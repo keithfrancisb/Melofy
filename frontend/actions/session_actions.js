@@ -19,10 +19,16 @@ const logoutUser = () => {
 };
 
 const receiveUser = (user) => {
-  debugger
   return {
     type: RECEIVE_USER,
     user
+  };
+};
+
+export const receiveSessionErrors = (errors) => {
+  return {
+    type: RECEIVE_SESSION_ERRORS,
+    errors
   };
 };
 

@@ -5,8 +5,10 @@ const App = (props) => {
 
   return (
     <div>
-      <h1>Melofy</h1>
-      <h3>It's not a 'melody' typo...Or is it?</h3>
+      <header>
+        <h1>Melofy</h1>
+        <h3>It's not a 'melody' typo...Or is it?</h3>
+      </header>
     </div>
   );
 };
