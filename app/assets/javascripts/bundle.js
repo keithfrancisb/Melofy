@@ -182,7 +182,6 @@ var UsersReducer = function UsersReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    // case expression:
     default:
       return state;
   }
