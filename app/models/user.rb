@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :bigint(8)        not null, primary key
+#  first_name      :string           not null
+#  last_name       :string           not null
+#  email           :string           not null
+#  password_digest :string           not null
+#  session_token   :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class User < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
@@ -10,7 +24,7 @@ class User < ApplicationRecord
   # FRIPE
 
   def self.find_by_credentials(email,password)
-    user = User.find_by_email(:email)
+    user = User.find_by_email(email)
     user && user.is_password?(password) ? user : nil
   end
 

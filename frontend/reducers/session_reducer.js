@@ -5,9 +5,10 @@ import {
 
 
 export const SessionReducer = (state = {id: null}, action) => {
+  debugger
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      return {id: action.id};
+      return {id: action.user.id};
     case LOGOUT_USER:
       return {id: null};
     default:

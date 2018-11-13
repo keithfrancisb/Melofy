@@ -5,8 +5,8 @@ class Api::UsersController < ApplicationController
 
     if @user.save
       login(@user)
-      # TODO: render a jbuilder to make user pojo for current_user
-    else
+      render 'api/users/show'
+     else
       render json: @user.errors.full_messages, status: 422
     end
   end
