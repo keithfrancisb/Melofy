@@ -27,9 +27,14 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+
 gem 'rails_12factor'
+=======
+gem 'jquery-rails'
+>>>>>>> User_Auth
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
+gem 'rails_12factor'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -38,7 +43,7 @@ gem 'rails_12factor'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  # Call 'byebug' anywhere in the code to stop execution and get a  console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
