@@ -1,3 +1,63 @@
 // Place all the styles related to the StaticPage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.main-header {
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.links {
+  padding: 0 10px 0 10px;
+}
+
+li {
+  list-style: none;
+}
+// SESSION Classes
+.session {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 450px;
+  margin: 0 auto;
+  // border: 1px solid black;
+}
+
+.session-input {
+  box-sizing: border-box;
+  height: 40px;
+  width: 450px;
+  border: 1px solid #d9dadc;
+}
+
+input:focus {
+  border-color: #919496;
+  outline: none;
+}
+
+.session-button {
+  height: 48px;
+  width: 430px;
+  text-align: center;
+}
+
+.session-form {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+}
+.session-wrapper {
+  display: flex;
+  justify-content: center;
+  // border: 1px solid black;
+  // width: 430px;
+
+}
+
+.session-header {
+
+}
