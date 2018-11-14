@@ -459,13 +459,13 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "session-input",
         type: "text",
-        placeholder: "   Email Address",
+        placeholder: "Email Address",
         value: this.state.email,
         onChange: this.update('email')
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "session-input",
         type: "password",
-        placeholder: "   Password",
+        placeholder: "Password",
         value: this.state.password,
         onChange: this.update('password')
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _defineProperty({

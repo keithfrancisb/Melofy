@@ -50,9 +50,9 @@ class LoginForm extends React.Component {
             {this.renderErrors()}
           </header>
           <form className='session-form' onSubmit={this.handleSubmit}>
-            <input className='session-input' type='text' placeholder='   Email Address' value={this.state.email} onChange={this.update('email')}/>
+            <input className='session-input' type='text' placeholder='Email Address' value={this.state.email} onChange={this.update('email')}/>
               <br/>
-            <input className='session-input' type='password' placeholder='   Password' value={this.state.password} onChange={this.update('password')}/>
+            <input className='session-input' type='password' placeholder='Password' value={this.state.password} onChange={this.update('password')}/>
               <br/>
             <input className='session-button' type='submit' value={formType} className='session-button'/>
           </form>

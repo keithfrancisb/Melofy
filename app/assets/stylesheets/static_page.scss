@@ -28,10 +28,13 @@ li {
 }
 
 .session-input {
+  display: block;
   box-sizing: border-box;
   height: 40px;
   width: 450px;
   border: 1px solid #d9dadc;
+  padding-inline-start: 10px;
+  font-size: 16px;
 }
 
 input:focus {
@@ -43,6 +46,7 @@ input:focus {
   height: 48px;
   width: 430px;
   text-align: center;
+  font-weight: 700;
 }
 
 .session-form {
