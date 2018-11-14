@@ -37,10 +37,11 @@ class LoginForm extends React.Component {
       </ul>
     );
   }
+
   render() {
 
     const { formType } = this.props;
-    const otherType = 'Sign Up';
+    const otherType = 'SIGN UP';
 
     return (
       <div className='wrapper'>
@@ -49,14 +50,29 @@ class LoginForm extends React.Component {
             <h3>{formType}</h3>
             {this.renderErrors()}
           </header>
+
+          <button className='demo-button' onClick={this.props.demoLogin}>LOG IN AS DEMO USER</button>
+
+          <br/>
+            <div className='divider-or-parent'>
+              <div className='divider-or'/> <span className='or'>OR</span> <div className='divider-or'/>
+            </div>
+          <br/>
+
           <form className='session-form' onSubmit={this.handleSubmit}>
-            <input className='session-input' type='text' placeholder='Email Address' value={this.state.email} onChange={this.update('email')}/>
+            <input className='session-input' type='text' placeholder='Email Address' value={this.state.email} onChange={this.update('email')} required/>
               <br/>
-            <input className='session-input' type='password' placeholder='Password' value={this.state.password} onChange={this.update('password')}/>
+            <input className='session-input' type='password' placeholder='Password' value={this.state.password} onChange={this.update('password')} required/>
               <br/>
-            <input className='session-button' type='submit' value={formType} className='session-button'/>
+            <input className='session-button' type='submit' value='LOG IN' className='session-button'/>
           </form>
-          <span>Don't have an account? <Link to='/signup'>{otherType}</Link></span>
+          <br/>
+            <div className='divider'/>
+          <br/>
+          <span>Don't have an account?</span>
+
+            <Link className='signup-in-login-button' to='/signup'>{otherType}</Link>
+
         </div>
       </div>
     );

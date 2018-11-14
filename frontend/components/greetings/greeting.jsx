@@ -14,14 +14,14 @@ class Greeting extends React.Component {
           <button onClick={logout}>Log Out</button>
         </div>
       );
-    } else {
+    } /*else {
       output = (
         <div>
           <Link className='links' to='/signup'>Sign Up</Link>
-          <Link to='/login'>Log In</Link>
+          <Link className='links' to='/login'>Log In</Link>
         </div>
       );
-    }
+    }*/
 
     return (
       <>
