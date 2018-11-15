@@ -248,6 +248,17 @@ var signup = function signup(user) {
 
 /***/ }),
 
+/***/ "./frontend/actions/song_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/song_actions.js ***!
+  \******************************************/
+/*! exports provided: RECEIVE_SONG, REMOVE_SONG, RECEIVE_SONG_ERRORS, addSongToPlaylist, removeSongFromPlaylist */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/keith_/Desktop/melofy/frontend/actions/song_actions.js: Unexpected token (38:4)\n\n\u001b[0m \u001b[90m 36 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m addSongToPlaylist \u001b[33m=\u001b[39m (playlistId\u001b[33m,\u001b[39m songId) \u001b[33m=>\u001b[39m dispatch \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 37 | \u001b[39m  \u001b[36mreturn\u001b[39m \u001b[33mPSApiUtil\u001b[39m\u001b[33m.\u001b[39maddSongToPlaylist(playlistId\u001b[33m,\u001b[39m songId)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 38 | \u001b[39m    \u001b[33m.\u001b[39mthen( payload \u001b[33m=>\u001b[39m dispatch(updatePlaylistToAdd(payload)))\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 39 | \u001b[39m      \u001b[33m.\u001b[39mfail( err \u001b[33m=>\u001b[39m dispatch(receiveSongErrors(err\u001b[33m.\u001b[39mresponseJSON)))\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 40 | \u001b[39m}\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 41 | \u001b[39m\u001b[0m\n    at _class.raise (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:4021:15)\n    at _class.unexpected (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:5330:16)\n    at _class.parseExprAtom (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:6418:20)\n    at _class.parseExprAtom (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:3717:52)\n    at _class.parseExprSubscripts (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:6006:21)\n    at _class.parseMaybeUnary (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:5985:21)\n    at _class.parseExprOps (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:5894:21)\n    at _class.parseMaybeConditional (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:5866:21)\n    at _class.parseMaybeAssign (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:5813:21)\n    at _class.parseExpression (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:5766:21)\n    at _class.parseStatementContent (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:7367:21)\n    at _class.parseStatement (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:7253:17)\n    at _class.parseBlockOrModuleBlockBody (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:7805:23)\n    at _class.parseBlockBody (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:7792:10)\n    at _class.parseBlock (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:7781:10)\n    at _class.parseFunctionBody (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:7026:24)\n    at _class.parseArrowExpression (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:6979:10)\n    at _class.parseExprAtom (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:6321:18)\n    at _class.parseExprAtom (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:3717:52)\n    at _class.parseExprSubscripts (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:6006:21)\n    at _class.parseMaybeUnary (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:5985:21)\n    at _class.parseExprOps (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:5894:21)\n    at _class.parseMaybeConditional (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:5866:21)\n    at _class.parseMaybeAssign (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:5813:21)\n    at _class.parseFunctionBody (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:7018:24)\n    at _class.parseArrowExpression (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:6979:10)\n    at _class.parseParenAndDistinguishExpression (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:6591:12)\n    at _class.parseExprAtom (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:6374:21)\n    at _class.parseExprAtom (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:3717:52)\n    at _class.parseExprSubscripts (/Users/keith_/Desktop/melofy/node_modules/@babel/parser/lib/index.js:6006:21)");
+
+/***/ }),
+
 /***/ "./frontend/components/app.jsx":
 /*!*************************************!*\
   !*** ./frontend/components/app.jsx ***!
@@ -932,7 +943,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _util_ps_api_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/ps_api_util */ "./frontend/util/ps_api_util.js");
 /* harmony import */ var _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions/playlist_actions */ "./frontend/actions/playlist_actions.js");
+/* harmony import */ var _actions_song_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./actions/song_actions */ "./frontend/actions/song_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -963,7 +976,9 @@ document.addEventListener('DOMContentLoaded', function () {
   window.dispatch = store.dispatch;
   window.createPlaylist = _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_5__["createPlaylist"];
   window.updatePlaylist = _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_5__["updatePlaylist"];
-  window.deletePlaylist = _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_5__["deletePlaylist"]; // window.createPlaylist = PSApiUtil.createPlaylist;
+  window.deletePlaylist = _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_5__["deletePlaylist"];
+  window.addSongToPlaylist = _actions_song_actions__WEBPACK_IMPORTED_MODULE_6__["addSongToPlaylist"];
+  window.removeSongFromPlaylist = _actions_song_actions__WEBPACK_IMPORTED_MODULE_6__["removeSongFromPlaylist"]; // window.createPlaylist = PSApiUtil.createPlaylist;
   // window.updatePlaylist = PSApiUtil.updatePlaylist;
   // window.deletePlaylist = PSApiUtil.deletePlaylist;
 
