@@ -24,6 +24,7 @@ class Api::PlaylistsController < ApplicationController
     @playlist = current_user.playlists.find(params[:id])
     @playlist.destroy
     # TODO: render current_user's playlist index
+    render :show
   end
 
   private

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import Root from './components/root';
 import { configureStore } from './store/store';
 
-import {login,logout,signup} from './actions/session_actions';
 import * as PSApiUtil from './util/ps_api_util';
+import { createPlaylist, updatePlaylist, deletePlaylist } from './actions/playlist_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -24,12 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // TEST
   window.getState = store.getState;
   window.dispatch = store.dispatch;
-  window.login = login;
-  window.logout = logout;
-  window.signup = signup;
-  window.createPlaylist = PSApiUtil.createPlaylist;
-  window.updatePlaylist = PSApiUtil.updatePlaylist;
-  window.deletePlaylist = PSApiUtil.deletePlaylist;
+
+  window.createPlaylist = createPlaylist;
+  window.updatePlaylist = updatePlaylist;
+  window.deletePlaylist = deletePlaylist;
+
+  // window.createPlaylist = PSApiUtil.createPlaylist;
+  // window.updatePlaylist = PSApiUtil.updatePlaylist;
+  // window.deletePlaylist = PSApiUtil.deletePlaylist;
   window.addSongToPlaylist = PSApiUtil.addSongToPlaylist;
   window.removeSongFromPlaylist = PSApiUtil.removeSongFromPlaylist;
 
