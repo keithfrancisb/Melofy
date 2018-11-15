@@ -4,6 +4,7 @@ import Root from './components/root';
 import { configureStore } from './store/store';
 
 import {login,logout,signup} from './actions/session_actions';
+import * as PSApiUtil from './util/ps_api_util';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -26,6 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
   window.login = login;
   window.logout = logout;
   window.signup = signup;
+  window.createPlaylist = PSApiUtil.createPlaylist;
+  window.updatePlaylist = PSApiUtil.updatePlaylist;
+  window.deletePlaylist = PSApiUtil.deletePlaylist;
+  window.addSongToPlaylist = PSApiUtil.addSongToPlaylist;
+  window.removeSongFromPlaylist = PSApiUtil.removeSongFromPlaylist;
+
   // TEST
 
   const root = document.getElementById('root');

@@ -1,7 +1,7 @@
 class Api::PlaylistsController < ApplicationController
 
   def create
-    @playlist = currentUser.playlists.new(playlist_params)
+    @playlist = current_user.playlists.new(playlist_params)
 
     if @playlist.save
       render :show
@@ -11,7 +11,7 @@ class Api::PlaylistsController < ApplicationController
   end
 
   def update
-    @playlist = currentUser.playlists.find(params[:id])
+    @playlist = current_user.playlists.find(params[:id])
 
     if @playlist.update(playlist_params)
       render :show
@@ -21,9 +21,9 @@ class Api::PlaylistsController < ApplicationController
   end
 
   def destroy
-    @playlist = currentUser.playlists.find(params[:id])
+    @playlist = current_user.playlists.find(params[:id])
     @playlist.destroy
-    # TODO: render currentUser's playlist index
+    # TODO: render current_user's playlist index
   end
 
   private

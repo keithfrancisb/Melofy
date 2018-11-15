@@ -1,19 +1,25 @@
 class Api::SongsController < ApplicationController
 
   def create
-    @playlist = currentUser.playlists.find(params[:playlist_id])
-    @song = Song.find(params[:id])
 
-    @playlist.songs += [song]
+    @playlist = current_user.playlists.find(params[:playlist_id])
+    @song = Song.find(params[:songId])
+
+    if @song
+      @playlist.song_ids += [params[:songId]]
+      render json: ['Song successfully added to playlist!'], status: 200
+    else
+      render json: ['Song does not exist!'], status: 422
+    end
   end
 
   def destroy
-    @playlist = currentUser.playlists.find(params[:playlist_id])
+    @playlist = current_user.playlists.find(params[:playlist_id])
     @song = @playlist.songs.find(params[:id])
     # @song.destroy
     # .destroy removes song from the database. NO NO NO
     if @song
-      @playlist.songs -= [song]
+      @playlist.songs -= [@song]
 
       render 'api/playlists/show'
     else
