@@ -1,0 +1,3 @@
+Fix header,
+make errors pretty,
+work on splash page

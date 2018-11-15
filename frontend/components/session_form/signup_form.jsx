@@ -57,17 +57,17 @@ class SignupForm extends React.Component {
             {this.renderErrors()}
           </header>
           <form className='session-form' onSubmit={this.handleSubmit}>
-            <input className='session-input' type='text' placeholder='   First Name' value={first_name} onChange={this.update('first_name')}/>
+            <input className='session-input' type='text' placeholder='First Name' value={first_name} onChange={this.update('first_name')} required/>
               <br/>
-            <input className='session-input' type='text' placeholder='   Last Name' value={last_name} onChange={this.update('last_name')}/>
+            <input className='session-input' type='text' placeholder='Last Name' value={last_name} onChange={this.update('last_name')} required/>
               <br/>
-            <input className='session-input' type='text' placeholder='   Email Address' value={email} onChange={this.update('email')}/>
+            <input className='session-input' type='text' placeholder='Email Address' value={email} onChange={this.update('email')} required/>
               <br/>
-            <input className='session-input' type='password' placeholder='   Password' value={password} onChange={this.update('password')}/>
+            <input className='session-input' type='password' placeholder='Password' value={password} onChange={this.update('password')} required/>
               <br/>
-            <input className='session-button' type='submit' value='Sign Up'/>
+            <input className='session-button' type='submit' value='SIGN UP'/>
           </form>
-          <span>Already have an account? <Link to={`/login`}>{otherType}</Link></span>
+          <strong>Already have an account? <Link className='link-green' to={`/login`}>{otherType}</Link></strong>
         </div>
       </div>
     );

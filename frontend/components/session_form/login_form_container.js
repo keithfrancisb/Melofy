@@ -5,14 +5,15 @@ import { connect } from 'react-redux';
 const msp = (state) => {
   return {
     errors: state.errors.session,
-    formType: 'Log In',
+    formType: 'LOG IN',
     currentUser: state.entities.users[state.session.id]
   };
 };
 const mdp = dispatch => {
   return {
     processForm: (user) => dispatch(login(user)),
-    clearAllErrors: () => dispatch(clearAllErrors())
+    clearAllErrors: () => dispatch(clearAllErrors()),
+    demoLogin: () => dispatch(login({email:'indigo@gmail.com', password:'123456'}))
   };
 };
 
