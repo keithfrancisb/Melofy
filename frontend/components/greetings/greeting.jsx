@@ -9,19 +9,19 @@ class Greeting extends React.Component {
     let output;
     if(currentUser){
       output = (
-        <div>
-          <h4>Welcome {currentUser.first_name}</h4>
+        <div className='welcome-msg'>
+          <span>Logged in as {currentUser.first_name}</span>
           <button onClick={logout}>Log Out</button>
         </div>
       );
-    } /*else {
+    } else {
       output = (
-        <div>
+        <div className='session-links'>
           <Link className='links' to='/signup'>Sign Up</Link>
           <Link className='links' to='/login'>Log In</Link>
         </div>
       );
-    }*/
+    }
 
     return (
       <>
