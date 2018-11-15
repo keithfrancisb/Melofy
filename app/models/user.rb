@@ -21,6 +21,7 @@ class User < ApplicationRecord
   attr_reader :password
   after_initialize :ensure_session_token
 
+  has_many :playlists
   # FRIPE
 
   def self.find_by_credentials(email,password)
