@@ -16,6 +16,6 @@ class Playlist < ApplicationRecord
 
   belongs_to :user
 
-  has_many: :ps_tags
-  has_many: :songs, through: :ps_tags
+  has_many :ps_tags
+  has_many :songs, through: :ps_tags
 end
