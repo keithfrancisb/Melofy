@@ -11,10 +11,10 @@ Artist.destroy_all
 Album.destroy_all
 Song.destroy_all
 Playlist.destroy_all
+PsTag.destroy_all
 
 # Users
 user1 = User.create!(first_name:'Reed',last_name:'Purplebottom',email:'indigo@gmail.com',password:'123456')
-
 
 # Artists
 art1 = Artist.create!(name:'Caravan Palace')
