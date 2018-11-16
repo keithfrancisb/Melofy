@@ -49,29 +49,8 @@ const receiveSongErrors = errors => {
 
 // Thunk Actions
 
-// ### Regular Action being used in fetchPlaylist thunk ###
-// export const fetchPlaylistSongs = playlistId => dispatch => {
-//   return PSApiUtil.fetchPlaylist(playlistId)
-//     .then( response => dispatch(receiveSongs(response)))
-//       .fail( err => dispatch(receiveSongErrors(err.responseJSON)));
-// };
-
 export const fetchSong = id => dispatch => {
   return PSApiUtil.fetchSong(id)
     .then( song => dispatch(receiveSong(song)))
-      .fail( err => dispatch(receiveSongErrors(err.responseJSON)));
-};
-
-// TODO fetchAlbumSongs
-
-export const addSongToPlaylist = (playlistId, songId) => dispatch => {
-  return PSApiUtil.addSongToPlaylist(playlistId, songId)
-    // .then( payload => dispatch(updatePlaylistToAdd(payload)))
-      .fail( err => dispatch(receiveSongErrors(err.responseJSON)));
-};
-
-export const removeSongFromPlaylist = (playlistId, songId) => dispatch => {
-  return PSApiUtil.removeSongFromPlaylist(playlistId, songId)
-    // .then( payload => dispatch(updatePlaylistToRemove(payload)))
       .fail( err => dispatch(receiveSongErrors(err.responseJSON)));
 };

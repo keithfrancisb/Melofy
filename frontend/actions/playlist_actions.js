@@ -15,7 +15,7 @@ const receivePlaylists = playlists => {
   };
 };
 
-const receivePlaylist = ({playlist}) => {
+const receivePlaylist = (playlist) => {
   debugger
   return {
     type: RECEIVE_PLAYLIST,
@@ -48,8 +48,8 @@ export const fetchPlaylists = () => dispatch => {
 export const fetchPlaylist = id => dispatch => {
   return PSApiUtil.fetchPlaylist(id)
     .then( payload => {
-      dispatch(receiveSongs(payload));
-      dispatch(receivePlaylist(payload));
+      dispatch(receiveSongs(payload).songs);
+      dispatch(receivePlaylist(payload.playlist));
     })
       .fail( err => dispatch(receivePlaylistErrors(err.responseJSON)));
 };
