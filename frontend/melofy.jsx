@@ -31,9 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addSongToPlaylist = addSongToPlaylist;
   window.removeSongFromPlaylist = removeSongFromPlaylist;
   window.fetchSong = fetchSong;
-  // window.createPlaylist = PSApiUtil.createPlaylist;
-  // window.updatePlaylist = PSApiUtil.updatePlaylist;
-  // window.deletePlaylist = PSApiUtil.deletePlaylist;
   window.addSongToPlaylist = PSApiUtil.addSongToPlaylist;
   window.removeSongFromPlaylist = PSApiUtil.removeSongFromPlaylist;
 

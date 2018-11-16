@@ -47,9 +47,9 @@ export const fetchPlaylists = () => dispatch => {
 
 export const fetchPlaylist = id => dispatch => {
   return PSApiUtil.fetchPlaylist(id)
-    .then( response => {
-      dispatch(receiveSongs(response));
-      dispatch(receivePlaylist(response));
+    .then( payload => {
+      dispatch(receiveSongs(payload));
+      dispatch(receivePlaylist(payload));
     })
       .fail( err => dispatch(receivePlaylistErrors(err.responseJSON)));
 };
