@@ -26,7 +26,7 @@ export const SongsReducer = (state = {}, action) => {
     //   const right = newState[songId].playlistIds.slice(index+1);
     //   newState[songId].playlistIds = left.concat(right);
     //   return newState;
-      default:
+    default:
       return state;
   }
 }
