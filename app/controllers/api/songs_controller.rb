@@ -1,5 +1,10 @@
 class Api::SongsController < ApplicationController
 
+  def show
+    @song = Song.find(params[:id])
+    
+  end
+
   def create
 
     @playlist = current_user.playlists.find(params[:playlist_id])

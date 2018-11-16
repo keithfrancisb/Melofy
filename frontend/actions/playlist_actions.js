@@ -1,12 +1,22 @@
 import * as PSApiUtil from '../util/ps_api_util';
+import { receiveSongs } from './song_actions';
 
+export const RECEIVE_PLAYLISTS = 'RECEIVE_PLAYLISTS';
 export const RECEIVE_PLAYLIST = 'RECEIVE_PLAYLIST';
 export const REMOVE_PLAYLIST = 'REMOVE_PLAYLIST';
 export const RECEIVE_PLAYLIST_ERRORS = 'RECEIVE_PLAYLIST_ERRORS';
 
 // Regular Actions
 
-const receivePlaylist = playlist => {
+const receivePlaylists = playlists => {
+  return {
+    type: RECEIVE_PLAYLISTS,
+    playlists
+  };
+};
+
+const receivePlaylist = ({playlist}) => {
+  debugger
   return {
     type: RECEIVE_PLAYLIST,
     playlist
@@ -28,6 +38,21 @@ const receivePlaylistErrors = errors => {
 };
 
 // Thunk Actions
+
+export const fetchPlaylists = () => dispatch => {
+  return PSApiUtil.fetchPlaylists()
+    .then( playlists => dispatch(receivePlaylists(playlists)))
+      .fail( err => dispatch(receivePlaylistErrors(err.responseJSON)));
+};
+
+export const fetchPlaylist = id => dispatch => {
+  return PSApiUtil.fetchPlaylist(id)
+    .then( response => {
+      dispatch(receiveSongs(response));
+      dispatch(receivePlaylist(response));
+    })
+      .fail( err => dispatch(receivePlaylistErrors(err.responseJSON)));
+};
 
 export const createPlaylist = playlist => dispatch => {
   return PSApiUtil.createPlaylist(playlist)

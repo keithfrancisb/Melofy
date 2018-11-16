@@ -1,5 +1,15 @@
 class Api::PlaylistsController < ApplicationController
 
+  def index
+    @playlists = Playlist.all.includes(:songs)
+
+  end
+
+  def show
+    @playlist = Playlist.find(params[:id])
+    @songs = @playlist.songs
+  end
+
   def create
     @playlist = current_user.playlists.new(playlist_params)
 

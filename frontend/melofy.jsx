@@ -4,8 +4,8 @@ import Root from './components/root';
 import { configureStore } from './store/store';
 
 import * as PSApiUtil from './util/ps_api_util';
-import { createPlaylist, updatePlaylist, deletePlaylist } from './actions/playlist_actions';
-import { addSongToPlaylist, removeSongFromPlaylist } from './actions/song_actions';
+import { fetchPlaylist, fetchPlaylists } from './actions/playlist_actions';
+import { addSongToPlaylist, removeSongFromPlaylist, fetchSong } from './actions/song_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -26,12 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
   window.getState = store.getState;
   window.dispatch = store.dispatch;
 
-  window.createPlaylist = createPlaylist;
-  window.updatePlaylist = updatePlaylist;
-  window.deletePlaylist = deletePlaylist;
+  window.fetchPlaylists = fetchPlaylists;
+  window.fetchPlaylist = fetchPlaylist;
   window.addSongToPlaylist = addSongToPlaylist;
   window.removeSongFromPlaylist = removeSongFromPlaylist;
-
+  window.fetchSong = fetchSong;
   // window.createPlaylist = PSApiUtil.createPlaylist;
   // window.updatePlaylist = PSApiUtil.updatePlaylist;
   // window.deletePlaylist = PSApiUtil.deletePlaylist;

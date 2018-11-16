@@ -1,6 +1,21 @@
 
 // --------------------- Playlist API ---------------------- //
 
+export const fetchPlaylists = () => {
+  return $.ajax({
+    method: 'get',
+    url: 'api/playlists'
+  });
+};
+
+// Used for collecting Playlist info and list of songs
+export const fetchPlaylist = id => {
+  return $.ajax({
+    method: 'get',
+    url: `api/playlists/${id}`
+  });
+};
+
 export const createPlaylist = (playlist) => {
   return $.ajax({
     method: 'post',
@@ -25,6 +40,20 @@ export const deletePlaylist = (playlistId) => {
 };
 
 // -------------------- Song API --------------------------- //
+
+export const fetchPlaylistSongs = (playlistId) => {
+  return $.ajax({
+    method: 'get',
+    url: `api/playlists/${playlistId}/songs`
+  });
+};
+
+export const fetchSong = (songId) => {
+  return $.ajax({
+    method: 'get',
+    url: `api/songs/${songId}`
+  });
+};
 
 export const addSongToPlaylist = (playlistId, songId) => {
   return $.ajax({
