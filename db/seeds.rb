@@ -14,7 +14,7 @@ Playlist.destroy_all
 PsTag.destroy_all
 
 # Users
-user1 = User.create!(first_name:'Reed',last_name:'Purplebottom',email:'indigo@gmail.com',password:'123456')
+user1 = User.create!(first_name:'Demo',last_name:'User',email:'demo_user@notMail.com',password:'123456')
 
 # Artists
 art1 = Artist.create!(name:'Caravan Palace')
@@ -33,3 +33,4 @@ song3 = Song.create!(song_url:'pending...', name:'The Mojo Radio Gang', artist_i
 
 # Playlists
 pl1 = Playlist.create!(name:'Fo Shizzle maah Drizzle \o/ ', user_id:user1.id)
+pl1.song_ids = [song1.id, song2.id, song3.id]

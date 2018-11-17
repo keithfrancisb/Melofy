@@ -13,7 +13,7 @@ const mdp = dispatch => {
   return {
     processForm: (user) => dispatch(login(user)),
     clearAllErrors: () => dispatch(clearAllErrors()),
-    demoLogin: () => dispatch(login({email:'indigo@gmail.com', password:'123456'}))
+    demoLogin: () => dispatch(login({email:'demo_user@notMail.com', password:'123456'}))
   };
 };
 

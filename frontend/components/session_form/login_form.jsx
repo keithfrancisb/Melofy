@@ -33,7 +33,7 @@ class LoginForm extends React.Component {
 
     return (
       <ul>
-        {errors.map( (error, idx) => <li key={idx}>{error}</li>)}
+        {errors.map( (error, idx) => <li className='error-color' key={idx}>{error}</li>)}
       </ul>
     );
   }
@@ -46,7 +46,7 @@ class LoginForm extends React.Component {
     return (
       <div className='wrapper'>
         <div className='session'>
-          <header>
+          <header className='form-header'>
             <h3>{formType}</h3>
             {this.renderErrors()}
           </header>
