@@ -1,0 +1,50 @@
+.main {
+  background: linear-gradient(rgb(51, 67, 78), rgb(6, 8, 9) 85%);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+.sub-main {
+
+}
+
+.sidebar {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 230px;
+  height: 100%;
+  float: left;
+  background-color: #060809;
+  padding: 24px 24px 5px;
+  color: white;
+  position: fixed;
+}
+
+.three-musketeers > li {
+  margin: 40px 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: .015em;
+  color: #b3b3b3;
+  transition: color 0.5s;
+}
+
+.three-musketeers > li:hover {
+  color: white;
+}
+
+.green {
+  color: #1db954;
+}
+
+.inactive {
+  color: #b3b3b3;
+  transition: color 0.5s;
+}
+
+.inactive:hover {
+  color: white;
+}

@@ -6,6 +6,7 @@ import { configureStore } from './store/store';
 import * as PSApiUtil from './util/ps_api_util';
 import { fetchPlaylist, fetchPlaylists } from './actions/playlist_actions';
 import { fetchSong } from './actions/song_actions';
+import { logout } from './actions/session_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // TEST
   window.getState = store.getState;
   window.dispatch = store.dispatch;
-
+  window.logout = logout;
   window.fetchPlaylists = fetchPlaylists;
   window.fetchPlaylist = fetchPlaylist;
   window.fetchSong = fetchSong;
