@@ -5,9 +5,13 @@ import Search from '../Search/Search';
 import Collection from '../collection/collection';
 import { ProtectedRoute } from '../../util/route_util';
 
+import { connect } from 'react-redux';
+import { logout } from '../../actions/session_actions';
+
 class Dashboard extends React.Component {
 
   render(){
+    const { currentUser, logout } = this.props;
     return (
       <div className='main'>
         <nav className='sidebar'>
@@ -38,6 +42,10 @@ class Dashboard extends React.Component {
               </div>
             </li>
           </ul>
+
+          <ul>
+            <li onClick={logout}>{currentUser.first_name} {currentUser.last_name}</li>
+          </ul>
         </nav>
 
         <div className='now-playing-bar'>
@@ -52,4 +60,16 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+const msp = (state, ownProps) => {
+  return {
+    currentUser: state.entities.users[state.session.id]
+  };
+};
+
+const mdp = (dispatch) => {
+  return {
+    logout: () => dispatch(logout())
+  };
+};
+
+export default connect(msp,mdp)(Dashboard);

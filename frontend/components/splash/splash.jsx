@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { login } from '../../actions/session_actions';
 
 class Splash extends React.Component {
@@ -10,7 +11,7 @@ class Splash extends React.Component {
       <div className ="splash">
         <h1 className="splash-header">Melodies for everyone.</h1>
         <h3 className="splash-slogan">Not many Songs. Just use Spotify.</h3>
-        <button className="splash-button">GET MELOFY FOR FREE!</button>
+        <Link className="splash-signup" to='/signup'>GET MELOFY FOR FREE!</Link>
         <div className="divider-or-parent">
           <div className="splash-divider-or"/> <span className="or">OR</span> <div className="splash-divider-or"/>
         </div>
