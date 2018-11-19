@@ -1,6 +1,6 @@
-json.playlist do
-  json.extract! playlist, :id, :name, :description, :user_id
-end
+
+json.extract! playlist, :id, :name, :description, :user_id
+
 
 if songs
   json.songs do

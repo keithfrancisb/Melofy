@@ -1,0 +1,87 @@
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { ProtectedRoute } from '../../../util/route_util';
+import PlaylistCollection from './p_collection';
+
+class Collection extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      newPlaylist: false,
+      playlistName: ''
+    };
+
+    this.changeBooleanState = this.changeBooleanState.bind(this);
+  }
+
+  changeBooleanState() {
+    this.setState({newPlaylist: !this.state.newPlaylist});
+  }
+
+  update(){
+    return (e) => {
+      this.setState({playlistName: e.target.value});
+    };
+  }
+  
+  createPlaylist(){
+    if(this.state.newPlaylist)
+      return (
+        <div className='new-playlist-main'>
+          <div className='new-playlist-container'>
+            <div>
+              <button onClick={this.changeBooleanState}>
+                <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>Close</title><path d="M31.098 29.794L16.955 15.65 31.097 1.51 29.683.093 15.54 14.237 1.4.094-.016 1.508 14.126 15.65-.016 29.795l1.414 1.414L15.54 17.065l14.144 14.143" fill="#FFF" fill-rule="evenodd"></path></svg>
+              </button>
+            </div>
+            <div><h1 className='h1-new-playlist'>Create new playlist</h1></div>
+            <div className='input-container'>
+              <div className='input-box'>
+                <div className='content-space'>
+                  <h4 className='input-label'>Playlist Name</h4>
+                  <input className='input-text' type='text' placeholder='Start typing...' onChange={this.update()} value={this.state.playlistName} />
+                </div>
+              </div>
+            </div>
+            <div className='button-group'>
+              <button className='btn-cancel' onClick={this.changeBooleanState}>Cancel</button>
+              <button className='btn-create'>Create</button>
+            </div>
+          </div>
+        </div>
+      );
+  }
+
+  render (){
+    return (
+      <div>
+        {this.createPlaylist()}
+        <div className='collection-main-view'>
+          <div>
+            <section className='content-spacing'>
+              <div className='tabs-container'>
+                <nav className='nav-tabs'>
+                  <ul className='tabs'>
+                    <li><NavLink activeClassName='selected-tab' to='/dashboard/collection/playlists'>Playlists</NavLink></li>
+                    <li><NavLink activeClassName='selected-tab' to='/dashboard/collection/songs'>Songs</NavLink></li>
+                    <li><NavLink activeClassName='selected-tab' to='/dashboard/collection/albums'>Albums</NavLink></li>
+                    <li><NavLink activeClassName='selected-tab' to='/dashboard/collection/artists'>Artists</NavLink></li>
+                  </ul>
+                </nav>
+                <div className='div-button'>
+                  <button className='div-button' onClick={this.changeBooleanState}>New Playlist</button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <ProtectedRoute path='/dashboard/collection/playlists' component={PlaylistCollection} />
+      </div>
+
+    );
+  }
+}
+
+export default Collection;
