@@ -6,6 +6,11 @@
   height: 100vh;
 }
 
+.content-scrolling {
+  overflow-y: scroll;
+  height: 85vh;
+}
+
 .content-spacing {
   display: block;
   padding: 0 32px;
@@ -187,4 +192,50 @@
   background-color: #1db954;
   padding: 11px 44px;
   color: white;
+}
+
+// ---------------- PCollectionItem ---------------- //
+
+.playlist-list {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  position: relative;
+  left: -15px;
+  flex-wrap: wrap;
+  width: 1515px;
+}
+
+.playlist-list > li {
+  padding: 20px 15px 0 15px;
+}
+
+// .playlist-list > li > span {
+//   font-size: 14px;
+//   line-height: 20px;
+//   letter-spacing: .015em;
+//   font-weight: 500;
+//   color: #fff;
+//   text-transform: none;
+// }
+.pc-item {
+  position: relative;
+  padding-bottom: 2.5em;
+}
+
+.playlist-image {
+  width: 222px;
+  height: 222px;
+}
+
+.playlist-span {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: .015em;
+  font-weight: 500;
+  color: #fff;
+  text-transform: none;
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
 }

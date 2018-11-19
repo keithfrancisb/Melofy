@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { currentUserPlaylists } from '../../../reducers/selectors/playlist_selectors';
+import { currentUserPlaylists } from '../../../../reducers/selectors/playlist_selectors';
+import PCollectionItem from './p_collection_item';
 
 class PlaylistCollection extends React.Component {
 
@@ -12,12 +13,12 @@ class PlaylistCollection extends React.Component {
   render() {
     const playlists = this.props.currentUserPlaylists.map((playlist) => {
       return (
-        <li key={playlist.id}>{playlist.name}</li>
+        <PCollectionItem key={playlist.id} playlist={playlist} />
       );
     });
     return (
       <div>
-        <ul>
+        <ul className='playlist-list'>
           {playlists}
         </ul>
       </div>

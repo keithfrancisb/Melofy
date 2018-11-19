@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { ProtectedRoute } from '../../../util/route_util';
-import PlaylistCollection from './p_collection';
+import PlaylistCollection from './p_collection/p_collection';
 import { connect } from 'react-redux';
 import { createPlaylist } from '../../../actions/playlist_actions';
 
@@ -71,7 +71,7 @@ class Collection extends React.Component {
       <div>
         {this.createPlaylist()}
         <div className='collection-main-view'>
-          <div>
+          <div className='content-scrolling'>
             <section className='content-spacing'>
               <div className='tabs-container'>
                 <nav className='nav-tabs'>
@@ -86,10 +86,10 @@ class Collection extends React.Component {
                   <button className='div-button' onClick={this.changeBooleanState}>New Playlist</button>
                 </div>
               </div>
+              <ProtectedRoute path='/dashboard/collection/playlists' component={PlaylistCollection} />
             </section>
           </div>
         </div>
-        <ProtectedRoute path='/dashboard/collection/playlists' component={PlaylistCollection} />
       </div>
 
     );
