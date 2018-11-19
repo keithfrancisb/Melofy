@@ -12,7 +12,7 @@ class PlaylistCollection extends React.Component {
   render() {
     const playlists = this.props.currentUserPlaylists.map((playlist) => {
       return (
-        <li key={playlist.id}>playlist.name</li>
+        <li key={playlist.id}>{playlist.name}</li>
       );
     });
     return (

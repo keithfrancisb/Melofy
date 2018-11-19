@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { ProtectedRoute } from '../../../util/route_util';
 import PlaylistCollection from './p_collection';
+import { connect } from 'react-redux';
+import { createPlaylist } from '../../../actions/playlist_actions';
 
 class Collection extends React.Component {
 
@@ -10,22 +12,32 @@ class Collection extends React.Component {
 
     this.state = {
       newPlaylist: false,
-      playlistName: ''
+      playlist: {name: ''}
     };
 
     this.changeBooleanState = this.changeBooleanState.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   changeBooleanState() {
     this.setState({newPlaylist: !this.state.newPlaylist});
   }
 
-  update(){
+  update() {
     return (e) => {
-      this.setState({playlistName: e.target.value});
+      this.setState({playlist: {name: e.target.value}});
     };
   }
-  
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.playlist.name !== '') {
+      this.props.submitForm(this.state.playlist);
+      this.setState({playlist: {name: ''}});
+      this.changeBooleanState();
+    }
+  }
+
   createPlaylist(){
     if(this.state.newPlaylist)
       return (
@@ -33,7 +45,7 @@ class Collection extends React.Component {
           <div className='new-playlist-container'>
             <div>
               <button onClick={this.changeBooleanState}>
-                <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>Close</title><path d="M31.098 29.794L16.955 15.65 31.097 1.51 29.683.093 15.54 14.237 1.4.094-.016 1.508 14.126 15.65-.016 29.795l1.414 1.414L15.54 17.065l14.144 14.143" fill="#FFF" fill-rule="evenodd"></path></svg>
+                <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>Close</title><path d="M31.098 29.794L16.955 15.65 31.097 1.51 29.683.093 15.54 14.237 1.4.094-.016 1.508 14.126 15.65-.016 29.795l1.414 1.414L15.54 17.065l14.144 14.143" fill="#FFF" fillRule="evenodd"></path></svg>
               </button>
             </div>
             <div><h1 className='h1-new-playlist'>Create new playlist</h1></div>
@@ -41,13 +53,13 @@ class Collection extends React.Component {
               <div className='input-box'>
                 <div className='content-space'>
                   <h4 className='input-label'>Playlist Name</h4>
-                  <input className='input-text' type='text' placeholder='Start typing...' onChange={this.update()} value={this.state.playlistName} />
+                  <input className='input-text' type='text' placeholder='Start typing...' onChange={this.update()} value={this.state.playlist.name}/>
                 </div>
               </div>
             </div>
             <div className='button-group'>
               <button className='btn-cancel' onClick={this.changeBooleanState}>Cancel</button>
-              <button className='btn-create'>Create</button>
+              <button className='btn-create' onClick={this.handleSubmit}>Create</button>
             </div>
           </div>
         </div>
@@ -84,4 +96,11 @@ class Collection extends React.Component {
   }
 }
 
-export default Collection;
+const mdp = dispatch => {
+  return {
+    submitForm: (playlistName) => dispatch(createPlaylist(playlistName))
+  };
+};
+
+
+export default connect(null,mdp)(Collection);

@@ -13,7 +13,7 @@
 # end
 
 json.album do
-  json.extract! album, :id, :name, :description, :artist_id
+  json.extract! album, :id, :name, :description, :artist_id, :image_url
 end
 
 if songs

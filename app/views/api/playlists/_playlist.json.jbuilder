@@ -1,5 +1,5 @@
 
-json.extract! playlist, :id, :name, :description, :user_id
+json.extract! playlist, :id, :name, :description, :user_id, :image_url
 
 
 if songs

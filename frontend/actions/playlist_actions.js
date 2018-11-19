@@ -16,7 +16,7 @@ const receivePlaylists = playlists => {
 };
 
 const receivePlaylist = (playlist) => {
-  debugger
+
   return {
     type: RECEIVE_PLAYLIST,
     playlist
@@ -61,6 +61,7 @@ export const createPlaylist = playlist => dispatch => {
 };
 
 export const updatePlaylist = playlist => dispatch => {
+  debugger
   return PSApiUtil.updatePlaylist(playlist)
     .then( playlist => dispatch(receivePlaylist(playlist)))
       .fail( err => dispatch(receivePlaylistErrors(err.responseJSON)));
