@@ -22,6 +22,7 @@ class User < ApplicationRecord
   after_initialize :ensure_session_token
 
   has_many :playlists
+  has_one_attached :photo
   # FRIPE
 
   def self.find_by_credentials(email,password)
