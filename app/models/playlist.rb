@@ -15,7 +15,18 @@ class Playlist < ApplicationRecord
   validates :name, presence: true
 
   belongs_to :user
+  has_one_attached :photo
 
   has_many :ps_tags
   has_many :songs, through: :ps_tags
+  has_many :artists, through: :songs
+  has_many :albums, through: :songs
+
+  after_initialize :ensure_playlist_image
+
+  def ensure_playlist_image
+    unless self.image_url
+      self.image_url = 'https://s3.amazonaws.com/playlist-dev/icons/no-image-playlist.png'
+    end
+  end
 end

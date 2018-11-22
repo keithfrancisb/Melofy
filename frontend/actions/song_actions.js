@@ -8,10 +8,10 @@ export const RECEIVE_SONG_ERRORS = 'RECEIVE_SONG_ERRORS';
 
 // Regular Actions
 
-export const receiveSongs = ({songs}) => {
+export const receiveSongs = (payload) => {
   return {
     type: RECEIVE_SONGS,
-    songs
+    payload
   };
 };
 
@@ -30,6 +30,12 @@ const receiveSongErrors = errors => {
 };
 
 // Thunk Actions
+
+export const fetchSongs = () => dispatch => {
+  return PSApiUtil.fetchSongs()
+    .then( payload => dispatch(receiveSongs(payload)))
+      .fail( err => dispatch(receiveSongErrors(err.responseJSON)));
+}
 
 export const fetchSong = id => dispatch => {
   return PSApiUtil.fetchSong(id)

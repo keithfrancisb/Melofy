@@ -5,17 +5,17 @@ export const RECEIVE_ALBUMS = 'RECEIVE_ALBUMS';
 export const RECEIVE_ALBUM = 'RECEIVE_ALBUM';
 export const RECEIVE_ALBUM_ERRORS = 'RECEIVE_ALBUM_ERRORS';
 
-export const receiveAlbums = albums => {
+export const receiveAlbums = payload => {
   return {
     type: RECEIVE_ALBUMS,
-    albums
+    payload
   };
 };
 
-const receiveAlbum = album => {
+const receiveAlbum = payload => {
   return {
     type: RECEIVE_ALBUM,
-    album
+    payload
   };
 };
 
@@ -30,15 +30,14 @@ const receiveAlbumErrors = errors => {
 
 export const fetchAlbums = () => dispatch => {
   return AAApiUtil.fetchAlbums()
-    .then( albums => dispatch(receiveAlbums(albums)))
+    .then( payload => dispatch(receiveAlbums(payload)))
       .fail( err => dispatch(receiveAlbumErrors(err.responseJSON)));
 };
 
 export const fetchAlbum = albumId => dispatch => {
   return AAApiUtil.fetchAlbum(albumId)
     .then( payload => {
-      dispatch(receiveAlbum(payload.album));
-      dispatch(receiveSongs(payload.songs));
+      dispatch(receiveAlbum(payload));
     })
       .fail( err => dispatch(receiveAlbumErrors(err.responseJSON)));
 };

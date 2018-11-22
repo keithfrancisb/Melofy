@@ -1,7 +1,8 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 import { ProtectedRoute } from '../../../util/route_util';
 import PlaylistCollection from './p_collection/p_collection';
+import PlaylistItemShow from './p_collection/p_collection_item_show';
 import { connect } from 'react-redux';
 import { createPlaylist } from '../../../actions/playlist_actions';
 
@@ -86,7 +87,8 @@ class Collection extends React.Component {
                   <button className='div-button' onClick={this.changeBooleanState}>New Playlist</button>
                 </div>
               </div>
-              <ProtectedRoute path='/dashboard/collection/playlists' component={PlaylistCollection} />
+              <ProtectedRoute exact path='/dashboard/collection/playlists' component={PlaylistCollection} />
+              <ProtectedRoute exact path='/dashboard/collection/playlists/:playlistId' component={PlaylistItemShow} />
             </section>
           </div>
         </div>
@@ -103,4 +105,4 @@ const mdp = dispatch => {
 };
 
 
-export default connect(null,mdp)(Collection);
+export default withRouter(connect(null,mdp)(Collection));

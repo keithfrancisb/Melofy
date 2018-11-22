@@ -7,17 +7,17 @@ export const RECEIVE_ARTIST_ERRORS = 'RECEIVE_ARTIST_ERRORS';
 
 // Regular Actions
 
-const receiveArtists = artists => {
+const receiveArtists = payload => {
   return {
     type: RECEIVE_ARTISTS,
-    artists
+    payload
   };
 };
 
-const receiveArtist = artist => {
+const receiveArtist = payload => {
   return {
     type: RECEIVE_ARTIST,
-    artist
+    payload
   };
 };
 
@@ -32,7 +32,7 @@ const receiveArtistErrors = errors => {
 
 export const fetchArtists = () => dispatch => {
   return AAApiUtil.fetchArtists()
-    .then( artists => dispatch(receiveArtists(artists)))
+    .then( payload => dispatch(receiveArtists(payload)))
       .fail( err => dispatch(receiveArtistErrors(err.responseJSON)));
 };
 

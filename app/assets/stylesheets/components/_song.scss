@@ -1,0 +1,53 @@
+.div-browse-song-list-item {
+  padding: 12px 10px;
+  transition: background-color .4s;
+}
+
+.div-browse-song-list-item:hover {
+  background-color: rgba(0,0,0,0.4);
+}
+
+.div-song-browse-list {
+  width: 65vw;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  left: 125px;
+}
+
+.songs-list {
+  width: 100%;
+
+}
+
+.song-misc-info {
+
+}
+
+.song-misc-logo {
+  width: 2em;
+  height: 2em;
+}
+
+// ADD To Playlist
+
+.add-to-playlist {
+  z-index: 1;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  padding-top: 90px;
+}
+
+.h1-add-to-playlist {
+  font-size: 72px;
+  line-height: 82px;
+  letter-spacing: -.005em;
+  font-weight: 600;
+  color: #fff;
+  text-transform: none;
+  text-align: center;
+}

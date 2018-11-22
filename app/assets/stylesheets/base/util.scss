@@ -1,0 +1,40 @@
+
+.popupBox {
+  width: 7em;
+  height: 4em;
+  background-color: #282828;
+  display: none;
+  justify-content: center;
+  padding-top: 6px;
+  border-radius: 5px;
+  position: relative;
+  left: 95px;
+}
+
+.show {
+  display: flex;
+}
+
+.dot-div:hover .popupBox {
+  display: flex;
+}
+
+.popupBox-song {
+  width: 7em;
+  height: 4em;
+  background-color: #282828;
+  display: none;
+  justify-content: center;
+  padding-top: 6px;
+  border-radius: 5px;
+  position: relative;
+  left: 95px;
+}
+
+.show {
+  display: flex;
+}
+
+.dot-div:hover .popupBox-song {
+  display: flex;
+}

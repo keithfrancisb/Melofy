@@ -1,5 +1,7 @@
 import * as PSApiUtil from '../util/ps_api_util';
 import { receiveSongs } from './song_actions';
+import { receiveArtists } from './artist_actions';
+import { receiveAlbums } from './album_actions';
 
 export const RECEIVE_PLAYLISTS = 'RECEIVE_PLAYLISTS';
 export const RECEIVE_PLAYLIST = 'RECEIVE_PLAYLIST';
@@ -15,11 +17,10 @@ const receivePlaylists = playlists => {
   };
 };
 
-const receivePlaylist = (playlist) => {
-
+const receivePlaylist = (payload) => {
   return {
     type: RECEIVE_PLAYLIST,
-    playlist
+    payload
   };
 };
 
@@ -48,22 +49,20 @@ export const fetchPlaylists = () => dispatch => {
 export const fetchPlaylist = id => dispatch => {
   return PSApiUtil.fetchPlaylist(id)
     .then( payload => {
-      dispatch(receiveSongs(payload.songs));
-      dispatch(receivePlaylist(payload.playlist));
+      dispatch(receivePlaylist(payload));
     })
       .fail( err => dispatch(receivePlaylistErrors(err.responseJSON)));
 };
 
 export const createPlaylist = playlist => dispatch => {
   return PSApiUtil.createPlaylist(playlist)
-    .then( playlist => dispatch(receivePlaylist(playlist)))
+    .then( payload => dispatch(receivePlaylist(payload)))
       .fail( err => dispatch(receivePlaylistErrors(err.responseJSON)));
 };
 
 export const updatePlaylist = playlist => dispatch => {
-  debugger
   return PSApiUtil.updatePlaylist(playlist)
-    .then( playlist => dispatch(receivePlaylist(playlist)))
+    .then( payload => dispatch(receivePlaylist(payload)))
       .fail( err => dispatch(receivePlaylistErrors(err.responseJSON)));
 };
 

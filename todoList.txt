@@ -1,3 +1,2 @@
-Fix header,
-make errors pretty,
-work on splash page
+fix createPlaylist in browse
+fix album index

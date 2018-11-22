@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { ProtectedRoute } from '../../../../util/route_util';
 import { currentUserPlaylists } from '../../../../reducers/selectors/playlist_selectors';
-import PCollectionItem from './p_collection_item';
+import PlaylistItem from './playlist_item';
+import PlaylistItemShow from './p_collection_item_show';
+
 
 class PlaylistCollection extends React.Component {
 
@@ -13,7 +16,7 @@ class PlaylistCollection extends React.Component {
   render() {
     const playlists = this.props.currentUserPlaylists.map((playlist) => {
       return (
-        <PCollectionItem key={playlist.id} playlist={playlist} />
+        <PlaylistItem key={playlist.id} playlist={playlist} />
       );
     });
     return (
@@ -39,4 +42,4 @@ const mdp = dispatch => {
   };
 };
 
-export default connect(msp,mdp)(PlaylistCollection);
+export default withRouter(connect(msp,mdp)(PlaylistCollection));

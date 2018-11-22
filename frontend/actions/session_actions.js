@@ -4,6 +4,7 @@ export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const RECEIVE_USER = 'RECEIVE_USER';
 export const RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
+export const RECEIVE_USER_ERRORS = 'RECEIVE_USER_ERRORS';
 export const CLEAR_ALL_ERRORS = 'CLEAR_ALL_ERRORS';
 
 const receiveCurrentUser = user => {
@@ -34,6 +35,14 @@ export const receiveSessionErrors = (errors) => {
   };
 };
 
+export const receiveUserErrors = (errors) => {
+
+  return {
+    type: RECEIVE_USER_ERRORS,
+    errors
+  };
+};
+
 export const clearAllErrors = () => {
   return {
     type: CLEAR_ALL_ERRORS
@@ -59,4 +68,12 @@ export const signup = (user) => {
       .then( user => dispatch(receiveCurrentUser(user)))
         .fail( err => { return dispatch(receiveSessionErrors(err.responseJSON))});
   }
+};
+
+// USER
+
+export const fetchUser = id => dispatch => {
+  return SessionAPIUtil.fetchUser(id)
+    .then( user => dispatch(receiveUser(user)))
+      .fail( err => dispatch(receiveUserErrors(err)));
 };

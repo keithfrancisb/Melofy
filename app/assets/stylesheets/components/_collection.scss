@@ -1,3 +1,10 @@
+.collection-main {
+  background: linear-gradient(rgb(51, 67, 78), rgb(6, 8, 9) 85%);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
 .collection-main-view {
   padding-left: 230px;
   display: block;
@@ -223,7 +230,7 @@
   padding-bottom: 2.5em;
 }
 
-.playlist-image {
+.playlist-index-image {
   width: 222px;
   height: 222px;
 }

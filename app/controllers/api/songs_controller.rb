@@ -5,6 +5,12 @@ class Api::SongsController < ApplicationController
 
   end
 
+  def index
+    @songs = Song.all
+    @artists = Artist.all
+    @albums = Album.all
+  end
+
   def create
 
     @playlist = current_user.playlists.find(params[:playlist_id])

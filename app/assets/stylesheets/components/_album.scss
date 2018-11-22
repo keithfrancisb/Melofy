@@ -1,0 +1,29 @@
+.album-index-image {
+  width: 222px;
+  height: 222px;
+}
+
+.album-span {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: .015em;
+  font-weight: 500;
+  color: #fff;
+  text-transform: none;
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.album-artist-span {
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: .015em;
+  font-weight: 500;
+  color: #fff;
+  text-transform: none;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+  opacity: .6;
+}

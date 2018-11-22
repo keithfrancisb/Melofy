@@ -2,12 +2,11 @@ class Api::PlaylistsController < ApplicationController
 
   def index
     @playlists = Playlist.all.includes(:songs)
-
   end
 
   def show
     @playlist = Playlist.find(params[:id])
-    @songs = @playlist.songs
+    @songs = @playlist.songs.includes(:artist,:album)
   end
 
   def create

@@ -1,0 +1,129 @@
+.content-spacing-playlist {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 0 32px;
+  // background-color: #161417;
+}
+
+.playlist-content {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0px 80px;
+}
+
+.playlist-content > ul {
+  position: relative;
+}
+
+.playlist-info {
+  color: #fff;
+  text-align: center;
+  width: 320px;
+}
+
+.hoverable-info {
+
+}
+
+.playlist-show-border {
+
+  background-color: #060809;
+  box-shadow: 0px 0px 20px #312d2d;
+}
+
+.playlist-show-image {
+  width: 320px;
+  height: 320px;
+  display: block;
+  position: relative;
+  opacity: 1;
+}
+
+.playlist-default-image {
+  width: 300px;
+  height: 300px;
+  display: block;
+  position: relative;
+  top: 10px;
+  left: 10px;
+  opacity: 0.8;
+}
+
+.playlist-label {
+  line-height: 36px;
+  letter-spacing: -.005em;
+  font-weight: 500;
+  color: #fff;
+  text-transform: none;
+  padding: 15px 0;
+}
+
+.playlist-label > h2 {
+  font-size: 28px;
+}
+
+.playlist-label > span {
+  opacity: 0.6;
+}
+
+.misc-logo {
+  width: 6em;
+  height: 6em;
+}
+
+.playlist-songs {
+  width: 45vw;
+  margin: 0 4em;
+}
+
+
+.div-song-list-item {
+  padding: 12px 10px;
+  transition: background-color .2s;
+}
+
+.div-song-list-item:hover {
+  background-color: rgba(0,0,0,0.4);
+}
+
+.song-browse-list {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  width: 65vw;
+  justify-content: space-between;
+}
+
+
+.songs-list > div > span {
+  color: white;
+}
+
+.sub-song-info {
+  font-size: 13px;
+  opacity: .6;
+  margin: 6px 0;
+}
+
+.second-line-separator {
+  color: #fff;
+  opacity: .6;
+  display: inline-block;
+  transform: translateY(-1px);
+  font-size: .8em;
+  padding: 0 8px;
+}
+
+.delete-playlist {
+  z-index: 3;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  padding-top: 90px;
+}

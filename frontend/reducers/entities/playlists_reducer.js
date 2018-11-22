@@ -8,12 +8,11 @@ import {
 export const PlaylistsReducer = (state = {}, action) => {
   Object.freeze(state);
   const newState = Object.assign({}, state);
-
   switch (action.type) {
     case RECEIVE_PLAYLISTS:
       return action.playlists;
     case RECEIVE_PLAYLIST:
-      newState[action.playlist.id] = action.playlist;
+      newState[action.payload.playlist.id] = action.payload.playlist;
       return newState;
     case REMOVE_PLAYLIST:
       delete newState[action.playlistId];
