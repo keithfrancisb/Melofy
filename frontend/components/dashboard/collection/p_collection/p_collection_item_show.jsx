@@ -8,13 +8,18 @@ class PlaylistItemShow extends React.Component{
   constructor(props){
     super(props);
 
-    this.state = { changeBooleanState: false };
+    this.state = { changeBooleanState: false , songId: -1 };
     this.changeBooleanState = this.changeBooleanState.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   changeBooleanState() {
     this.setState({ changeBooleanState: !this.state.changeBooleanState });
+  }
+
+  handleAddToPlaylist(playlistId, songId) {
+    this.changeBooleanState();
+    return () => this.props.addSongToPlaylist(playlistId, songId);
   }
 
   renderConfirmDelete() {
@@ -57,15 +62,29 @@ class PlaylistItemShow extends React.Component{
           const { name: songName, artist_id, album_id } = song;
           const { artists, albums } = this.props;
           return (
-            <div key={song.id} className='div-song-item'>
+            <div key={song.id} className='div-song-list-item'>
               <li className='songs-list'>
                 <div>
-                  <span>{songName}</span>
+                  <div>
+                    <span>{songName}</span>
+                  </div>
+                  <div className='sub-song-info'>
+                    <span>{artists[artist_id].name}</span>
+                    <span className="second-line-separator">•</span>
+                    <span>{albums[album_id].name}</span>
+                  </div>
                 </div>
-                <div className='sub-song-info'>
-                  <span>{artists[artist_id].name}</span>
-                  <span className="second-line-separator">•</span>
-                  <span>{albums[album_id].name}</span>
+                <div className='dot-div'>
+                  <button id='popup'>
+                    <img className='song-misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
+                  </button>
+                  <div className='popupBox-song'>
+                    <ul>
+                      <li>
+                        <span>Remove from this Playlist</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </li>
             </div>

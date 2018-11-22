@@ -1,6 +1,7 @@
 .div-browse-song-list-item {
   padding: 12px 10px;
   transition: background-color .4s;
+  user-select: none;
 }
 
 .div-browse-song-list-item:hover {
@@ -17,7 +18,10 @@
 
 .songs-list {
   width: 100%;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
 }
 
 .song-misc-info {

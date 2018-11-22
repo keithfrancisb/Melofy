@@ -10,8 +10,100 @@ import { logout } from '../../actions/session_actions';
 
 class Dashboard extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      progress: 0,
+      playbackButton: 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png'
+     };
+
+    this.updateProgressBar = this.updateProgressBar.bind(this);
+    this.togglePlayPause = this.togglePlayPause.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.nowPlaying.id !== this.props.nowPlaying.id){
+      const player = document.getElementById('music-player');
+      player.load();
+      this.togglePlayPause();
+    }
+  }
+
+  togglePlayPause() {
+    const player = document.getElementById('music-player');
+
+    const newIcon = player.paused ? 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_pause+button_895204.png' :
+      'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png';
+
+    this.setState({ playbackButton: newIcon });
+    player.paused ? player.play() : player.pause();
+  }
+
+  updateProgressBar() {
+    const bar = document.getElementById('progress-bar');
+    const player = document.getElementById('music-player');
+
+    const newValue = (player.currentTime / player.duration) * 100;
+    this.setState({ progress: newValue });
+  }
+
+  updateCurrentTime() {
+    const player = document.getElementById('music-player');
+
+    if(player) {
+      const currentTime = player.currentTime
+
+      const current_hour = parseInt(currentTime / 3600) % 24;
+      const current_minute = parseInt(currentTime / 60) % 60;
+      const current_seconds_long = currentTime % 60;
+      const current_seconds = current_seconds_long.toFixed();
+      const current_time = (current_minute < 10 ? "0" + current_minute :
+        current_minute) + ":" + (current_seconds < 10 ? "0" + current_seconds : current_seconds);
+
+      return current_time;
+    } else {
+      return '--:--';
+    }
+  }
+
+  renderTotalTime() {
+    const player = document.getElementById('music-player');
+
+    if(player) {
+      const duration = player.duration;
+
+      const minutes = Math.floor(duration / 60);
+      const seconds_int = duration - minutes * 60;
+      const seconds_str = seconds_int.toString();
+      const seconds = seconds_str.substr(0, 2);
+      const totalTime = `${minutes}:${seconds}`;
+
+      return totalTime;
+    } else {
+      return '--:--';
+    }
+  }
+
+  renderNowPlayingInfo() {
+    if(this.props.nowPlaying.name) {
+      const { artists, albums } = this.props;
+      return (
+        <div className='now-playing-bar-left'>
+          <div className='album-image-player'>
+            <img src={albums[this.props.nowPlaying.album_id].image_url || ''}></img>
+          </div>
+          <div className='song-artist-info-bar'>
+            <div className='song-name-player'><span>{this.props.nowPlaying.name}</span></div>
+            <div className='artist-name-player'><span>{artists[this.props.nowPlaying.artist_id].name}</span></div>
+          </div>
+        </div>
+      );
+    }
+  }
+
   render(){
-    const { currentUser, logout } = this.props;
+    const { currentUser, logout, albums, artists } = this.props;
     return (
       <div className='main'>
         <nav className='sidebar'>
@@ -49,7 +141,44 @@ class Dashboard extends React.Component {
         </nav>
 
         <div className='now-playing-bar'>
-          <footer></footer>
+          <footer className='footer-player-bar'>
+              {this.renderNowPlayingInfo()}
+            <div className='now-playing-bar-center'>
+              <div className='player-controls'>
+                <button className='shuffle'>
+                  <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_Shuffle_2052748.png'></img>
+                </button>
+                <button>
+                  <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_previous_899259.png'></img>
+                </button>
+                <button onClick={this.togglePlayPause}>
+                  <img src={this.state.playbackButton}></img>
+                </button>
+                <button>
+                  <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_skip+track_899260.png'></img>
+                </button>
+                <button className='repeat'>
+                  <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_Repeat_1155556.png'></img>
+                </button>
+                <audio id='music-player' onTimeUpdate={this.updateProgressBar}>
+                  <source src={this.props.nowPlaying.song_url} type='audio/mp3'></source>
+                  <source src={this.props.nowPlaying.song_url} type='video/mp4'></source>
+                  <source src={this.props.nowPlaying.song_url} type='video/webm'></source>
+                </audio>
+              </div>
+              <div className='playback-bar'>
+                <div className='current-time'>{this.updateCurrentTime()}</div>
+                <div className='progress-bar'>
+                  <progress id='progress-bar' value={this.state.progress} max='100'></progress>
+                </div>
+                <div className='end-time'>{this.renderTotalTime()}</div>
+              </div>
+            </div>
+            <div className='now-playing-bar-right'>
+              <div className='volume-icon'></div>
+              <div className='volume-bar'></div>
+            </div>
+          </footer>
         </div>
         <ProtectedRoute path='/dashboard/search' component={Search}/>
         <ProtectedRoute path='/dashboard/browse' component={Browse}/>
@@ -62,7 +191,10 @@ class Dashboard extends React.Component {
 
 const msp = (state, ownProps) => {
   return {
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
+    albums: state.entities.albums,
+    artists: state.entities.artists,
+    nowPlaying: state.nowPlaying
   };
 };
 

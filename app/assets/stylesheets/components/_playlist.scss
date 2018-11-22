@@ -82,7 +82,8 @@
 
 .div-song-list-item {
   padding: 12px 10px;
-  transition: background-color .2s;
+  transition: background-color .4s;
+  user-select: none;
 }
 
 .div-song-list-item:hover {

@@ -6,6 +6,7 @@ import { fetchPlaylists } from '../../../../actions/playlist_actions';
 import { currentUserPlaylists } from '../../../../reducers/selectors/playlist_selectors.js';
 import SongItem from './song_item';
 import PlaylistItem from '../../collection/p_collection/playlist_item';
+import { receiveCurrentSong } from '../../../../actions/now_playing_actions';
 
 class SongBrowse extends React.Component {
 
@@ -17,6 +18,7 @@ class SongBrowse extends React.Component {
     this.changeBooleanState = this.changeBooleanState.bind(this);
     this.setupAddToPlaylist = this.setupAddToPlaylist.bind(this);
     this.handleAddToPlaylist = this.handleAddToPlaylist.bind(this);
+    this.playSong = this.playSong.bind(this);
   }
 
   changeBooleanState() {
@@ -72,12 +74,19 @@ class SongBrowse extends React.Component {
     this.props.fetchPlaylists();
   }
 
+  playSong(song) {
+    const { receiveCurrentSong } = this.props;
+    return () => {
+      return receiveCurrentSong(song);
+    };
+  }
+
   render() {
     const { artists, albums } = this.props;
     const songs = this.props.songs.map((song) => {
       const { artist_id, album_id } = song;
       return (
-        <SongItem key={song.id} setupAddToPlaylist={this.setupAddToPlaylist} song={song} artist={artists[artist_id]} album={albums[album_id]}/>
+        <SongItem playSong={this.playSong} key={song.id} setupAddToPlaylist={this.setupAddToPlaylist} song={song} artist={artists[artist_id]} album={albums[album_id]}/>
       );
     });
     return (
@@ -107,7 +116,8 @@ const mdp = dispatch => {
   return {
     fetchSongs: () => dispatch(fetchSongs()),
     fetchPlaylists: () => dispatch(fetchPlaylists()),
-    addSongToPlaylist: (playlistId, songId) => addSongToPlaylist(playlistId, songId)
+    addSongToPlaylist: (playlistId, songId) => addSongToPlaylist(playlistId, songId),
+    receiveCurrentSong: (song) => dispatch(receiveCurrentSong(song))
   };
 };
 

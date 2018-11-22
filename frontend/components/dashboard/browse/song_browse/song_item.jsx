@@ -1,10 +1,10 @@
 import React from 'react';
 
 const SongItem = (props) => {
-  const { song, artist, album, setupAddToPlaylist } = props;
+  const { song, artist, album, setupAddToPlaylist, playSong } = props;
   return (
     <div className='div-browse-song-list-item'>
-      <li className='song-browse-list'>
+      <li className='song-browse-list' onDoubleClick={playSong(song)}>
         <div>
           <div>
             <span>{song.name}</span>
