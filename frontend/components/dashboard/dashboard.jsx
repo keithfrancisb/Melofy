@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Browse from './browse/browse';
-import Search from './Search/Search';
+import Search from './search/search';
 import Collection from './collection/collection';
 import { ProtectedRoute } from '../../util/route_util';
 
