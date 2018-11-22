@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const PlaylistItem = (props) => {
-  const { playlist } = props
+  const { playlist } = props;
   return (
     <li>
       <div className='pc-item'>

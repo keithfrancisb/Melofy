@@ -52,7 +52,7 @@ class Dashboard extends React.Component {
     const player = document.getElementById('music-player');
 
     if(player) {
-      const currentTime = player.currentTime
+      const currentTime = player.currentTime;
 
       const current_hour = parseInt(currentTime / 3600) % 24;
       const current_minute = parseInt(currentTime / 60) % 60;
