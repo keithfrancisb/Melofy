@@ -43,9 +43,9 @@ alb3.image_url = 'https://i.scdn.co/image/c9c0ba55b658fcd567e2e1d71705fb24f617a2
 alb3.save!
 
 # Songs
-song1 = Song.create!(song_url:'pending...', name:'Say Amen (Saturday Night)', artist_id: art2.id, album_id: alb3.id)
-song2 = Song.create!(song_url:'pending...', name:'Lone Digger', artist_id: art1.id, album_id: alb2.id)
-song3 = Song.create!(song_url:'pending...', name:'The Mojo Radio Gang', artist_id: art3.id, album_id: alb1.id)
+song1 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Say+Amen+(Saturday+Night).mp3', name:'Say Amen (Saturday Night)', artist_id: art2.id, album_id: alb3.id)
+song2 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Caravan+Palace+-+Lone+Digger+(album+version).mp3', name:'Lone Digger', artist_id: art1.id, album_id: alb2.id)
+song3 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+The+Mojo+Radio+Gang+(Official+Audio).mp3', name:'The Mojo Radio Gang', artist_id: art3.id, album_id: alb1.id)
 
 
 

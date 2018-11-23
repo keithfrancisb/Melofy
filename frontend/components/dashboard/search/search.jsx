@@ -5,7 +5,9 @@ class Search extends React.Component {
 
   render (){
     return (
-      <h2>Search</h2>
+      <div className='collection-main-view'>
+        <h2>Search</h2>
+      </div>
     );
   }
 }

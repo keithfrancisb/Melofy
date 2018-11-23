@@ -105,7 +105,7 @@ class Dashboard extends React.Component {
   render(){
     const { currentUser, logout, albums, artists } = this.props;
     return (
-      <div className='main'>
+      <div className='collection-main'>
         <nav className='sidebar'>
           <h2>Melofy</h2>
           <ul className='three-musketeers'>
