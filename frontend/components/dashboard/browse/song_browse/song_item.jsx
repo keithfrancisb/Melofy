@@ -1,10 +1,26 @@
 import React from 'react';
 
+// const calculateTotalTime = (duration) => {
+//
+//     const minutes = Math.floor(duration / 60);
+//     const seconds_int = duration - minutes * 60;
+//     const seconds_str = seconds_int.toString();
+//     const seconds = seconds_str.substr(0, 2);
+//     const totalTime = `${minutes}:${seconds}`;
+
+//     return totalTime;
+// };
+
 const SongItem = (props) => {
   const { song, artist, album, setupAddToPlaylist, playSong } = props;
+  // const audio = document.createElement('audio');
+
+  // audio.src = song.song_url;
+  // const duration = calculateTotalTime(audio.duration);
+
   return (
-    <div className='div-browse-song-list-item'>
-      <li className='song-browse-list' onDoubleClick={playSong(song)}>
+    <div key={song.id} className='div-browse-song-list-item' onDoubleClick={playSong(song)}>
+      <li className='song-browse-list'>
         <div>
           <div>
             <span>{song.name}</span>

@@ -6,6 +6,7 @@
 .sidebar {
   box-sizing: border-box;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   width: 230px;
   height: 91vh;
@@ -28,6 +29,41 @@
 
 .three-musketeers > li:hover {
   color: white;
+}
+
+.current-user-info {
+  position: relative;
+  display: flex;
+  bottom: 1.5em;
+  flex-direction: column;
+  right: -7%;
+  text-align: center;
+  width: 10vw;
+}
+
+.current-user-info > li {
+  margin: 15px 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: .015em;
+  color: #b3b3b3;
+  transition: color 0.5s;
+}
+
+.current-user-info > li > button {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.super-mini-divider {
+  border: 0.5px solid #d9dadc;
+  width: 9em;
+  display: block;
+  line-height: 1px;
+  margin: 5px 0;
+  position: relative;
+  text-align: center;
 }
 
 .three-musketeers-text {
@@ -156,4 +192,9 @@
   min-width: 40px;
   text-align: center;
   font-weight: lighter;
+}
+
+.now-playing-bar-right {
+  position: absolute;
+  right: 3vw;
 }

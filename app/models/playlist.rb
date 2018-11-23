@@ -26,7 +26,7 @@ class Playlist < ApplicationRecord
 
   def ensure_playlist_image
     unless self.image_url
-      self.image_url = 'https://s3.amazonaws.com/playlist-dev/icons/no-image-playlist.png'
+      self.image_url = 'https://s3.amazonaws.com/playlist-dev/icons/noun_music+playlist_1058814.png'
     end
   end
 end

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Navlink, Redirect } from 'react-router-dom';
 import { deletePlaylist } from '../../../../actions/playlist_actions';
+import { fetchCurrentSong } from '../../../../actions/now_playing_actions';
 
 class PlaylistItemShow extends React.Component{
 
@@ -11,6 +12,7 @@ class PlaylistItemShow extends React.Component{
     this.state = { changeBooleanState: false , songId: -1 };
     this.changeBooleanState = this.changeBooleanState.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.playSong = this.playSong.bind(this);
   }
 
   changeBooleanState() {
@@ -55,6 +57,13 @@ class PlaylistItemShow extends React.Component{
     this.props.fetchPlaylist(this.props.match.params.playlistId);
   }
 
+  playSong(song) {
+    const { fetchCurrentSong } = this.props;
+    return () => {
+      return fetchCurrentSong(song);
+    };
+  }
+
   renderSongList() {
     return (
       <ul className='ul-songs'>
@@ -62,7 +71,7 @@ class PlaylistItemShow extends React.Component{
           const { name: songName, artist_id, album_id } = song;
           const { artists, albums } = this.props;
           return (
-            <div key={song.id} className='div-song-list-item'>
+            <div key={song.id} className='div-song-list-item' onDoubleClick={this.playSong(song)}>
               <li className='songs-list'>
                 <div>
                   <div>
@@ -78,7 +87,7 @@ class PlaylistItemShow extends React.Component{
                   <button id='popup'>
                     <img className='song-misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
                   </button>
-                  <div className='popupBox-song'>
+                  <div className='popupBox-song-playlist'>
                     <ul>
                       <li>
                         <span>Remove from this Playlist</span>
@@ -96,7 +105,7 @@ class PlaylistItemShow extends React.Component{
 
   render() {
     const { playlist, creatorName, songs } = this.props;
-    const defaultImage = 'https://s3.amazonaws.com/playlist-dev/icons/no-image-playlist.png';
+    const defaultImage = 'https://s3.amazonaws.com/playlist-dev/icons/noun_music+playlist_1058814.png';
     const displayPhoto = playlist.image_url === defaultImage ? 'playlist-default-image' : 'playlist-show-image';
 
     return (
@@ -162,7 +171,8 @@ const msp = ({entities},ownProps) => {
 const mdp = dispatch => {
   return {
     fetchPlaylist: id => dispatch(fetchPlaylist(id)),
-    deletePlaylist: id => dispatch(deletePlaylist(id))
+    deletePlaylist: id => dispatch(deletePlaylist(id)),
+    fetchCurrentSong: (song) => dispatch(fetchCurrentSong(song))
   };
 };
 

@@ -2,7 +2,10 @@ class Api::SongsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
-
+    @artist_name = @song.artist.name
+    album = @song.album
+    @album_name = album.name
+    @album_image = album.image_url
   end
 
   def index

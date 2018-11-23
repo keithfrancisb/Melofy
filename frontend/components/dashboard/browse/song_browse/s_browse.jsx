@@ -6,7 +6,7 @@ import { fetchPlaylists } from '../../../../actions/playlist_actions';
 import { currentUserPlaylists } from '../../../../reducers/selectors/playlist_selectors.js';
 import SongItem from './song_item';
 import PlaylistItem from '../../collection/p_collection/playlist_item';
-import { receiveCurrentSong } from '../../../../actions/now_playing_actions';
+import { fetchCurrentSong } from '../../../../actions/now_playing_actions';
 
 class SongBrowse extends React.Component {
 
@@ -75,9 +75,9 @@ class SongBrowse extends React.Component {
   }
 
   playSong(song) {
-    const { receiveCurrentSong } = this.props;
+    const { fetchCurrentSong } = this.props;
     return () => {
-      return receiveCurrentSong(song);
+      return fetchCurrentSong(song);
     };
   }
 
@@ -117,7 +117,7 @@ const mdp = dispatch => {
     fetchSongs: () => dispatch(fetchSongs()),
     fetchPlaylists: () => dispatch(fetchPlaylists()),
     addSongToPlaylist: (playlistId, songId) => addSongToPlaylist(playlistId, songId),
-    receiveCurrentSong: (song) => dispatch(receiveCurrentSong(song))
+    fetchCurrentSong: (song) => dispatch(fetchCurrentSong(song))
   };
 };
 
