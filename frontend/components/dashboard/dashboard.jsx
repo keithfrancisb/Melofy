@@ -68,14 +68,17 @@ class Dashboard extends React.Component {
   }
 
   renderTotalTime() {
-    if(document.getElementById('music-player')) {
+    const player = document.getElementById('music-player');
 
-      const minutes = Math.floor(document.getElementById('music-player').duration / 60);
-      const seconds_int = document.getElementById('music-player').duration - minutes * 60;
+    if(player) {
+      const duration = player.duration;
+
+      const minutes = Math.floor(duration / 60);
+      const seconds_int = duration - minutes * 60;
       const seconds_str = seconds_int.toString();
       const seconds = seconds_str.substr(0, 2);
       const totalTime = `${minutes}:${seconds}`;
-      debugger
+      
       return minutes && seconds ? totalTime : '--:--';
     }
   }
