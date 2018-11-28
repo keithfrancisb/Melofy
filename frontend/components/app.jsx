@@ -1,11 +1,12 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
-import GreetingContainer from './greetings/greeting_container';
 import LoginFormContainer from './session_form/login_form_container';
 import SignupFormContainer from './session_form/signup_form_container';
 import Splash from './splash/splash';
 import Dashboard from './dashboard/dashboard';
+import GreetingContainer from './greetings/greeting_container';
+
 
 class App extends React.Component {
 

@@ -43,9 +43,29 @@ class Greeting extends React.Component {
     }
 
     return (
-      <div>
-      {output}
-    </div>
+      <div className='nav-bar'>
+        <nav className = 'nav-left'>
+          <Link className='logo-name' to='/'>Melofy</Link>
+        </nav>
+        <nav className = 'nav-right'>
+          <ul>
+            <li>
+              <a className='links' href="https://www.github.com/keithfrancisb">GitHub</a>
+            </li>
+            <li>
+              <Link className='links' to='/'>LinkedIn</Link>
+            </li>
+            <li className='links-divider'></li>
+            <li>
+              <Link className='links' to='/signup'>Sign Up</Link>
+            </li>
+            <li>
+              <Link className='links' to='/login'>Log In</Link>
+            </li>
+
+          </ul>
+        </nav>
+      </div>
     );
   }
 }

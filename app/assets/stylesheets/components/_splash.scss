@@ -8,19 +8,8 @@
   color: white;
   position: relative;
   overflow: hidden;
-  z-index: -4;
-}
-
-.splash:before {
-  content: "";
-  position: absolute;
-  width: 160%;
-  height: 150%;
-  top: -50%;
-  left: -50%;
-  z-index: -3;
   background: image-url('background.svg'), linear-gradient(rgb(253, 80, 107), rgb(251, 153, 56));
-  transform: rotate(-180deg);
+  background-size: 110%;
 }
 
 .splash-header {
@@ -63,7 +52,6 @@
   background-color: #1db954;
   transition: background-color 0.25s;
 }
-
 
 .splash-button:hover, .splash-signup:hover {
   background-color: #1ed760;
