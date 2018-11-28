@@ -15,9 +15,9 @@
   display: flex;
 }
 
-// .dot-div:hover .popupBox {
-//   display: flex;
-// }
+.dot-div:hover .popupBox {
+  display: flex;
+}
 
 .popupBox-song {
   width: 11em;
@@ -33,19 +33,19 @@
   font-size: 14px;
 }
 
-.popupBox-song-playlist {
-  width: 11em;
-  height: 4em;
-  background-color: #282828;
-  display: none;
-  justify-content: center;
-  padding-top: 6px;
-  border-radius: 5px;
-  position: absolute;
-  right: 6em;
-  text-align: center;
-  font-size: 14px;
-}
+// .popupBox-song-playlist {
+//   width: 11em;
+//   height: 4em;
+//   background-color: #282828;
+//   display: none;
+//   justify-content: center;
+//   padding-top: 6px;
+//   border-radius: 5px;
+//   position: absolute;
+//   right: 6em;
+//   text-align: center;
+//   font-size: 14px;
+// }
 
 
 .dot-div:hover .popupBox-song .popupBox-song-playlist{

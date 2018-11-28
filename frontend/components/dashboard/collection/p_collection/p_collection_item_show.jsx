@@ -87,7 +87,7 @@ class PlaylistItemShow extends React.Component{
                   <button id='popup'>
                     <img className='song-misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
                   </button>
-                  <div className='popupBox-song-playlist'>
+                  <div className='popupBox-song'>
                     <ul>
                       <li>
                         <span>Remove from this Playlist</span>
