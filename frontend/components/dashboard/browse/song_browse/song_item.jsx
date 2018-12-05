@@ -11,12 +11,30 @@ import React from 'react';
 //     return totalTime;
 // };
 
+const toggleDropdown = (id) => {
+  return () => {
+    document.getElementById(`dropDown${id}`).classList.toggle('show');
+    window.songId = id;
+  };
+};
+
+
 const SongItem = (props) => {
   const { song, artist, album, setupAddToPlaylist, playSong } = props;
-  // const audio = document.createElement('audio');
 
-  // audio.src = song.song_url;
-  // const duration = calculateTotalTime(audio.duration);
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = (event) => {
+    if (!event.target.matches(`button${window.songId}`)) {
+
+      const dropdowns = document.getElementsByClassName("popupBox-song");
+      for (let i = 0; i < dropdowns.length; i++) {
+        const openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show') && openDropdown.id !== `dropDown${window.songId}`) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  };
 
   return (
     <div key={song.id} className='div-browse-song-list-item' onDoubleClick={playSong(song)}>
@@ -32,15 +50,11 @@ const SongItem = (props) => {
           </div>
         </div>
         <div className='dot-div'>
-          <button id='popup'>
+          <button id='popup' onClick={toggleDropdown(song.id)} className={`button${song.id}`}>
             <img className='song-misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
           </button>
-          <div className='popupBox-song'>
-            <ul>
-              <li>
-                <span onClick={setupAddToPlaylist(song.id)}>Add to Playlist</span>
-              </li>
-            </ul>
+          <div id={`dropDown${song.id}`} className='popupBox-song'>
+            <span onClick={setupAddToPlaylist(song.id)}>Add to Playlist</span>
           </div>
         </div>
       </li>
