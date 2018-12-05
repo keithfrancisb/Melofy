@@ -7,8 +7,9 @@
   justify-content: center;
   padding-top: 6px;
   border-radius: 5px;
-  position: relative;
+  position: absolute;
   left: 95px;
+  user-select: none;
 }
 
 .show {
@@ -19,11 +20,6 @@
   position: relative;
   display: block;
 }
-
-
-// .dot-div:hover .popupBox {
-//   display: flex;
-// }
 
 .popupBox-song {
   display: none;

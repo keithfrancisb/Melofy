@@ -24,6 +24,13 @@ class PlaylistItemShow extends React.Component{
     return () => this.props.addSongToPlaylist(playlistId, songId);
   }
 
+  toggleDropdown(id) {
+    return () => {
+      document.getElementById(`dropDown${id}`).classList.toggle('show');
+      window.songId = id;
+    };
+  }
+
   renderConfirmDelete() {
     if(this.state.changeBooleanState)
       return (
@@ -84,13 +91,13 @@ class PlaylistItemShow extends React.Component{
                   </div>
                 </div>
                 <div className='dot-div'>
-                  <button id='popup'>
+                  <button id='popup' onClick={this.toggleDropdown(song.id)} className={`button${song.id}`}>
                     <img className='song-misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
                   </button>
-                  <div className='popupBox-song'>
+                  <div id={`dropDown${song.id}`} className='popupBox-song'>
                     <ul>
                       <li>
-                        <span>Remove from this Playlist</span>
+                        <span>Remove from playlist</span>
                       </li>
                     </ul>
                   </div>
@@ -128,10 +135,10 @@ class PlaylistItemShow extends React.Component{
                 </div>
               </div>
               <div className='dot-div'>
-                <button id='popup'>
+                <button id='popup' onClick={this.toggleDropdown(playlist.id)} className={`button${playlist.id}`}>
                   <img className='misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
                 </button>
-                <div className='popupBox'>
+                <div id={`dropDown${playlist.id}`} className='popupBox'>
                   <ul>
                     <li>
                       <span onClick={this.changeBooleanState}>Delete</span>
@@ -149,6 +156,20 @@ class PlaylistItemShow extends React.Component{
     );
   }
 }
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = (event) => {
+  if (!event.target.matches(`button${window.songId}`)) {
+
+    const dropdowns = document.getElementsByClassName("popupBox-song");
+    for (let i = 0; i < dropdowns.length; i++) {
+      const openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show') && openDropdown.id !== `dropDown${window.songId}`) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+};
 
 const msp = ({entities},ownProps) => {
   const { playlists, songs, albums, artists, users } = entities;
