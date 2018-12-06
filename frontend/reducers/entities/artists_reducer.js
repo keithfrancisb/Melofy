@@ -15,7 +15,8 @@ export const ArtistsReducer = (state = {}, action) => {
     case RECEIVE_PLAYLIST:
       return Object.assign({}, action.payload.artists);
     case RECEIVE_ALBUM:
-      newState[action.payload.artist.id] = action.payload.artist
+      newState[action.payload.artist.id] = action.payload.artist;
+      return newState;
     case RECEIVE_ALBUMS:
     case RECEIVE_ARTISTS:
       return action.payload.artists;

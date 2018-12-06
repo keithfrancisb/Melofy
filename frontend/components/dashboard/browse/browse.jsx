@@ -6,6 +6,7 @@ import { ProtectedRoute } from '../../../util/route_util';
 import PlaylistBrowse from './p_browse/p_browse';
 import PlaylistItemShow from '../collection//p_collection/p_collection_item_show';
 import AlbumBrowse from './album_browse/album_browse';
+import AlbumItemShow from './album_browse/album_show';
 import SongBrowse from './song_browse/s_browse';
 import ArtistBrowse from './artist_browse/artist_browse';
 import ArtistShow from './artist_browse/artist_show';
@@ -63,6 +64,7 @@ class Browse extends React.Component {
               <ProtectedRoute exact path='/dashboard/browse/playlists' component={PlaylistBrowse} />
               <ProtectedRoute exact path='/dashboard/browse/playlists/:playlistId' component={PlaylistItemShow} />
               <ProtectedRoute exact path='/dashboard/browse/albums' component={AlbumBrowse} />
+              <ProtectedRoute exact path='/dashboard/browse/albums/:albumId' component={AlbumItemShow} />
               <ProtectedRoute exact path='/dashboard/browse/songs' component={SongBrowse} />
               <ProtectedRoute exact path='/dashboard/browse/artists' component={ArtistBrowse} />
               <ProtectedRoute exact path='/dashboard/browse/artists/:artistId' component={ArtistShow} />
