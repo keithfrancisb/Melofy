@@ -28,8 +28,8 @@ const receiveAlbumErrors = errors => {
 
 // THUNK
 
-export const fetchAlbums = () => dispatch => {
-  return AAApiUtil.fetchAlbums()
+export const fetchAlbums = (searchTerm, album_ids) => dispatch => {
+  return AAApiUtil.fetchAlbums(searchTerm, album_ids)
     .then( payload => dispatch(receiveAlbums(payload)))
       .fail( err => dispatch(receiveAlbumErrors(err.responseJSON)));
 };

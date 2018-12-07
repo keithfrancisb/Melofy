@@ -21,7 +21,6 @@ const toggleDropdown = (id) => {
 
 const SongItem = (props) => {
   const { song, artist, album, setupAddToPlaylist, playSong } = props;
-
   // Close the dropdown menu if the user clicks outside of it
   window.onclick = (event) => {
     if (!event.target.matches(`button${window.songId}`)) {

@@ -21,6 +21,18 @@ class SongIndex extends React.Component {
     this.playSong = this.playSong.bind(this);
   }
 
+  componentDidMount(){
+    const { searchTerm, song_ids } = this.props;
+    this.props.fetchSongs(searchTerm, song_ids);
+    // this.props.fetchPlaylists();
+  }
+
+  componentDidUpdate(prevProps) {
+    debugger
+    if(prevProps.searchTerm != this.props.searchTerm)
+      this.props.fetchSongs(this.props.searchTerm);
+  }
+
   changeBooleanState() {
     this.setState({ booleanToggle: !this.state.booleanToggle })
   }
@@ -69,10 +81,6 @@ class SongIndex extends React.Component {
     }
   }
 
-  componentDidMount(){
-    this.props.fetchSongs();
-    this.props.fetchPlaylists();
-  }
 
   playSong(song) {
     const { fetchCurrentSong } = this.props;
@@ -82,11 +90,11 @@ class SongIndex extends React.Component {
   }
 
   render() {
-    const { artists, albums } = this.props;
+    // const { artists, albums } = this.props;
     const songs = this.props.songs.map((song) => {
       const { artist_id, album_id } = song;
       return (
-        <SongItem playSong={this.playSong} key={song.id} setupAddToPlaylist={this.setupAddToPlaylist} song={song} artist={artists[artist_id]} album={albums[album_id]}/>
+        <SongItem playSong={this.playSong} key={song.id} setupAddToPlaylist={this.setupAddToPlaylist} song={song} artist={song.artist} album={song.album}/>
       );
     });
     return (
@@ -106,15 +114,15 @@ const msp = ({entities, session}) => {
   const { songs, artists, albums, playlists } = entities;
   return {
     songs: Object.values(songs),
-    artists,
-    albums,
-    playlists: currentUserPlaylists(playlists, session.id)
+    // artists,
+    // albums,
+    // playlists: currentUserPlaylists(playlists, session.id)
   };
 };
 
 const mdp = dispatch => {
   return {
-    fetchSongs: () => dispatch(fetchSongs()),
+    fetchSongs: (searchTerm, song_ids) => dispatch(fetchSongs(searchTerm, song_ids)),
     fetchPlaylists: () => dispatch(fetchPlaylists()),
     addSongToPlaylist: (playlistId, songId) => addSongToPlaylist(playlistId, songId),
     fetchCurrentSong: (song) => dispatch(fetchCurrentSong(song))

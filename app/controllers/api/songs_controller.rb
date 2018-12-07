@@ -9,9 +9,15 @@ class Api::SongsController < ApplicationController
   end
 
   def index
-    @songs = Song.all
-    @artists = Artist.all
-    @albums = Album.all
+    if(params[:search_term])
+      @songs = Song.where('name ILIKE ?', "%#{params[:search_term].downcase}%").includes(:artist,:album)
+    elsif (params[:song_ids])
+      @songs = Song.where(id: params[:song_ids])
+    else
+      @songs = Song.all.includes(:artist,:album)
+      # @artists = Artist.all
+      # @albums = Album.all
+    end
   end
 
   def create

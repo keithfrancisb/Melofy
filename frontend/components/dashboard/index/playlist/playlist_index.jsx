@@ -7,13 +7,19 @@ import PlaylistItem from './playlist_item';
 class PlaylistIndex extends React.Component {
 
   componentDidMount(){
-    this.props.fetchPlaylists();
+    const { searchTerm, playlist_ids } = this.props;
+    this.props.fetchPlaylists(searchTerm, playlist_ids);
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.searchTerm != this.props.searchTerm)
+      this.props.fetchPlaylists(this.props.searchTerm);
   }
 
   render() {
     const playlists = this.props.playlists.map((playlist) => {
       return (
-        <PlaylistItem key={playlist.id} playlist={playlist} />
+        <PlaylistItem key={playlist.id} playlist={playlist} user={playlist.user}/>
       );
     });
     return (
@@ -35,7 +41,7 @@ const msp = ({entities}) => {
 
 const mdp = dispatch => {
   return {
-    fetchPlaylists: () => dispatch(fetchPlaylists())
+    fetchPlaylists: (searchTerm, playlist_ids) => dispatch(fetchPlaylists(searchTerm, playlist_ids))
   };
 };
 

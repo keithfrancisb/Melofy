@@ -13,16 +13,16 @@
 # end
 
 json.artist do
-  json.extract! artist, :id, :name, :description, :image_url
+  json.extract! artist, :id, :name, :description, :image_url, :album_ids, :song_ids
 end
 
-if albums
-  json.albums do
-    albums.each do |album|
-      json.set! album.id do
-        json.extract! album, :id, :name, :description, :artist_id, :image_url
-      end
-    end
-  end
-
-end
+# if albums
+#   json.albums do
+#     albums.each do |album|
+#       json.set! album.id do
+#         json.extract! album, :id, :name, :description, :artist_id, :image_url
+#       end
+#     end
+#   end
+#
+# end

@@ -1,12 +1,18 @@
 class Api::PlaylistsController < ApplicationController
 
   def index
-    @playlists = Playlist.all.includes(:songs)
+    if(params[:search_term])
+      @playlists = Playlist.where('name ILIKE ?', "%#{params[:search_term].downcase}%").includes(:songs)
+    elsif (params[:playlist_ids])
+      @playlists = Playlist.where(id: params[:playlist_ids])
+    else
+      @playlists = Playlist.all.includes(:songs)
+    end
   end
 
   def show
     @playlist = Playlist.find(params[:id])
-    @songs = @playlist.songs.includes(:artist,:album)
+    # @songs = @playlist.songs.includes(:artist,:album)
   end
 
   def create

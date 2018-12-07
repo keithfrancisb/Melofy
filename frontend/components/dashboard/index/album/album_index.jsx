@@ -6,16 +6,22 @@ import { fetchAlbums } from '../../../../actions/album_actions';
 
 class AlbumIndex extends React.Component {
 
-  componentDidMount(){
-    this.props.fetchAlbums();
+  componentDidMount(props){
+    const { searchTerm, album_ids } = this.props;
+    this.props.fetchAlbums(searchTerm, album_ids);
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.searchTerm != this.props.searchTerm)
+      this.props.fetchAlbums(this.props.searchTerm);
   }
 
   render() {
-    const { artists } = this.props;
+    // const { artists } = this.props;
     const albums = this.props.albums.map((album) => {
-      const artist = artists[album.artist_id];
+
       return (
-        <AlbumItem key={album.id} album={album} artist={artist}/>
+        <AlbumItem key={album.id} album={album} artist={album.artist}/>
       );
     });
     return (
@@ -32,13 +38,13 @@ const msp = ({entities}) => {
   const { albums, artists } = entities;
   return {
     albums: Object.values(albums),
-    artists: artists
+    // artists: artists
   };
 };
 
 const mdp = dispatch => {
   return {
-    fetchAlbums: () => dispatch(fetchAlbums()),
+    fetchAlbums: (searchTerm, album_ids) => dispatch(fetchAlbums(searchTerm, album_ids)),
   };
 };
 

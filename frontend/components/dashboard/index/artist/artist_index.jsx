@@ -8,7 +8,13 @@ import { fetchArtists } from '../../../../actions/artist_actions';
 class ArtistIndex extends React.Component {
 
   componentDidMount(){
-    this.props.fetchArtists();
+    const { searchTerm, artist_ids } = this.props;
+    this.props.fetchArtists(searchTerm, artist_ids);
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.searchTerm != this.props.searchTerm)
+      this.props.fetchArtists(this.props.searchTerm);
   }
 
   render() {
@@ -36,7 +42,7 @@ const msp = ({entities}) => {
 
 const mdp = dispatch => {
   return {
-    fetchArtists: () => dispatch(fetchArtists())
+    fetchArtists: (searchTerm, artist_ids) => dispatch(fetchArtists(searchTerm, artist_ids))
   };
 };
 

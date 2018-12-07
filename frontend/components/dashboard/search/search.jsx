@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
+import SearchResult from './searchResult';
 
 class Search extends React.Component {
 
@@ -23,8 +24,8 @@ class Search extends React.Component {
     if(this.state.searchTerm){
       result = (
         <div className='search-content'>
-          <Route exact path='dashboard/search' render={ () => <Redirect to='dashboard/search/top' /> } />
-          <Route path='dashboard/search/:tab' render={ () => <SearchResult searchTerm={this.state.searchTerm} />} />
+          <Route exact path='/dashboard/search' render={ () => <Redirect to='/dashboard/search/top' /> } />
+          <Route path='/dashboard/search/:tab' render={ () => <SearchResult searchTerm={this.state.searchTerm} /> } />
         </div>
       );
     } else {

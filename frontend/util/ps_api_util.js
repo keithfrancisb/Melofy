@@ -1,10 +1,14 @@
 
 // --------------------- Playlist API ---------------------- //
 
-export const fetchPlaylists = () => {
+export const fetchPlaylists = (searchTerm, playlist_ids) => {
   return $.ajax({
     method: 'get',
-    url: 'api/playlists'
+    url: 'api/playlists',
+    data: {
+      search_term: searchTerm,
+      playlist_ids
+    }
   });
 };
 
@@ -48,10 +52,14 @@ export const fetchPlaylistSongs = (playlistId) => {
   });
 };
 
-export const fetchSongs = () => {
+export const fetchSongs = (searchTerm, song_ids) => {
   return $.ajax({
     method: 'get',
-    url: 'api/songs'
+    url: 'api/songs',
+    data: {
+      search_term: searchTerm,
+      song_ids
+    }
   });
 };
 

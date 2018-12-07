@@ -40,8 +40,8 @@ const receivePlaylistErrors = errors => {
 
 // Thunk Actions
 
-export const fetchPlaylists = () => dispatch => {
-  return PSApiUtil.fetchPlaylists()
+export const fetchPlaylists = (searchTerm, playlist_ids) => dispatch => {
+  return PSApiUtil.fetchPlaylists(searchTerm, playlist_ids)
     .then( playlists => dispatch(receivePlaylists(playlists)))
       .fail( err => dispatch(receivePlaylistErrors(err.responseJSON)));
 };

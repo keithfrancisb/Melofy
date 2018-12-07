@@ -10,7 +10,7 @@ export const AlbumsReducer = (state = {}, action) => {
   const newState = Object.assign({}, state);
 
   switch (action.type) {
-    case RECEIVE_SONGS:
+    // case RECEIVE_SONGS:
     case RECEIVE_PLAYLIST:
       return Object.assign({}, action.payload.albums);
     case RECEIVE_ALBUMS:

@@ -31,8 +31,8 @@ const receiveSongErrors = errors => {
 
 // Thunk Actions
 
-export const fetchSongs = () => dispatch => {
-  return PSApiUtil.fetchSongs()
+export const fetchSongs = (searchTerm, song_ids) => dispatch => {
+  return PSApiUtil.fetchSongs(searchTerm, song_ids)
     .then( payload => dispatch(receiveSongs(payload)))
       .fail( err => dispatch(receiveSongErrors(err.responseJSON)));
 }

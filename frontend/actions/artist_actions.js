@@ -30,8 +30,8 @@ const receiveArtistErrors = errors => {
 
 // Thunk Actions
 
-export const fetchArtists = () => dispatch => {
-  return AAApiUtil.fetchArtists()
+export const fetchArtists = (searchTerm, artist_ids) => dispatch => {
+  return AAApiUtil.fetchArtists(searchTerm, artist_ids)
     .then( payload => dispatch(receiveArtists(payload)))
       .fail( err => dispatch(receiveArtistErrors(err.responseJSON)));
 };

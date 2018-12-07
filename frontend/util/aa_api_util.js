@@ -1,10 +1,14 @@
 
 // --------------------- Album API ---------------------- //
 
-export const fetchAlbums = () => {
+export const fetchAlbums = (searchTerm, album_ids) => {
   return $.ajax({
     method: 'get',
-    url: 'api/albums'
+    url: 'api/albums',
+    data: {
+      search_term : searchTerm,
+      album_ids
+    }
   });
 };
 
@@ -17,10 +21,14 @@ export const fetchAlbum = (albumId) => {
 
 // --------------------- Artist API ---------------------- //
 
-export const fetchArtists = () => {
+export const fetchArtists = (searchTerm, artist_ids) => {
   return $.ajax({
     method: 'get',
-    url: 'api/artists'
+    url: 'api/artists',
+    data: {
+      search_term: searchTerm,
+      artist_ids
+    }
   });
 };
 
