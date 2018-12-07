@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import ArtistItem from './artist_index_item';
+import ArtistItem from './artist_item';
 import { fetchArtists } from '../../../../actions/artist_actions';
 
 
-class ArtistBrowse extends React.Component {
+class ArtistIndex extends React.Component {
 
   componentDidMount(){
     this.props.fetchArtists();
@@ -40,4 +40,4 @@ const mdp = dispatch => {
   };
 };
 
-export default connect(msp,mdp)(ArtistBrowse);
+export default connect(msp,mdp)(ArtistIndex);

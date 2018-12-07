@@ -1,10 +1,11 @@
 import React from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 import { ProtectedRoute } from '../../../util/route_util';
-import PlaylistCollection from './p_collection/p_collection';
-import PlaylistItemShow from './p_collection/p_collection_item_show';
 import { connect } from 'react-redux';
 import { createPlaylist } from '../../../actions/playlist_actions';
+
+import PlaylistIndex from '../index/playlist/playlist_index.jsx';
+import PlaylistShow from '../show/playlist_show.jsx';
 
 class Collection extends React.Component {
 
@@ -87,8 +88,8 @@ class Collection extends React.Component {
                   <button className='div-button' onClick={this.changeBooleanState}>New Playlist</button>
                 </div>
               </div>
-              <ProtectedRoute exact path='/dashboard/collection/playlists' component={PlaylistCollection} />
-              <ProtectedRoute exact path='/dashboard/collection/playlists/:playlistId' component={PlaylistItemShow} />
+              <ProtectedRoute exact path='/dashboard/collection/playlists' component={PlaylistIndex} />
+              <ProtectedRoute exact path='/dashboard/collection/playlists/:playlistId' component={PlaylistShow} />
             </section>
           </div>
         </div>

@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import PlaylistItem from './playlist_b_item';
+import PlaylistItem from './playlist_item';
 
 
-
-class PlaylistBrowse extends React.Component {
+class PlaylistIndex extends React.Component {
 
   componentDidMount(){
     this.props.fetchPlaylists();
@@ -40,4 +39,4 @@ const mdp = dispatch => {
   };
 };
 
-export default connect(msp,mdp)(PlaylistBrowse);
+export default connect(msp,mdp)(PlaylistIndex);

@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { fetchAlbum } from '../../../../actions/album_actions';
-import { fetchCurrentSong } from '../../../../actions/now_playing_actions';
+import { fetchAlbum } from '../../../actions/album_actions';
+import { fetchCurrentSong } from '../../../actions/now_playing_actions';
 
 class AlbumItemShow extends React.Component{
 

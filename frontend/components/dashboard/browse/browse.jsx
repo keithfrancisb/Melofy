@@ -3,13 +3,15 @@ import { withRouter, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createPlaylist } from '../../../actions/playlist_actions';
 import { ProtectedRoute } from '../../../util/route_util';
-import PlaylistBrowse from './p_browse/p_browse';
-import PlaylistItemShow from '../collection//p_collection/p_collection_item_show';
-import AlbumBrowse from './album_browse/album_browse';
-import AlbumItemShow from './album_browse/album_show';
-import SongBrowse from './song_browse/s_browse';
-import ArtistBrowse from './artist_browse/artist_browse';
-import ArtistShow from './artist_browse/artist_show';
+
+import PlaylistIndex from '../index/playlist/playlist_index.jsx';
+import AlbumIndex from '../index/album/album_index.jsx';
+import ArtistIndex from '../index/artist/artist_index.jsx';
+import SongIndex from '../index/song/song_index.jsx';
+
+import PlaylistShow from '../show/playlist_show.jsx';
+import AlbumShow from '../show/album_show.jsx';
+import ArtistShow from '../show/artist_show.jsx';
 
 class Browse extends React.Component {
   constructor(props) {
@@ -61,12 +63,12 @@ class Browse extends React.Component {
                 </nav>
 
               </div>
-              <ProtectedRoute exact path='/dashboard/browse/playlists' component={PlaylistBrowse} />
-              <ProtectedRoute exact path='/dashboard/browse/playlists/:playlistId' component={PlaylistItemShow} />
-              <ProtectedRoute exact path='/dashboard/browse/albums' component={AlbumBrowse} />
-              <ProtectedRoute exact path='/dashboard/browse/albums/:albumId' component={AlbumItemShow} />
-              <ProtectedRoute exact path='/dashboard/browse/songs' component={SongBrowse} />
-              <ProtectedRoute exact path='/dashboard/browse/artists' component={ArtistBrowse} />
+              <ProtectedRoute exact path='/dashboard/browse/playlists' component={PlaylistIndex} />
+              <ProtectedRoute exact path='/dashboard/browse/playlists/:playlistId' component={PlaylistShow} />
+              <ProtectedRoute exact path='/dashboard/browse/albums' component={AlbumIndex} />
+              <ProtectedRoute exact path='/dashboard/browse/albums/:albumId' component={AlbumShow} />
+              <ProtectedRoute exact path='/dashboard/browse/songs' component={SongIndex} />
+              <ProtectedRoute exact path='/dashboard/browse/artists' component={ArtistIndex} />
               <ProtectedRoute exact path='/dashboard/browse/artists/:artistId' component={ArtistShow} />
             </section>
           </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Navlink, Redirect } from 'react-router-dom';
-import { deletePlaylist } from '../../../../actions/playlist_actions';
-import { fetchCurrentSong } from '../../../../actions/now_playing_actions';
+import { deletePlaylist } from '../../../actions/playlist_actions';
+import { fetchCurrentSong } from '../../../actions/now_playing_actions';
 
 class PlaylistItemShow extends React.Component{
 

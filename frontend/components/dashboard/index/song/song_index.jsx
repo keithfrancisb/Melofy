@@ -8,7 +8,7 @@ import SongItem from './song_item';
 import PlaylistItem from '../../collection/p_collection/playlist_item';
 import { fetchCurrentSong } from '../../../../actions/now_playing_actions';
 
-class SongBrowse extends React.Component {
+class SongIndex extends React.Component {
 
   constructor(props) {
     super(props);
@@ -121,4 +121,4 @@ const mdp = dispatch => {
   };
 };
 
-export default connect(msp,mdp)(SongBrowse);
+export default connect(msp,mdp)(SongIndex);

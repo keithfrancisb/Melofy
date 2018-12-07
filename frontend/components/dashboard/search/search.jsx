@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Route } from 'react-router-dom';
 
 class Search extends React.Component {
 
@@ -21,7 +21,12 @@ class Search extends React.Component {
   render (){
     let result;
     if(this.state.searchTerm){
-
+      result = (
+        <div className='search-content'>
+          <Route exact path='dashboard/search' render={ () => <Redirect to='dashboard/search/top' /> } />
+          <Route path='dashboard/search/:tab' render={ () => <SearchResult searchTerm={this.state.searchTerm} />} />
+        </div>
+      );
     } else {
       result = (
         <div className='search-content --empty'>

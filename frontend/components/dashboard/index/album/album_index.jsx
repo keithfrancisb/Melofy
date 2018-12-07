@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import AlbumItem from './album_item';
 import { fetchAlbums } from '../../../../actions/album_actions';
 
-class AlbumBrowse extends React.Component {
+class AlbumIndex extends React.Component {
 
   componentDidMount(){
     this.props.fetchAlbums();
@@ -42,4 +42,4 @@ const mdp = dispatch => {
   };
 };
 
-export default connect(msp,mdp)(AlbumBrowse);
+export default connect(msp,mdp)(AlbumIndex);
