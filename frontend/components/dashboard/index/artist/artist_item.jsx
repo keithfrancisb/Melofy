@@ -1,12 +1,14 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 
 const ArtistItem = (props) => {
-  const { artist } = props;
+  const { artist, match } = props;
+  const array = match.path.split('/');
+  const tab = array[2];
   return (
     <li>
       <div className='pc-item'>
-        <NavLink to={`/dashboard/browse/artists/${artist.id}`}>
+        <NavLink to={`/dashboard/${tab}/artists/${artist.id}`}>
           <img className='artist-index-image' src={artist.image_url}></img>
           <span className='playlist-span'>{artist.name}</span>
         </NavLink>
@@ -15,4 +17,4 @@ const ArtistItem = (props) => {
   );
 };
 
-export default ArtistItem;
+export default withRouter(ArtistItem);

@@ -17,7 +17,6 @@ class PlaylistItemShow extends React.Component{
   }
 
   componentDidMount() {
-    debugger
     this.props.fetchPlaylist(this.props.match.params.playlistId);
   }
 
@@ -115,7 +114,7 @@ class PlaylistItemShow extends React.Component{
     const { playlist } = this.props;
     const defaultImage = 'https://s3.amazonaws.com/playlist-dev/icons/noun_music+playlist_1058814.png';
     const displayPhoto = playlist.image_url === defaultImage ? 'playlist-default-image' : 'playlist-show-image';
-    debugger
+
     if (!this.props.playlist.user) return null;
 
     return (
@@ -177,7 +176,6 @@ window.onclick = (event) => {
 
 const msp = ({entities},ownProps) => {
   const { playlists } = entities;
-  debugger
   // const playlistSongs = Object.values(songs);
   const playlist = playlists[ownProps.match.params.playlistId] || {};
   return {

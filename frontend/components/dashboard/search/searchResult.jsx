@@ -23,25 +23,25 @@ class SearchResult extends React.Component{
             </li>
             <li>
               <NavLink to={`/dashboard/search/artists`}
-                className={"rela-block app-link" + ((tab === 'artists') ? ' active' : '')}>
+                activeClassName='selected-tab'>
                 Artists
               </NavLink>
             </li>
             <li>
               <NavLink to={`/dashboard/search/songs`}
-                className={"rela-block app-link" + ((tab === 'tracks') ? ' active' : '')}>
+                activeClassName='selected-tab'>
                 Songs
               </NavLink>
             </li>
             <li>
               <NavLink to={`/dashboard/search/albums`}
-                className={"rela-block app-link" + ((tab === 'albums') ? ' active' : '')}>
+                activeClassName='selected-tab'>
                 Albums
               </NavLink>
             </li>
             <li>
               <NavLink to={`/dashboard/search/playlists`}
-                className={"rela-block app-link" + ((tab === 'playlists') ? ' active' : '')}>
+                activeClassName='selected-tab'>
                 Playlists
               </NavLink>
             </li>

@@ -90,6 +90,11 @@ class Collection extends React.Component {
               </div>
               <ProtectedRoute exact path='/dashboard/collection/playlists' component={PlaylistIndex} />
               <ProtectedRoute exact path='/dashboard/collection/playlists/:playlistId' component={PlaylistShow} />
+              <ProtectedRoute exact path='/dashboard/collection/albums' component={AlbumIndex} />
+              <ProtectedRoute exact path='/dashboard/collection/albums/:albumId' component={AlbumShow} />
+              <ProtectedRoute exact path='/dashboard/collection/songs' component={SongIndex} />
+              <ProtectedRoute exact path='/dashboard/collection/artists' component={ArtistIndex} />
+              <ProtectedRoute exact path='/dashboard/collection/artists/:artistId' component={ArtistShow} />
             </section>
           </div>
         </div>
