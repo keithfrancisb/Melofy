@@ -153,19 +153,15 @@ class Dashboard extends React.Component {
             <div className='now-playing-bar-center'>
               <div className='player-controls'>
                 <button className='shuffle'>
-                  <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_Shuffle_2052748.png'></img>
                 </button>
-                <button>
-                  <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_previous_899259.png'></img>
+                <button className='previousSong'>
                 </button>
                 <button onClick={this.togglePlayPause}>
                   <img src={this.state.playbackButton}></img>
                 </button>
-                <button>
-                  <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_skip+track_899260.png'></img>
+                <button className='nextSong'>
                 </button>
                 <button className='repeat'>
-                  <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_Repeat_1155556.png'></img>
                 </button>
                 <audio id='music-player' onTimeUpdate={this.updateProgressBar} volume={this.state.volume} src={this.props.nowPlaying.song_url}>
                 </audio>
@@ -195,6 +191,10 @@ class Dashboard extends React.Component {
   }
 }
 
+<img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_Shuffle_2052748.png'></img>
+<img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_previous_899259.png'></img>
+<img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_skip+track_899260.png'></img>
+<img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_Repeat_1155556.png'></img>
 const msp = (state, ownProps) => {
   return {
     currentUser: state.entities.users[state.session.id],
