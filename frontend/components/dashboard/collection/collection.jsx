@@ -5,7 +5,14 @@ import { connect } from 'react-redux';
 import { createPlaylist } from '../../../actions/playlist_actions';
 
 import PlaylistIndex from '../index/playlist/playlist_index.jsx';
+import SongIndex from '../index/song/song_index.jsx';
+import ArtistIndex from '../index/artist/artist_index.jsx';
+import AlbumIndex from '../index/album/album_index.jsx';
+
 import PlaylistShow from '../show/playlist_show.jsx';
+import ArtistShow from '../show/artist_show.jsx';
+import AlbumShow from '../show/album_show.jsx';
+
 
 class Collection extends React.Component {
 

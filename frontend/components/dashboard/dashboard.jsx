@@ -47,7 +47,7 @@ class Dashboard extends React.Component {
     const player = document.getElementById('music-player');
 
     const newValue = (player.currentTime / player.duration) * 100;
-    this.setState({ progress: newValue });
+    if (newValue) this.setState({ progress: newValue });
   }
 
   updateCurrentTime() {
@@ -70,16 +70,17 @@ class Dashboard extends React.Component {
   renderTotalTime() {
     const player = document.getElementById('music-player');
 
-    if(player) {
+    if(player && player.duration) {
       const duration = player.duration;
+      const total_minute = parseInt(duration / 60) % 60;
+      const total_seconds_long = duration % 60;
+      const total_seconds = total_seconds_long.toFixed();
+      const totalTime = (total_minute < 10 ? "0" + total_minute :
+        total_minute) + ":" + (total_seconds < 10 ? "0" + total_seconds : total_seconds);
 
-      const minutes = Math.floor(duration / 60);
-      const seconds_int = duration - minutes * 60;
-      const seconds_str = seconds_int.toString();
-      const seconds = seconds_str.substr(0, 2);
-      const totalTime = `${minutes}:${seconds}`;
-
-      return minutes && seconds ? totalTime : '--:--';
+      return totalTime;
+    } else {
+      return '--:--';
     }
   }
 
@@ -193,10 +194,6 @@ class Dashboard extends React.Component {
   }
 }
 
-// <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_Shuffle_2052748.png'></img>
-// <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_previous_899259.png'></img>
-// <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_skip+track_899260.png'></img>
-// <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_Repeat_1155556.png'></img>
 const msp = (state, ownProps) => {
   return {
     currentUser: state.entities.users[state.session.id],

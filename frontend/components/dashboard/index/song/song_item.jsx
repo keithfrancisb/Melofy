@@ -18,6 +18,22 @@ const toggleDropdown = (id) => {
   };
 };
 
+const renderTotalTime = () => {
+  const player = document.getElementById('music-player');
+
+  if(player && player.duration) {
+    const duration = player.duration;
+    const total_minute = parseInt(duration / 60) % 60;
+    const total_seconds_long = duration % 60;
+    const total_seconds = total_seconds_long.toFixed();
+    const totalTime = (total_minute < 10 ? "0" + total_minute :
+      total_minute) + ":" + (total_seconds < 10 ? "0" + total_seconds : total_seconds);
+
+    return totalTime;
+  } else {
+    return '     ';
+  }
+}
 
 const SongItem = (props) => {
   const { song, artist, album, setupAddToPlaylist, playSong } = props;
