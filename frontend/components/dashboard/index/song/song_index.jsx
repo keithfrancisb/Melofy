@@ -23,7 +23,8 @@ class SongIndex extends React.Component {
 
   componentDidMount(){
     const { searchTerm, songIds } = this.props;
-    this.props.fetchSongs(searchTerm, songIds);
+    this.props.fetchSongs(searchTerm, songIds)
+      .then( () => window.songIdList = this.props.songs.map( song => song.id));
     this.props.fetchPlaylists();
   }
 
@@ -33,7 +34,7 @@ class SongIndex extends React.Component {
   }
 
   changeBooleanState() {
-    this.setState({ booleanToggle: !this.state.booleanToggle })
+    this.setState({ booleanToggle: !this.state.booleanToggle });
   }
 
   setupAddToPlaylist(songId) {
@@ -84,7 +85,7 @@ class SongIndex extends React.Component {
   playSong(song) {
     const { fetchCurrentSong } = this.props;
     return () => {
-      return fetchCurrentSong(song);
+      return fetchCurrentSong(song.id);
     };
   }
 
@@ -131,7 +132,7 @@ const mdp = dispatch => {
     fetchSongs: (searchTerm, song_ids) => dispatch(fetchSongs(searchTerm, song_ids)),
     fetchPlaylists: () => dispatch(fetchPlaylists()),
     addSongToPlaylist: (playlistId, songId) => addSongToPlaylist(playlistId, songId),
-    fetchCurrentSong: (song) => dispatch(fetchCurrentSong(song))
+    fetchCurrentSong: (songId) => dispatch(fetchCurrentSong(songId))
   };
 };
 

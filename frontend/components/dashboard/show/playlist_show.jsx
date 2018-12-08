@@ -67,7 +67,7 @@ class PlaylistItemShow extends React.Component{
   playSong(song) {
     const { fetchCurrentSong } = this.props;
     return () => {
-      return fetchCurrentSong(song);
+      return fetchCurrentSong(song.id);
     };
   }
 

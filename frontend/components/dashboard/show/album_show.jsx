@@ -28,7 +28,7 @@ class AlbumItemShow extends React.Component{
   playSong(song) {
     const { fetchCurrentSong } = this.props;
     return () => {
-      return fetchCurrentSong(song);
+      return fetchCurrentSong(song.id);
     };
   }
 
@@ -150,7 +150,7 @@ const mdp = dispatch => {
 
   return {
     fetchAlbum: id => dispatch(fetchAlbum(id)),
-    fetchCurrentSong: song => dispatch(fetchCurrentSong(song))
+    fetchCurrentSong: songId => dispatch(fetchCurrentSong(songId))
   };
 };
 

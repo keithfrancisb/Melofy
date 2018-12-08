@@ -10,7 +10,7 @@ export const receiveCurrentSong = (song) => {
   };
 };
 
-export const fetchCurrentSong = (song) => dispatch => {
-  return PSApiUtil.fetchSong(song.id)
+export const fetchCurrentSong = (songId) => dispatch => {
+  return PSApiUtil.fetchSong(songId)
     .then( currentSong => dispatch(receiveCurrentSong(currentSong)));
 };

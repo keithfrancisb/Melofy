@@ -7,6 +7,7 @@ import { ProtectedRoute } from '../../util/route_util';
 
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
+import { fetchCurrentSong } from '../../actions/now_playing_actions';
 
 class Dashboard extends React.Component {
 
@@ -22,6 +23,8 @@ class Dashboard extends React.Component {
     this.updateProgressBar = this.updateProgressBar.bind(this);
     this.togglePlayPause = this.togglePlayPause.bind(this);
     this.updateVolume = this.updateVolume.bind(this);
+    this.nextSong = this.nextSong.bind(this);
+    this.prevSong = this.prevSong.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -30,6 +33,33 @@ class Dashboard extends React.Component {
       player.load();
       this.togglePlayPause();
     }
+  }
+
+  nextSong() {
+    const { songIdList } = window;
+    const { nowPlaying, fetchCurrentSong } = this.props;
+
+    let newIndex = songIdList.indexOf(nowPlaying.id) + 1;
+    let newSongId = songIdList[newIndex];
+    if (newIndex === songIdList.length) newSongId = songIdList[0];
+
+    fetchCurrentSong(newSongId);
+  }
+
+  prevSong() {
+    const { songIdList } = window;
+    const { nowPlaying, fetchCurrentSong } = this.props;
+    const player = document.getElementById('music-player');
+
+    // if(player.currentTime < 3){
+      let newIndex = songIdList.indexOf(nowPlaying.id) - 1;
+      let newSongId = songIdList[newIndex];
+      if (newIndex === -1) newSongId = songIdList[songIdList.length-1];
+      fetchCurrentSong(newSongId);
+    // } else {
+    //   fetchCurrentSong(nowPlaying.id);
+    // }
+
   }
 
   togglePlayPause() {
@@ -45,7 +75,7 @@ class Dashboard extends React.Component {
   toggleRepeat() {
     const player = document.getElementById('music-player');
     const repeatButton = document.getElementsByClassName('repeat')[0];
-    
+
     player.loop = !player.loop;
     if(player.loop) {
       repeatButton.style.color = '#1db954';
@@ -169,12 +199,12 @@ class Dashboard extends React.Component {
               <div className='player-controls'>
                 <button className='control-button shuffle'>
                 </button>
-                <button className='control-button previousSong'>
+                <button className='control-button previousSong' onClick={this.prevSong}>
                 </button>
                 <button onClick={this.togglePlayPause}>
                   <img src={this.state.playbackButton}></img>
                 </button>
-                <button className='control-button nextSong'>
+                <button className='control-button nextSong' onClick={this.nextSong}>
                 </button>
                 <button className='control-button repeat' onClick={this.toggleRepeat}>
                 </button>
@@ -218,6 +248,7 @@ const msp = (state, ownProps) => {
 const mdp = (dispatch) => {
   return {
     logout: () => dispatch(logout()),
+    fetchCurrentSong: (songId) => dispatch(fetchCurrentSong(songId))
   };
 };
 
