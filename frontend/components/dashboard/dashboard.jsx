@@ -78,14 +78,14 @@ class Dashboard extends React.Component {
       const seconds_str = seconds_int.toString();
       const seconds = seconds_str.substr(0, 2);
       const totalTime = `${minutes}:${seconds}`;
-      
+
       return minutes && seconds ? totalTime : '--:--';
     }
   }
 
   updateVolume(e) {
-    // const volumeBar = document.getElementById('volume');
     this.setState({ volume: e.target.value });
+    document.getElementById('music-player').volume = this.state.volume / 100;
   }
 
   renderNowPlayingInfo() {
