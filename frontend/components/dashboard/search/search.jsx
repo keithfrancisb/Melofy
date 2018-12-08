@@ -38,13 +38,15 @@ class Search extends React.Component {
     }
 
     return (
-      <div className='collection-main-view'>
-        <div className='search-input-container'>
-          <div className='content-spacing'>
+      <div className='search-main-view'>
+        <div className='content-scrolling'>
+          <div className='search-input-container'>
             <input type='text' onChange={this.handleChange()} className='search-input' placeholder='Start typing...' value={this.state.searchTerm}/>
           </div>
+            <section className='content-spacing'>
+              {result}
+            </section>
         </div>
-        {result}
       </div>
     );
   }

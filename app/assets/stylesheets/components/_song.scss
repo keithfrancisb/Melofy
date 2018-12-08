@@ -9,11 +9,22 @@
 }
 
 .div-song-browse-list {
-  width: 65vw;
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   position: relative;
   left: 125px;
+}
+
+.song-index-div {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.song-list {
+  width: 100%;
 }
 
 .songs-list {

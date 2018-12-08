@@ -22,14 +22,13 @@ class SongIndex extends React.Component {
   }
 
   componentDidMount(){
-    const { searchTerm, song_ids } = this.props;
-    this.props.fetchSongs(searchTerm, song_ids);
-    // this.props.fetchPlaylists();
+    const { searchTerm, songIds } = this.props;
+    this.props.fetchSongs(searchTerm, songIds);
+    this.props.fetchPlaylists();
   }
 
   componentDidUpdate(prevProps) {
-    debugger
-    if(prevProps.searchTerm != this.props.searchTerm)
+    if(prevProps.searchTerm !== this.props.searchTerm)
       this.props.fetchSongs(this.props.searchTerm);
   }
 
@@ -92,15 +91,22 @@ class SongIndex extends React.Component {
   render() {
     // const { artists, albums } = this.props;
     const songs = this.props.songs.map((song) => {
-      const { artist_id, album_id } = song;
       return (
-        <SongItem playSong={this.playSong} key={song.id} setupAddToPlaylist={this.setupAddToPlaylist} song={song} artist={song.artist} album={song.album}/>
+        <SongItem
+          playSong={this.playSong}
+          key={song.id}
+          setupAddToPlaylist={this.setupAddToPlaylist}
+          song={song}
+          artist={song.artist}
+          album={song.album}
+          parentId={this.props.parentId}/>
       );
     });
+
     return (
       <div className='main-songs'>
         {this.renderAddToPlaylist()}
-        <div className='div-song-browse-list'>
+        <div className={this.props.parentId ? 'song-index-div' : 'div-song-browse-list'}>
           <ul className='song-list'>
             {songs}
           </ul>
@@ -116,7 +122,7 @@ const msp = ({entities, session}) => {
     songs: Object.values(songs),
     // artists,
     // albums,
-    // playlists: currentUserPlaylists(playlists, session.id)
+    playlists: currentUserPlaylists(playlists, session.id)
   };
 };
 

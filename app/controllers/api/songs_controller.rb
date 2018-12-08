@@ -12,7 +12,7 @@ class Api::SongsController < ApplicationController
     if(params[:search_term])
       @songs = Song.where('name ILIKE ?', "%#{params[:search_term].downcase}%").includes(:artist,:album)
     elsif (params[:song_ids])
-      @songs = Song.where(id: params[:song_ids])
+      @songs = Song.where(id: params[:song_ids]).includes(:artist,:album)
     else
       @songs = Song.all.includes(:artist,:album)
       # @artists = Artist.all

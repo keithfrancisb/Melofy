@@ -4,7 +4,7 @@ class Api::PlaylistsController < ApplicationController
     if(params[:search_term])
       @playlists = Playlist.where('name ILIKE ?', "%#{params[:search_term].downcase}%").includes(:songs)
     elsif (params[:playlist_ids])
-      @playlists = Playlist.where(id: params[:playlist_ids])
+      @playlists = Playlist.where(id: params[:playlist_ids]).includes(:songs)
     else
       @playlists = Playlist.all.includes(:songs)
     end

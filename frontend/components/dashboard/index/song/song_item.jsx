@@ -35,9 +35,12 @@ const SongItem = (props) => {
     }
   };
 
+  const liClass = props.parentId ? 'songs-list' : 'song-browse-list';
+  const divClass = props.parentId ? 'div-song-list-item' : 'div-browse-song-list-item';
+
   return (
-    <div key={song.id} className='div-browse-song-list-item' onDoubleClick={playSong(song)}>
-      <li className='song-browse-list'>
+    <div key={song.id} className={divClass} onDoubleClick={playSong(song)}>
+      <li className={liClass}>
         <div>
           <div>
             <span>{song.name}</span>

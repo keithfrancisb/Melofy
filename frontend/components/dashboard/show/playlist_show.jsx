@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Navlink, Redirect } from 'react-router-dom';
 import { deletePlaylist } from '../../../actions/playlist_actions';
 import { fetchCurrentSong } from '../../../actions/now_playing_actions';
+import SongIndex from '../index/song/song_index';
 
 class PlaylistItemShow extends React.Component{
 
@@ -13,6 +14,11 @@ class PlaylistItemShow extends React.Component{
     this.changeBooleanState = this.changeBooleanState.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.playSong = this.playSong.bind(this);
+  }
+
+  componentDidMount() {
+    debugger
+    this.props.fetchPlaylist(this.props.match.params.playlistId);
   }
 
   changeBooleanState() {
@@ -59,11 +65,6 @@ class PlaylistItemShow extends React.Component{
     this.props.history.push('/dashboard/collection/playlists');
   }
 
-
-  componentDidMount() {
-    this.props.fetchPlaylist(this.props.match.params.playlistId);
-  }
-
   playSong(song) {
     const { fetchCurrentSong } = this.props;
     return () => {
@@ -71,49 +72,51 @@ class PlaylistItemShow extends React.Component{
     };
   }
 
-  renderSongList() {
-    return (
-      <ul className='ul-songs'>
-        {this.props.songs.map( song => {
-          const { name: songName, artist_id, album_id } = song;
-          const { artists, albums } = this.props;
-          return (
-            <div key={song.id} className='div-song-list-item' onDoubleClick={this.playSong(song)}>
-              <li className='songs-list'>
-                <div>
-                  <div>
-                    <span>{songName}</span>
-                  </div>
-                  <div className='sub-song-info'>
-                    <span>{artists[artist_id].name}</span>
-                    <span className="second-line-separator">•</span>
-                    <span>{albums[album_id].name}</span>
-                  </div>
-                </div>
-                <div className='dot-div'>
-                  <button id='popup' onClick={this.toggleDropdown(song.id)} className={`button${song.id}`}>
-                    <img className='song-misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
-                  </button>
-                  <div id={`dropDown${song.id}`} className='popupBox-song'>
-                    <ul>
-                      <li>
-                        <span>Remove from playlist</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-            </div>
-          );
-        })}
-      </ul>
-    );
-  }
+  // renderSongList() {
+  //   return (
+  //     <ul className='ul-songs'>
+  //       {this.props.songs.map( song => {
+  //         const { name: songName, artist_id, album_id } = song;
+  //         const { artists, albums } = this.props;
+  //         return (
+  //           <div key={song.id} className='div-song-list-item' onDoubleClick={this.playSong(song)}>
+  //             <li className='songs-list'>
+  //               <div>
+  //                 <div>
+  //                   <span>{songName}</span>
+  //                 </div>
+  //                 <div className='sub-song-info'>
+  //                   <span>{artists[artist_id].name}</span>
+  //                   <span className="second-line-separator">•</span>
+  //                   <span>{albums[album_id].name}</span>
+  //                 </div>
+  //               </div>
+  //               <div className='dot-div'>
+  //                 <button id='popup' onClick={this.toggleDropdown(song.id)} className={`button${song.id}`}>
+  //                   <img className='song-misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
+  //                 </button>
+  //                 <div id={`dropDown${song.id}`} className='popupBox-song'>
+  //                   <ul>
+  //                     <li>
+  //                       <span>Remove from playlist</span>
+  //                     </li>
+  //                   </ul>
+  //                 </div>
+  //               </div>
+  //             </li>
+  //           </div>
+  //         );
+  //       })}
+  //     </ul>
+  //   );
+  // }
 
   render() {
-    const { playlist, creatorName, songs } = this.props;
+    const { playlist } = this.props;
     const defaultImage = 'https://s3.amazonaws.com/playlist-dev/icons/noun_music+playlist_1058814.png';
     const displayPhoto = playlist.image_url === defaultImage ? 'playlist-default-image' : 'playlist-show-image';
+    debugger
+    if (!this.props.playlist.user) return null;
 
     return (
       <div>
@@ -131,7 +134,7 @@ class PlaylistItemShow extends React.Component{
                   <h2>{playlist.name}</h2>
                 </div>
                 <div className='playlist-label'>
-                  <span>{creatorName}</span>
+                  <span>{`${playlist.user.first_name} ${playlist.user.last_name}`}</span>
                 </div>
               </div>
               <div className='dot-div'>
@@ -148,7 +151,7 @@ class PlaylistItemShow extends React.Component{
               </div>
             </div>
             <div className='playlist-songs'>
-              {this.renderSongList()}
+              <SongIndex songIds={playlist.song_ids} parentId={playlist.id} />
             </div>
           </section>
         </div>
@@ -157,6 +160,7 @@ class PlaylistItemShow extends React.Component{
   }
 }
 
+// {this.renderSongList()}
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = (event) => {
   if (!event.target.matches(`button${window.songId}`)) {
@@ -172,20 +176,12 @@ window.onclick = (event) => {
 };
 
 const msp = ({entities},ownProps) => {
-  const { playlists, songs, albums, artists, users } = entities;
-
-  const playlistSongs = Object.values(songs);
-  const playlist = playlists[ownProps.match.params.playlistId] || '';
-  const creator = users[playlist.user_id] || '';
-  let creatorName = '';
-  if(creator)
-    creatorName = `${users[playlist.user_id].first_name} ${users[playlist.user_id].last_name}`;
+  const { playlists } = entities;
+  debugger
+  // const playlistSongs = Object.values(songs);
+  const playlist = playlists[ownProps.match.params.playlistId] || {};
   return {
-    songs: playlistSongs,
     playlist,
-    creatorName,
-    albums,
-    artists
   };
 };
 
@@ -193,7 +189,6 @@ const mdp = dispatch => {
   return {
     fetchPlaylist: id => dispatch(fetchPlaylist(id)),
     deletePlaylist: id => dispatch(deletePlaylist(id)),
-    fetchCurrentSong: (song) => dispatch(fetchCurrentSong(song))
   };
 };
 

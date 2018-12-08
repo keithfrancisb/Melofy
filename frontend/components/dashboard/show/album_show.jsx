@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { fetchAlbum } from '../../../actions/album_actions';
 import { fetchCurrentSong } from '../../../actions/now_playing_actions';
+import SongIndex from '../index/song/song_index';
+
 
 class AlbumItemShow extends React.Component{
 
@@ -30,49 +32,51 @@ class AlbumItemShow extends React.Component{
     };
   }
 
-  renderSongList() {
-    return (
-      <ul className='ul-songs'>
-        {this.props.songs.map( song => {
-          const { name: songName } = song;
-          const { artist, album } = this.props;
-          return (
-            <div key={song.id} className='div-song-list-item' onDoubleClick={this.playSong(song)}>
-              <li className='songs-list'>
-                <div>
-                  <div>
-                    <span>{songName}</span>
-                  </div>
-                  <div className='sub-song-info'>
-                    <span>{artist.name}</span>
-                    <span className="second-line-separator">•</span>
-                    <span>{album.name}</span>
-                  </div>
-                </div>
-                <div className='dot-div'>
-                  <button id='popup' onClick={this.toggleDropdown(song.id)} className={`button${song.id}`}>
-                    <img className='song-misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
-                  </button>
-                  <div id={`dropDown${song.id}`} className='popupBox-song'>
-                    <ul>
-                      <li>
-                        <span>Remove from playlist</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-            </div>
-          );
-        })}
-      </ul>
-    );
-  }
+  // renderSongList() {
+  //   return (
+  //     <ul className='ul-songs'>
+  //       {this.props.songs.map( song => {
+  //         const { name: songName, artist, album } = song;
+  //         const { artist, album } = this.props;
+  //         return (
+  //           <div key={song.id} className='div-song-list-item' onDoubleClick={this.playSong(song)}>
+  //             <li className='songs-list'>
+  //               <div>
+  //                 <div>
+  //                   <span>{songName}</span>
+  //                 </div>
+  //                 <div className='sub-song-info'>
+  //                   <span>{artist.name}</span>
+  //                   <span className="second-line-separator">•</span>
+  //                   <span>{album.name}</span>
+  //                 </div>
+  //               </div>
+  //               <div className='dot-div'>
+  //                 <button id='popup' onClick={this.toggleDropdown(song.id)} className={`button${song.id}`}>
+  //                   <img className='song-misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
+  //                 </button>
+  //                 <div id={`dropDown${song.id}`} className='popupBox-song'>
+  //                   <ul>
+  //                     <li>
+  //                       <span>Remove from playlist</span>
+  //                     </li>
+  //                   </ul>
+  //                 </div>
+  //               </div>
+  //             </li>
+  //           </div>
+  //         );
+  //       })}
+  //     </ul>
+  //   );
+  // }
 
 
   render() {
-    const { album, artist, songs } = this.props;
+    const { album } = this.props;
     const displayPhoto = album.image_url;
+
+    if (!this.props.album.artist) return null;
 
     return (
       <div>
@@ -89,7 +93,7 @@ class AlbumItemShow extends React.Component{
                   <h2>{album.name}</h2>
                 </div>
                 <div className='playlist-label'>
-                  <span>{artist.name}</span>
+                  <span>{album.artist.name}</span>
                 </div>
               </div>
               <div className='dot-div'>
@@ -106,7 +110,7 @@ class AlbumItemShow extends React.Component{
               </div>
             </div>
             <div className='playlist-songs'>
-              {this.renderSongList()}
+              <SongIndex songIds={album.song_ids} parentId={album.id} />
             </div>
           </section>
         </div>
@@ -114,6 +118,7 @@ class AlbumItemShow extends React.Component{
     );
   }
 
+  // {this.renderSongList()}
 
 }
 
@@ -133,14 +138,11 @@ window.onclick = (event) => {
 
 
 const msp = (state, ownProps) => {
-  const { albums, artists, songs } = state.entities;
+  const { albums } = state.entities;
 
   const album = albums[ownProps.match.params.albumId] || {};
-  const artist = artists[album.artist_id] || {};
   return {
-    songs: Object.values(songs),
     album,
-    artist
   };
 };
 
