@@ -42,6 +42,18 @@ class Dashboard extends React.Component {
     player.paused ? player.play() : player.pause();
   }
 
+  toggleRepeat() {
+    const player = document.getElementById('music-player');
+    const repeatButton = document.getElementsByClassName('repeat')[0];
+    
+    player.loop = !player.loop;
+    if(player.loop) {
+      repeatButton.style.color = '#1db954';
+    } else {
+      repeatButton.style.color = '';
+    }
+  }
+
   updateProgressBar() {
     const bar = document.getElementById('progress-bar');
     const player = document.getElementById('music-player');
@@ -164,7 +176,7 @@ class Dashboard extends React.Component {
                 </button>
                 <button className='control-button nextSong'>
                 </button>
-                <button className='control-button repeat'>
+                <button className='control-button repeat' onClick={this.toggleRepeat}>
                 </button>
                 <audio id='music-player' onTimeUpdate={this.updateProgressBar} volume={this.state.volume} src={this.props.nowPlaying.song_url}>
                 </audio>
