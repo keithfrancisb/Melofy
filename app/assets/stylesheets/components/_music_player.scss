@@ -8,13 +8,13 @@
 }
 
 .player-controls {
-  width: 290px;
+  width: 240px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
-  top: -15px;
+  // position: relative;
+  // top: -15px;
 }
 
 .player-controls > .shuffle {
@@ -35,7 +35,7 @@
 .footer-player-bar {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
   height: 100%;
 }
@@ -43,29 +43,36 @@
 .now-playing-bar-left {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
-  position: fixed;
-  left: 1%;
-  width: 10%;
+  // position: fixed;
+  // left: 1%;
+  width: 30%;
+  min-width: 180px;
+  height: 100%;
   color: white;
+  margin: 0 10px;
 }
 
 .now-playing-bar-center {
-  position: fixed;
-  right: 40%;
+  // position: fixed;
+  // right: 40%;
+  width: 40%;
+  max-width: 722px;
 }
 
 .album-image-player {
   width: 56px;
-  position: absolute;
-  left: 5%;
+  position: relative;
+  // left: 5%;
+  padding: 15px;
 }
 
 .song-artist-info-bar {
-  position: absolute;
-  left: 55%;
-  width: 25vw;
+  position: relative;
+  // left: 55%;
+  // width: 25vw;
+  padding: 15px;
 }
 
 .song-artist-info-bar > div {
@@ -87,14 +94,18 @@
   justify-content: space-between;
   align-items: center;
   color: white;
-  width: 35vw;
-  position: absolute;
-  left: -38%;
-  bottom: -6%;
+  width: 100%;
+  // position: absolute;
+  // left: -38%;
+  // bottom: -6%;
+}
+
+.progress-bar {
+  width: 100%;
 }
 
 #progress-bar {
-  width: 25em;
+  width: 100%;
 }
 
 .end-time, .current-time {
@@ -107,6 +118,87 @@
 }
 
 .now-playing-bar-right {
-  position: absolute;
-  right: 3vw;
+  // position: absolute;
+  // right: 3vw;
+  display: flex;
+  justify-content: flex-end;
+  width: 30%;
+  min-width: 180px;
+}
+
+.control-button {
+  background-color: rgba(0,0,0,0);
+  border: none;
+  color: #b3b3b3;
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  position: relative;
+  text-align: center;
+}
+
+@font-face {
+  font-family: glue1-spoticon;
+  src: url(https://open.scdn.co/fonts/spoticon_regular_2.woff2) format("woff2"),url(https://open.scdn.co/fonts/spoticon_regular_2.woff) format("woff"),url(https://open.scdn.co/fonts/spoticon_regular_2.ttf) format("ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+.shuffle::before {
+  content: "\F144";
+  font-size: 16px;
+
+  font-family: glue1-spoticon;
+  font-style: normal;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: inherit;
+  vertical-align: bottom;
+  display: inline-block;
+  text-decoration: inherit;
+}
+
+.previousSong::before {
+  content: "\F146";
+  font-size: 16px;
+
+  font-family: glue1-spoticon;
+  font-style: normal;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: inherit;
+  vertical-align: bottom;
+  display: inline-block;
+  text-decoration: inherit;
+}
+
+.nextSong::before {
+  content: "\F148";
+  font-size: 16px;
+
+  font-family: glue1-spoticon;
+  font-style: normal;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: inherit;
+  vertical-align: bottom;
+  display: inline-block;
+  text-decoration: inherit;
+}
+
+.repeat::before {
+  content: "\F13E";
+  font-size: 16px;
+
+  font-family: glue1-spoticon;
+  font-style: normal;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: inherit;
+  vertical-align: bottom;
+  display: inline-block;
+  text-decoration: inherit;
 }

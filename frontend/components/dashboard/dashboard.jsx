@@ -92,7 +92,7 @@ class Dashboard extends React.Component {
     if(this.props.nowPlaying.name) {
       const { name, artistName, albumName, albumImage } = this.props.nowPlaying;
       return (
-        <div className='now-playing-bar-left'>
+        <>
           <div className='album-image-player'>
             <img src={albumImage}></img>
           </div>
@@ -100,7 +100,7 @@ class Dashboard extends React.Component {
             <div className='song-name-player'><span>{name}</span></div>
             <div className='artist-name-player'><span>{artistName}</span></div>
           </div>
-        </div>
+        </>
       );
     }
   }
@@ -149,19 +149,21 @@ class Dashboard extends React.Component {
 
         <div className='now-playing-bar'>
           <footer className='footer-player-bar'>
+            <div className='now-playing-bar-left'>
               {this.renderNowPlayingInfo()}
+            </div>
             <div className='now-playing-bar-center'>
               <div className='player-controls'>
-                <button className='shuffle'>
+                <button className='control-button shuffle'>
                 </button>
-                <button className='previousSong'>
+                <button className='control-button previousSong'>
                 </button>
                 <button onClick={this.togglePlayPause}>
                   <img src={this.state.playbackButton}></img>
                 </button>
-                <button className='nextSong'>
+                <button className='control-button nextSong'>
                 </button>
-                <button className='repeat'>
+                <button className='control-button repeat'>
                 </button>
                 <audio id='music-player' onTimeUpdate={this.updateProgressBar} volume={this.state.volume} src={this.props.nowPlaying.song_url}>
                 </audio>
@@ -191,10 +193,10 @@ class Dashboard extends React.Component {
   }
 }
 
-<img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_Shuffle_2052748.png'></img>
-<img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_previous_899259.png'></img>
-<img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_skip+track_899260.png'></img>
-<img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_Repeat_1155556.png'></img>
+// <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_Shuffle_2052748.png'></img>
+// <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_previous_899259.png'></img>
+// <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_skip+track_899260.png'></img>
+// <img src='https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_Repeat_1155556.png'></img>
 const msp = (state, ownProps) => {
   return {
     currentUser: state.entities.users[state.session.id],
