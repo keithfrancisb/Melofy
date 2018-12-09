@@ -26,6 +26,7 @@ class Dashboard extends React.Component {
     this.updateProgressBar = this.updateProgressBar.bind(this);
     this.togglePlayPause = this.togglePlayPause.bind(this);
     this.updateVolume = this.updateVolume.bind(this);
+    this.muteVolume = this.muteVolume.bind(this);
     this.nextSong = this.nextSong.bind(this);
     this.prevSong = this.prevSong.bind(this);
     this.seek = this.seek.bind(this);
@@ -148,9 +149,37 @@ class Dashboard extends React.Component {
     }
   }
 
+  muteVolume() {
+    const volumeBar = document.getElementById('volume');
+    const player = document.getElementById('music-player');
+    const mute = document.getElementById('mute');
+
+    if(!this.state.muted) {
+      mute.classList.toggle('muted');
+      this.setState({ muted: !this.state.muted });
+      volumeBar.value = 0;
+      player.volume = 0;
+    } else {
+      mute.classList.toggle('muted');
+      this.setState({ muted: !this.state.muted });
+      volumeBar.value = this.state.volume;
+      player.volume = this.state.volume;
+    }
+  }
+
   updateVolume(e) {
+    const volumeBar = document.getElementById('volume');
+    const player = document.getElementById('music-player');
+    const mute = document.getElementById('mute');
+    debugger
     this.setState({ volume: e.target.value });
-    document.getElementById('music-player').volume = this.state.volume;
+    if(Object.values(mute.classList).includes('muted')) {
+      this.muteVolume();
+    } else {
+      volumeBar.value = e.target.value;
+      player.volume = e.target.value;
+
+    }
   }
 
   renderNowPlayingInfo() {
@@ -219,18 +248,14 @@ class Dashboard extends React.Component {
             </div>
             <div className='now-playing-bar-center'>
               <div className='player-controls'>
-                <button className='control-button shuffle'>
-                </button>
-                <button className='control-button previousSong' onClick={this.prevSong}>
-                </button>
+                <button className='control-button shuffle'></button>
+                <button className='control-button previousSong' onClick={this.prevSong}></button>
                 <button onClick={this.togglePlayPause}>
                   <img src={this.state.playbackButton}></img>
                 </button>
-                <button className='control-button nextSong' onClick={this.nextSong}>
-                </button>
-                <button className='control-button repeat' onClick={this.toggleRepeat}>
-                </button>
-                <audio id='music-player' onTimeUpdate={this.updateProgressBar} volume={this.state.volume} src={this.props.nowPlaying.song_url}>
+                <button className='control-button nextSong' onClick={this.nextSong}></button>
+                <button className='control-button repeat' onClick={this.toggleRepeat}></button>
+                <audio id='music-player' onTimeUpdate={this.updateProgressBar} volume={this.state.muted ? 0 : this.state.volume} src={this.props.nowPlaying.song_url}>
                 </audio>
               </div>
               <div className='playback-bar'>
@@ -245,11 +270,13 @@ class Dashboard extends React.Component {
               </div>
             </div>
             <div className='now-playing-bar-right'>
-              <div className='volume-icon'></div>
+              <div className='right-button-icons'>
+                <button id='mute' className='control-button mute-button' onClick={this.muteVolume}></button>
+              </div>
               <div className='volume-bar-container'>
-                <input id='volume' className='volume-slider' type='range' min='0' max='1' step='0.01' value={this.state.volume} onChange={this.updateVolume}/>
+                <input id='volume' className='volume-slider' type='range' min='0' max='1' step='0.01' value={this.state.muted ? 0 : this.state.volume} onChange={this.updateVolume}/>
                 <div className='outer-bar'>
-                  <div className='inner-bar' style={{width: `${(this.state.volume * 100) || 100}%`}}></div>
+                  <div className='inner-bar' style={{width: `${((document.getElementById('volume') ? document.getElementById('volume').value : .01) * 100)+1 || 100}%`}}></div>
                 </div>
               </div>
             </div>

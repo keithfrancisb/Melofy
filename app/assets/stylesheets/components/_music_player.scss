@@ -265,3 +265,22 @@
 .volume-slider:hover::-webkit-slider-thumb, .seeker-bar:active::-webkit-slider-thumb {
   transform: scale(1);
 }
+
+.mute-button::before {
+  content: "\F15E";
+  font-size: 16px;
+
+  font-family: glue1-spoticon;
+  font-style: normal;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: inherit;
+  vertical-align: bottom;
+  display: inline-block;
+  text-decoration: inherit;
+}
+
+.muted::before {
+  content: "\F1EF" !important;
+}
