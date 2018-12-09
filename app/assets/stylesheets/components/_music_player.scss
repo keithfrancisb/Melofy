@@ -232,10 +232,36 @@
 // ------------------------------------------------------ //
 
 .now-playing-bar-right {
-  // position: absolute;
-  // right: 3vw;
   display: flex;
   justify-content: flex-end;
   width: 30%;
   min-width: 180px;
+}
+
+.volume-bar-container {
+  width: 100px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.volume-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  background-color: transparent;
+  position: absolute;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: white;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  transform: scale(0);
+  transition: 0.2s ease-out;
+}
+
+.volume-slider:hover::-webkit-slider-thumb, .seeker-bar:active::-webkit-slider-thumb {
+  transform: scale(1);
 }

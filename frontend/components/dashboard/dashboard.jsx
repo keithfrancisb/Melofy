@@ -17,7 +17,7 @@ class Dashboard extends React.Component {
     this.state = {
       // progress: 0,
       playbackButton: 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png',
-      volume: 50,
+      volume: 1,
       duration: 0,
       currentTime: 0,
       muted: false
@@ -150,7 +150,7 @@ class Dashboard extends React.Component {
 
   updateVolume(e) {
     this.setState({ volume: e.target.value });
-    document.getElementById('music-player').volume = this.state.volume / 100;
+    document.getElementById('music-player').volume = this.state.volume;
   }
 
   renderNowPlayingInfo() {
@@ -246,8 +246,11 @@ class Dashboard extends React.Component {
             </div>
             <div className='now-playing-bar-right'>
               <div className='volume-icon'></div>
-              <div className='volume-bar'>
-                <input id='volume' type='range' min='0' max='100' step='1' defaultValue='100' onChange={this.updateVolume}/>
+              <div className='volume-bar-container'>
+                <input id='volume' className='volume-slider' type='range' min='0' max='1' step='0.01' value={this.state.volume} onChange={this.updateVolume}/>
+                <div className='outer-bar'>
+                  <div className='inner-bar' style={{width: `${(this.state.volume * 100) || 100}%`}}></div>
+                </div>
               </div>
             </div>
           </footer>
