@@ -15,9 +15,12 @@ class Dashboard extends React.Component {
     super(props);
 
     this.state = {
-      progress: 0,
+      // progress: 0,
       playbackButton: 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png',
-      volume: 50
+      volume: 50,
+      duration: 0,
+      currentTime: 0,
+      muted: false
      };
 
     this.updateProgressBar = this.updateProgressBar.bind(this);
@@ -25,6 +28,11 @@ class Dashboard extends React.Component {
     this.updateVolume = this.updateVolume.bind(this);
     this.nextSong = this.nextSong.bind(this);
     this.prevSong = this.prevSong.bind(this);
+    this.seek = this.seek.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateInterval = setInterval(this.updateProgressBar, 300);
   }
 
   componentDidUpdate(prevProps) {
@@ -32,6 +40,9 @@ class Dashboard extends React.Component {
       const player = document.getElementById('music-player');
       player.load();
       this.togglePlayPause();
+      this.setState({
+        duration: player.duration || 0,
+      });
     }
   }
 
@@ -51,14 +62,15 @@ class Dashboard extends React.Component {
     const { nowPlaying, fetchCurrentSong } = this.props;
     const player = document.getElementById('music-player');
 
-    // if(player.currentTime < 3){
+    if(player.currentTime < 2){
       let newIndex = songIdList.indexOf(nowPlaying.id) - 1;
       let newSongId = songIdList[newIndex];
       if (newIndex === -1) newSongId = songIdList[songIdList.length-1];
       fetchCurrentSong(newSongId);
-    // } else {
-    //   fetchCurrentSong(nowPlaying.id);
-    // }
+    } else {
+      player.load();
+      player.play();
+    }
 
   }
 
@@ -84,12 +96,21 @@ class Dashboard extends React.Component {
     }
   }
 
-  updateProgressBar() {
-    const bar = document.getElementById('progress-bar');
+  seek(e) {
     const player = document.getElementById('music-player');
 
-    const newValue = (player.currentTime / player.duration) * 100;
-    if (newValue) this.setState({ progress: newValue });
+    if(player && player.currentTime) {
+      this.setState({ currentTime: e.target.value });
+      player.currentTime = e.target.value;
+    }
+  }
+
+  updateProgressBar() {
+    const player = document.getElementById('music-player');
+    this.setState({
+      duration: player.duration || 0,
+      currentTime: player.currentTime || 0,
+    });
   }
 
   updateCurrentTime() {
@@ -213,8 +234,11 @@ class Dashboard extends React.Component {
               </div>
               <div className='playback-bar'>
                 <div className='current-time'>{this.updateCurrentTime()}</div>
-                <div className='progress-bar'>
-                  <progress id='progress-bar' value={this.state.progress} max='100'></progress>
+                <div className='progress-bar-container'>
+                  <input className='seeker-bar' type='range' min='0' max={this.state.duration} step='0.25' onChange={this.seek} value={this.state.currentTime}/>
+                  <div className='outer-bar'>
+                    <div className='inner-bar' style={{width: `${(this.state.currentTime*100)/this.state.duration || 1}%`}}></div>
+                  </div>
                 </div>
                 <div className='end-time'>{this.renderTotalTime()}</div>
               </div>
@@ -236,6 +260,7 @@ class Dashboard extends React.Component {
   }
 }
 
+// <progress id='progress-bar' value={this.state.progress} max='100'></progress>
 const msp = (state, ownProps) => {
   return {
     currentUser: state.entities.users[state.session.id],
