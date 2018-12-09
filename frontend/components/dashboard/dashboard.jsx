@@ -107,6 +107,7 @@ class Dashboard extends React.Component {
 
   updateProgressBar() {
     const player = document.getElementById('music-player');
+    if (player.paused) this.setState( { playbackButton: 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png'});
     this.setState({
       duration: player.duration || 0,
       currentTime: player.currentTime || 0,
