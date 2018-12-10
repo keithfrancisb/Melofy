@@ -24,7 +24,19 @@ class SongIndex extends React.Component {
   componentDidMount(){
     const { searchTerm, songIds } = this.props;
     this.props.fetchSongs(searchTerm, songIds)
-      .then( () => window.songIdList = this.props.songs.map( song => song.id));
+      .then( () => {
+        window.songIdList = {};
+        window.songIdList.queue = this.props.songs.map( song => song.id);
+        return window.songIdList.queue;
+      })
+        .then( (songList) => {
+          let arr = window.songIdList.queue.slice(0);
+          for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+          }
+          window.songIdList.shuffleQueue = arr;
+        });
     this.props.fetchPlaylists();
   }
 

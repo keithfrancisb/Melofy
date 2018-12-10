@@ -20,11 +20,13 @@ class Dashboard extends React.Component {
       volume: 1,
       duration: 0,
       currentTime: 0,
-      muted: false
+      muted: false,
+      shuffle: false
      };
 
     this.updateProgressBar = this.updateProgressBar.bind(this);
     this.togglePlayPause = this.togglePlayPause.bind(this);
+    this.toggleShuffle = this.toggleShuffle.bind(this);
     this.updateVolume = this.updateVolume.bind(this);
     this.muteVolume = this.muteVolume.bind(this);
     this.nextSong = this.nextSong.bind(this);
@@ -49,25 +51,24 @@ class Dashboard extends React.Component {
 
   nextSong() {
     const { songIdList } = window;
-    const { nowPlaying, fetchCurrentSong } = this.props;
-
-    let newIndex = songIdList.indexOf(nowPlaying.id) + 1;
-    let newSongId = songIdList[newIndex];
+    const { nowPlaying } = this.props;
+    let newIndex = !this.state.shuffle ? songIdList.queue.indexOf(nowPlaying.id) + 1 : songIdList.shuffleQueue.indexOf(nowPlaying.id) + 1;
+    let newSongId = !this.state.shuffle ? songIdList.queue[newIndex] : songIdList.shuffleQueue[newIndex];
     if (newIndex === songIdList.length) newSongId = songIdList[0];
 
-    fetchCurrentSong(newSongId);
+    this.props.fetchCurrentSong(newSongId);
   }
 
   prevSong() {
     const { songIdList } = window;
-    const { nowPlaying, fetchCurrentSong } = this.props;
+    const { nowPlaying } = this.props;
     const player = document.getElementById('music-player');
 
     if(player.currentTime < 2){
-      let newIndex = songIdList.indexOf(nowPlaying.id) - 1;
-      let newSongId = songIdList[newIndex];
+      let newIndex = !this.state.shuffle ? songIdList.queue.indexOf(nowPlaying.id) - 1 : songIdList.shuffleQueue.indexOf(nowPlaying.id) - 1;
+      let newSongId = !this.state.shuffle ? songIdList.queue[newIndex] : songIdList.shuffleQueue[newIndex];
       if (newIndex === -1) newSongId = songIdList[songIdList.length-1];
-      fetchCurrentSong(newSongId);
+      this.props.fetchCurrentSong(newSongId);
     } else {
       player.load();
       player.play();
@@ -94,6 +95,21 @@ class Dashboard extends React.Component {
       repeatButton.style.color = '#1db954';
     } else {
       repeatButton.style.color = '';
+    }
+  }
+
+  toggleShuffle() {
+    const shuffleButton = document.getElementsByClassName('shuffle')[0];
+    let { shuffleQueue } = window.songIdList;
+
+    if(!this.state.shuffle){
+      const currentIndex = shuffleQueue.indexOf(this.props.nowPlaying.id);
+      shuffleQueue = shuffleQueue.slice(currentIndex).concat(shuffleQueue.slice(0,currentIndex));
+      shuffleButton.style.color = '#1db954';
+      this.setState({ shuffle: !this.state.shuffle});
+    } else {
+      shuffleButton.style.color = '';
+      this.setState({ shuffle: !this.state.shuffle});
     }
   }
 
@@ -248,7 +264,7 @@ class Dashboard extends React.Component {
             </div>
             <div className='now-playing-bar-center'>
               <div className='player-controls'>
-                <button className='control-button shuffle'></button>
+                <button className='control-button shuffle' onClick={this.toggleShuffle}></button>
                 <button className='control-button previousSong' onClick={this.prevSong}></button>
                 <button onClick={this.togglePlayPause}>
                   <img src={this.state.playbackButton}></img>
