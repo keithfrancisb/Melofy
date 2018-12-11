@@ -21,4 +21,12 @@ class Song < ApplicationRecord
   has_many :ps_tags
   has_many :playlists, through: :ps_tags
 
+  has_many :saves,
+    as: :saveable,
+    class_name: :Save
+
+  has_many :savers,
+    through: :saves,
+    source: :saver
+
 end

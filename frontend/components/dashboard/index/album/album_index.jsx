@@ -7,7 +7,6 @@ import { fetchAlbums } from '../../../../actions/album_actions';
 class AlbumIndex extends React.Component {
 
   componentDidMount(props){
-    debugger
     const { searchTerm, albumIds } = this.props;
     this.props.fetchAlbums(searchTerm, albumIds);
   }
@@ -24,7 +23,6 @@ class AlbumIndex extends React.Component {
         <AlbumItem key={album.id} album={album} artist={album.artist}/>
       );
     });
-    debugger
     return (
       <div>
         <ul className='playlist-list'>

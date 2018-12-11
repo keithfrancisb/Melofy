@@ -12,6 +12,7 @@ Album.destroy_all
 Song.destroy_all
 Playlist.destroy_all
 PsTag.destroy_all
+Save.destroy_all
 
 # Users
 user1 = User.create!(first_name:'Demo',last_name:'User',email:'demo_user@notMail.com',password:'123456')
@@ -131,7 +132,21 @@ pl2.songs = [a_song1,a_song2,a_song3,a_song4,a_song5,a_song6,a_song7,a_song8]
 pl2.image_url = 'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/Agust+D+COVER.JPG'
 pl2.save!
 
+# Saves
+save1 = Save.create!(saver_id: user1.id, saveable_id: song18.id, saveable_type: :Song)
+save2 = Save.create!(saver_id: user1.id, saveable_id: song1.id, saveable_type: :Song)
+save3 = Save.create!(saver_id: user1.id, saveable_id: song10.id, saveable_type: :Song)
+save4 = Save.create!(saver_id: user1.id, saveable_id: song3.id, saveable_type: :Song)
+save5 = Save.create!(saver_id: user1.id, saveable_id: song21.id, saveable_type: :Song)
+save6 = Save.create!(saver_id: user1.id, saveable_id: song24.id, saveable_type: :Song)
 
+save7 = Save.create!(saver_id: user1.id, saveable_id: art2.id, saveable_type: :Artist)
+save8 = Save.create!(saver_id: user1.id, saveable_id: art1.id, saveable_type: :Artist)
+save9 = Save.create!(saver_id: user1.id, saveable_id: art3.id, saveable_type: :Artist)
+
+save10 = Save.create!(saver_id: user1.id, saveable_id: alb1.id, saveable_type: :Album)
+save11 = Save.create!(saver_id: user1.id, saveable_id: alb2.id, saveable_type: :Album)
+save12 = Save.create!(saver_id: user1.id, saveable_id: alb3.id, saveable_type: :Album)
 
 
 

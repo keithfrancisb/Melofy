@@ -17,7 +17,6 @@ class ArtistShow extends React.Component {
     let songs;
     if(artist && artist.song_ids)
       songs = artist.song_ids.slice(0,6);
-      debugger
     return (
       <div>
         <div className='artist-show-view'>

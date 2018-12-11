@@ -22,6 +22,14 @@ class Playlist < ApplicationRecord
   has_many :artists, through: :songs
   has_many :albums, through: :songs
 
+  has_many :saves,
+    as: :saveable,
+    class_name: :Save
+
+  has_many :savers,
+    through: :saves,
+    source: :saver
+
   after_initialize :ensure_playlist_image
 
   def ensure_playlist_image

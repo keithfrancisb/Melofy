@@ -23,6 +23,31 @@ class User < ApplicationRecord
 
   has_many :playlists
   has_one_attached :photo
+
+  has_many :saves,
+    foreign_key: :saver_id,
+    class_name: :Save
+
+  has_many :saved_playlists,
+    through: :saves,
+    source: :saveable,
+    source_type: :Playlist
+
+  has_many :saved_songs,
+    through: :saves,
+    source: :saveable,
+    source_type: :Song
+
+  has_many :saved_artists,
+    through: :saves,
+    source: :saveable,
+    source_type: :Artist
+
+  has_many :saved_albums,
+    through: :saves,
+    source: :saveable,
+    source_type: :Album
+
   # FRIPE
 
   def self.find_by_credentials(email,password)

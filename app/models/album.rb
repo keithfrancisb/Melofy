@@ -17,4 +17,12 @@ class Album < ApplicationRecord
   belongs_to :artist
   has_many :songs
 
+  has_many :saves,
+    as: :saveable,
+    class_name: :Save
+
+  has_many :savers,
+    through: :saves,
+    source: :saver
+
 end
