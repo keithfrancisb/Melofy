@@ -1,6 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import SearchResult from './searchResult';
+import { ProtectedRoute } from '../../../util/route_util';
+
+import PlaylistShow from '../show/playlist_show.jsx';
+import AlbumShow from '../show/album_show.jsx';
+import ArtistShow from '../show/artist_show.jsx';
 
 class Search extends React.Component {
 
@@ -45,6 +50,10 @@ class Search extends React.Component {
           </div>
             <section className='content-spacing'>
               {result}
+
+              <ProtectedRoute exact path='/dashboard/search/artists/:artistId' component={ArtistShow} />
+              <ProtectedRoute exact path='/dashboard/search/playlists/:playlistId' component={PlaylistShow} />
+              <ProtectedRoute exact path='/dashboard/search/albums/:albumId' component={AlbumShow} />
             </section>
         </div>
       </div>

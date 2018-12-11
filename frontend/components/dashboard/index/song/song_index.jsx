@@ -80,7 +80,7 @@ class SongIndex extends React.Component {
                   <div className='pc-item'>
                     <div onClick={this.handleAddToPlaylist(playlist.id,this.state.songId)}>
                       <img className='playlist-index-image' src={playlist.image_url}></img>
-                      <span className='playlist-span'>{playlist.name}</span>
+                      <span className='playlist-name-span'>{playlist.name}</span>
                     </div>
                   </div>
                 </li>
@@ -102,7 +102,6 @@ class SongIndex extends React.Component {
   }
 
   render() {
-    // const { artists, albums } = this.props;
     const songs = this.props.songs.map((song) => {
       return (
         <SongItem
@@ -115,7 +114,6 @@ class SongIndex extends React.Component {
           parentId={this.props.parentId}/>
       );
     });
-
     return (
       <div className='main-songs'>
         {this.renderAddToPlaylist()}
@@ -130,11 +128,9 @@ class SongIndex extends React.Component {
 }
 
 const msp = ({entities, session}) => {
-  const { songs, artists, albums, playlists } = entities;
+  const { songs, playlists } = entities;
   return {
     songs: Object.values(songs),
-    // artists,
-    // albums,
     playlists: currentUserPlaylists(playlists, session.id)
   };
 };

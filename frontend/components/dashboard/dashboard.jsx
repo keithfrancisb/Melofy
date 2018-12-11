@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Route, Redirect } from 'react-router-dom';
 import Browse from './browse/browse';
 import Search from './search/search';
 import Collection from './collection/collection';
@@ -9,13 +9,16 @@ import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
 import { fetchCurrentSong } from '../../actions/now_playing_actions';
 
+import ArtistShow from './show/artist_show';
+import AlbumShow from './show/album_show';
+import PlaylistShow from './show/playlist_show';
+
 class Dashboard extends React.Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      // progress: 0,
       playbackButton: 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png',
       volume: 1,
       duration: 0,
@@ -47,6 +50,10 @@ class Dashboard extends React.Component {
         duration: player.duration || 0,
       });
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.updateInterval);
   }
 
   nextSong() {
@@ -124,7 +131,7 @@ class Dashboard extends React.Component {
 
   updateProgressBar() {
     const player = document.getElementById('music-player');
-    if (player.paused) this.setState( { playbackButton: 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png'});
+    if (player && player.paused) this.setState( { playbackButton: 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png'});
     this.setState({
       duration: player.duration || 0,
       currentTime: player.currentTime || 0,
@@ -187,7 +194,6 @@ class Dashboard extends React.Component {
     const volumeBar = document.getElementById('volume');
     const player = document.getElementById('music-player');
     const mute = document.getElementById('mute');
-    debugger
     this.setState({ volume: e.target.value });
     if(Object.values(mute.classList).includes('muted')) {
       this.muteVolume();
@@ -301,6 +307,9 @@ class Dashboard extends React.Component {
         <ProtectedRoute path='/dashboard/search' component={Search}/>
         <ProtectedRoute path='/dashboard/browse' component={Browse}/>
         <ProtectedRoute path='/dashboard/collection' component={Collection}/>
+        <ProtectedRoute path='/dashboard/albums/:albumId' component={AlbumShow} />
+        <ProtectedRoute path='/dashboard/playlists/:playlistId' component={PlaylistShow} />
+        <ProtectedRoute path='/dashboard/artists/:artistId' component={ArtistShow} />
       </div>
 
     );

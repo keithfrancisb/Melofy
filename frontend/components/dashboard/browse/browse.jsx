@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter, NavLink, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createPlaylist } from '../../../actions/playlist_actions';
 import { ProtectedRoute } from '../../../util/route_util';
@@ -63,19 +63,20 @@ class Browse extends React.Component {
                 </nav>
 
               </div>
+              <Route exact path='/dashboard/browse' render={ () => <Redirect to='/dashboard/browse/playlists'/> } />
               <ProtectedRoute exact path='/dashboard/browse/playlists' component={PlaylistIndex} />
-              <ProtectedRoute exact path='/dashboard/browse/playlists/:playlistId' component={PlaylistShow} />
               <ProtectedRoute exact path='/dashboard/browse/albums' component={AlbumIndex} />
-              <ProtectedRoute exact path='/dashboard/browse/albums/:albumId' component={AlbumShow} />
               <ProtectedRoute exact path='/dashboard/browse/songs' component={SongIndex} />
               <ProtectedRoute exact path='/dashboard/browse/artists' component={ArtistIndex} />
-              <ProtectedRoute exact path='/dashboard/browse/artists/:artistId' component={ArtistShow} />
             </section>
           </div>
         </div>
       </div>
 
     );
+    // <ProtectedRoute exact path='/dashboard/browse/playlists/:playlistId' component={PlaylistShow} />
+    // <ProtectedRoute exact path='/dashboard/browse/albums/:albumId' component={AlbumShow} />
+    // <ProtectedRoute exact path='/dashboard/browse/artists/:artistId' component={ArtistShow} />
   }
 }
 

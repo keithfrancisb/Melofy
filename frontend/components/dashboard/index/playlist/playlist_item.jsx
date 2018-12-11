@@ -8,9 +8,10 @@ export const PlaylistItem = (props) => {
   return (
     <li>
       <div className='pc-item'>
-        <NavLink to={`/dashboard/${tab}/playlists/${playlist.id}`}>
+        <NavLink to={`/dashboard/playlists/${playlist.id}`}>
           <img className='playlist-index-image' src={playlist.image_url}></img>
-          <span className='playlist-span'>{`${user.first_name} ${user.last_name}`}</span>
+          <span className='playlist-name-span'>{playlist.name}</span>
+          <span className='playlist-creator-span'>{`${user.first_name} ${user.last_name}`}</span>
         </NavLink>
       </div>
     </li>

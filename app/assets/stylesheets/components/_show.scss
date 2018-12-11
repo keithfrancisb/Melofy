@@ -1,0 +1,20 @@
+
+.show-main-view {
+  padding-left: 230px;
+  display: block;
+  background: linear-gradient(rgb(51, 67, 78), rgb(6, 8, 9) 85%);
+  height: 100vh;
+  padding-top: 45px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.artist-show-view {
+  padding-left: 230px;
+  display: block;
+  // background: linear-gradient(rgb(51, 67, 78), rgb(6, 8, 9) 85%);
+  height: 100vh;
+  background-color: #181818;
+}

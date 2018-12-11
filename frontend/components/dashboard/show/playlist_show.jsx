@@ -71,45 +71,6 @@ class PlaylistItemShow extends React.Component{
     };
   }
 
-  // renderSongList() {
-  //   return (
-  //     <ul className='ul-songs'>
-  //       {this.props.songs.map( song => {
-  //         const { name: songName, artist_id, album_id } = song;
-  //         const { artists, albums } = this.props;
-  //         return (
-  //           <div key={song.id} className='div-song-list-item' onDoubleClick={this.playSong(song)}>
-  //             <li className='songs-list'>
-  //               <div>
-  //                 <div>
-  //                   <span>{songName}</span>
-  //                 </div>
-  //                 <div className='sub-song-info'>
-  //                   <span>{artists[artist_id].name}</span>
-  //                   <span className="second-line-separator">•</span>
-  //                   <span>{albums[album_id].name}</span>
-  //                 </div>
-  //               </div>
-  //               <div className='dot-div'>
-  //                 <button id='popup' onClick={this.toggleDropdown(song.id)} className={`button${song.id}`}>
-  //                   <img className='song-misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
-  //                 </button>
-  //                 <div id={`dropDown${song.id}`} className='popupBox-song'>
-  //                   <ul>
-  //                     <li>
-  //                       <span>Remove from playlist</span>
-  //                     </li>
-  //                   </ul>
-  //                 </div>
-  //               </div>
-  //             </li>
-  //           </div>
-  //         );
-  //       })}
-  //     </ul>
-  //   );
-  // }
-
   render() {
     const { playlist } = this.props;
     const defaultImage = 'https://s3.amazonaws.com/playlist-dev/icons/noun_music+playlist_1058814.png';
@@ -119,47 +80,50 @@ class PlaylistItemShow extends React.Component{
 
     return (
       <div>
-        {this.renderConfirmDelete()}
-        <div className='content-spacing-playlist'>
-          <section className='playlist-content'>
-            <div className='playlist-info'>
-              <div className='hoverable-info'>
-                <div className='playlist-show-border'>
-                  <div className='image-container'>
-                    <img className={displayPhoto} src={playlist.image_url}></img>
+        <div className='show-main-view'>
+          <div className='content-scrolling'>
+            {this.renderConfirmDelete()}
+            <div className='content-spacing-playlist'>
+              <section className='playlist-content'>
+                <div className='playlist-info'>
+                  <div className='hoverable-info'>
+                    <div className='playlist-show-border'>
+                      <div className='image-container'>
+                        <img className={displayPhoto} src={playlist.image_url}></img>
+                      </div>
+                    </div>
+                    <div className='playlist-label'>
+                      <h2>{playlist.name}</h2>
+                    </div>
+                    <div className='playlist-label'>
+                      <span>{`${playlist.user.first_name} ${playlist.user.last_name}`}</span>
+                    </div>
+                  </div>
+                  <div className='dot-div'>
+                    <button id='popup' onClick={this.toggleDropdown(playlist.id)} className={`button${playlist.id}`}>
+                      <img className='misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
+                    </button>
+                    <div id={`dropDown${playlist.id}`} className='popupBox'>
+                      <ul>
+                        <li>
+                          <span onClick={this.changeBooleanState}>Delete</span>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-                <div className='playlist-label'>
-                  <h2>{playlist.name}</h2>
+                <div className='playlist-songs'>
+                  <SongIndex songIds={playlist.song_ids} parentId={playlist.id} />
                 </div>
-                <div className='playlist-label'>
-                  <span>{`${playlist.user.first_name} ${playlist.user.last_name}`}</span>
-                </div>
-              </div>
-              <div className='dot-div'>
-                <button id='popup' onClick={this.toggleDropdown(playlist.id)} className={`button${playlist.id}`}>
-                  <img className='misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
-                </button>
-                <div id={`dropDown${playlist.id}`} className='popupBox'>
-                  <ul>
-                    <li>
-                      <span onClick={this.changeBooleanState}>Delete</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              </section>
             </div>
-            <div className='playlist-songs'>
-              <SongIndex songIds={playlist.song_ids} parentId={playlist.id} />
-            </div>
-          </section>
+          </div>
         </div>
       </div>
     );
   }
 }
 
-// {this.renderSongList()}
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = (event) => {
   if (!event.target.matches(`button${window.songId}`)) {

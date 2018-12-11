@@ -19,18 +19,22 @@ user1 = User.create!(first_name:'Demo',last_name:'User',email:'demo_user@notMail
 # Artists
 art1 = Artist.create!(name:'Caravan Palace')
 art1.image_url = 'https://i.scdn.co/image/65df61829bfdb02f7e068de1b3c28799bdc5ace6'
+art1.cover_url = 'https://i.scdn.co/image/c74a0b1d088c6b7140a28f7d728b36ca832874bf'
 art1.save!
 
 art2 = Artist.create!(name:'Panic! At The Disco')
 art2.image_url = 'https://i.scdn.co/image/e71f9ba6573c95041ecd71f766788668f1ceb998'
+art2.cover_url = 'https://i.scdn.co/image/a2d5caf95ea7319853924a019ff35bcf7dab123c'
 art2.save!
 
 art3 = Artist.create!(name:'Parov Stelar')
 art3.image_url = 'https://i.scdn.co/image/f0e5cc6e912adbf51eb185067ea09009f8ed23d9'
+art3.cover_url = 'https://i.scdn.co/image/c0a529ca40e783bbb1b6ec03d34c2da8995f0235'
 art3.save!
 
 art4 = Artist.create!(name:'RM')
 art4.image_url = 'https://i.scdn.co/image/a59eaec7d3d9e6a41cbcc38c9c0a411551fb1d07'
+art4.cover_url = 'https://dbkpop.com/wp-content/uploads/2018/08/bts_love_yourself_answer_RM_profile.jpg'
 art4.save!
 
 # Albums
@@ -102,6 +106,7 @@ song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/
 
 agustD = Artist.create!(name:'Agust D', description:'No habla Korean')
 agustD.image_url = 'https://i.scdn.co/image/4e1f70bbc6ab7cb3c8d33aee60c441e1a8bfc0a4'
+agustD.cover_url = 'https://i.imgur.com/LpzdOWp.jpg'
 agustD.save!
 
 agustDAlbum = Album.create!(name:'Agust D', artist_id: agustD.id, description:'Album of Korean songs')

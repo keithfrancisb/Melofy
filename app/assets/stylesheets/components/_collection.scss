@@ -22,7 +22,7 @@
   display: block;
   padding: 0 32px;
   margin: 0 auto;
-  max-width: 1480px;
+  max-width: 1430px;
 }
 
 .tabs-container {
@@ -235,7 +235,20 @@
   height: 222px;
 }
 
-.playlist-span {
+.playlist-creator-span {
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: .015em;
+  font-weight: 500;
+  color: #fff;
+  text-transform: none;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+  opacity: .6;
+}
+
+.playlist-name-span {
   font-size: 14px;
   line-height: 20px;
   letter-spacing: .015em;

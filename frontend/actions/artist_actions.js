@@ -39,8 +39,7 @@ export const fetchArtists = (searchTerm, artist_ids) => dispatch => {
 export const fetchArtist = (artistId) => dispatch => {
   return AAApiUtil.fetchArtist(artistId)
     .then( payload => {
-      dispatch(receiveArtist(payload.artist));
-      dispatch(receiveAlbums(payload.albums))
+      dispatch(receiveArtist(payload));
     })
       .fail( err => dispatch(receiveArtistErrors(err.responseJSON)));
 };

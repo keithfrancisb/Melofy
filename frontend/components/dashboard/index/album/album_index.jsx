@@ -7,8 +7,9 @@ import { fetchAlbums } from '../../../../actions/album_actions';
 class AlbumIndex extends React.Component {
 
   componentDidMount(props){
-    const { searchTerm, album_ids } = this.props;
-    this.props.fetchAlbums(searchTerm, album_ids);
+    debugger
+    const { searchTerm, albumIds } = this.props;
+    this.props.fetchAlbums(searchTerm, albumIds);
   }
 
   componentDidUpdate(prevProps) {
@@ -17,13 +18,13 @@ class AlbumIndex extends React.Component {
   }
 
   render() {
-    // const { artists } = this.props;
     const albums = this.props.albums.map((album) => {
 
       return (
         <AlbumItem key={album.id} album={album} artist={album.artist}/>
       );
     });
+    debugger
     return (
       <div>
         <ul className='playlist-list'>
@@ -38,7 +39,6 @@ const msp = ({entities}) => {
   const { albums, artists } = entities;
   return {
     albums: Object.values(albums),
-    // artists: artists
   };
 };
 

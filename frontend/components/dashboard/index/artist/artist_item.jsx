@@ -8,9 +8,9 @@ const ArtistItem = (props) => {
   return (
     <li>
       <div className='pc-item'>
-        <NavLink to={`/dashboard/${tab}/artists/${artist.id}`}>
+        <NavLink to={`/dashboard/artists/${artist.id}`}>
           <img className='artist-index-image' src={artist.image_url}></img>
-          <span className='playlist-span'>{artist.name}</span>
+          <span className='artist-name-span'>{artist.name}</span>
         </NavLink>
       </div>
     </li>

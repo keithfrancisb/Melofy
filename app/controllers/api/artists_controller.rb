@@ -4,7 +4,7 @@ class Api::ArtistsController < ApplicationController
     if(params[:search_term])
       @artists = Artist.where('name ILIKE ?', "%#{params[:search_term].downcase}%").includes(:albums,:songs)
     elsif (params[:artist_ids])
-      @artists = Artist.where(id: params[:artist_ids])
+      @artists = Artist.where(id: params[:artist_ids]).includes(:albums, :songs)
     else
       @artists = Artist.all.includes(:albums,:songs)
     end
@@ -12,7 +12,7 @@ class Api::ArtistsController < ApplicationController
 
   def show
     @artist = Artist.find(params[:id])
-    @albums = @artist.albums
+    # @albums = @artist.albums
   end
 
 end

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter, NavLink, Redirect, Route } from 'react-router-dom';
 import { ProtectedRoute } from '../../../util/route_util';
 import { connect } from 'react-redux';
 import { createPlaylist } from '../../../actions/playlist_actions';
@@ -76,6 +76,8 @@ class Collection extends React.Component {
   }
 
   render (){
+
+
     return (
       <div>
         {this.createPlaylist()}
@@ -95,13 +97,12 @@ class Collection extends React.Component {
                   <button className='div-button' onClick={this.changeBooleanState}>New Playlist</button>
                 </div>
               </div>
+              <Route exact path='/dashboard/collection' render={ () => <Redirect to='/dashboard/collection/playlists'/> } />
               <ProtectedRoute exact path='/dashboard/collection/playlists' component={PlaylistIndex} />
-              <ProtectedRoute exact path='/dashboard/collection/playlists/:playlistId' component={PlaylistShow} />
               <ProtectedRoute exact path='/dashboard/collection/albums' component={AlbumIndex} />
-              <ProtectedRoute exact path='/dashboard/collection/albums/:albumId' component={AlbumShow} />
               <ProtectedRoute exact path='/dashboard/collection/songs' component={SongIndex} />
               <ProtectedRoute exact path='/dashboard/collection/artists' component={ArtistIndex} />
-              <ProtectedRoute exact path='/dashboard/collection/artists/:artistId' component={ArtistShow} />
+              
             </section>
           </div>
         </div>

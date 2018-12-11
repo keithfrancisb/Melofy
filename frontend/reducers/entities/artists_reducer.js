@@ -9,7 +9,6 @@ import { RECEIVE_SONGS } from '../../actions/song_actions';
 export const ArtistsReducer = (state = {}, action) => {
   Object.freeze(state);
   const newState = Object.assign({}, state);
-
   switch (action.type) {
     // case RECEIVE_SONGS:
     // case RECEIVE_PLAYLIST:

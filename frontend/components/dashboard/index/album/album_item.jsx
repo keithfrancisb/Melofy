@@ -8,7 +8,7 @@ const AlbumItem = (props) => {
   return (
     <li>
       <div className='pc-item'>
-        <NavLink to={`/dashboard/${tab}/albums/${album.id}`}>
+        <NavLink to={`/dashboard/albums/${album.id}`}>
           <img className='album-index-image' src={album.image_url}></img>
           <span className='album-span'>{album.name}</span>
           <span className='album-artist-span'>{artist.name}</span>
