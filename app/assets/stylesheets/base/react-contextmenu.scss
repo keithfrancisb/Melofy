@@ -1,18 +1,31 @@
 .react-contextmenu {
-    background-color: #fff;
+    // background-color: #fff;
+    // background-clip: padding-box;
+    // border: 1px solid rgba(0,0,0,.15);
+    // border-radius: .25rem;
+    // color: #373a3c;
+    // font-size: 16px;
+    // margin: 2px 0 0;
+    // min-width: 160px;
+    // outline: none;
+    // opacity: 0;
+    // padding: 5px 0;
+    // pointer-events: none;
+    // text-align: left;
+    // transition: opacity 250ms ease !important;
+
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    background-color: #282828;
+    -webkit-background-clip: padding-box;
     background-clip: padding-box;
     border: 1px solid rgba(0,0,0,.15);
     border-radius: .25rem;
-    color: #373a3c;
-    font-size: 16px;
-    margin: 2px 0 0;
-    min-width: 160px;
     outline: none;
-    opacity: 0;
-    padding: 5px 0;
     pointer-events: none;
-    text-align: left;
-    transition: opacity 250ms ease !important;
+    opacity: 0;
+    z-index: 1003;
 }
 
 .react-contextmenu.react-contextmenu--visible {
@@ -22,12 +35,17 @@
 }
 
 .react-contextmenu-item {
+    // width: 100%;
     background: 0 0;
     border: 0;
-    color: #373a3c;
-	cursor: pointer;
-    font-weight: 400;
-    line-height: 1.5;
+    clear: both;
+    user-select: none;
+    color: rgba(255,255,255, 0.6);
+    font-size: 13px;
+    letter-spacing: 0.035em;
+	  cursor: default;
+    font-weight: 300;
+    line-height: 32px;
     padding: 3px 20px;
     text-align: inherit;
     white-space: nowrap;
@@ -36,8 +54,8 @@
 .react-contextmenu-item.react-contextmenu-item--active,
 .react-contextmenu-item.react-contextmenu-item--selected {
     color: #fff;
-    background-color: #20a0ff;
-    border-color: #20a0ff;
+    background-color: #313131;
+    border-color: #313131;
     text-decoration: none;
 }
 
