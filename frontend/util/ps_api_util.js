@@ -2,6 +2,7 @@
 // --------------------- Playlist API ---------------------- //
 
 export const fetchPlaylists = (searchTerm, playlist_ids) => {
+  if(playlist_ids && playlist_ids.length === 0) playlist_ids = [-1];
   return $.ajax({
     method: 'get',
     url: 'api/playlists',
@@ -53,6 +54,7 @@ export const fetchPlaylistSongs = (playlistId) => {
 };
 
 export const fetchSongs = (searchTerm, song_ids) => {
+  if(song_ids && song_ids.length === 0) song_ids = [-1];
   return $.ajax({
     method: 'get',
     url: 'api/songs',

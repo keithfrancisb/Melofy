@@ -2,6 +2,7 @@
 // --------------------- Album API ---------------------- //
 
 export const fetchAlbums = (searchTerm, album_ids) => {
+  if(album_ids && album_ids.length === 0) album_ids = [-1];
   return $.ajax({
     method: 'get',
     url: 'api/albums',
@@ -22,6 +23,7 @@ export const fetchAlbum = (albumId) => {
 // --------------------- Artist API ---------------------- //
 
 export const fetchArtists = (searchTerm, artist_ids) => {
+  if(artist_ids && artist_ids.length === 0) artist_ids = [-1];
   return $.ajax({
     method: 'get',
     url: 'api/artists',

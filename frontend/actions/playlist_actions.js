@@ -8,6 +8,8 @@ export const RECEIVE_PLAYLIST = 'RECEIVE_PLAYLIST';
 export const REMOVE_PLAYLIST = 'REMOVE_PLAYLIST';
 export const RECEIVE_PLAYLIST_ERRORS = 'RECEIVE_PLAYLIST_ERRORS';
 
+export const CLEAR_ENTITIES_STATE = 'CLEARENTITIESSTATE';
+
 // Regular Actions
 
 const receivePlaylists = playlists => {

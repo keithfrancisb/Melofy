@@ -26,7 +26,7 @@ class Greeting extends React.Component {
                 <a className='links' href="https://www.github.com/keithfrancisb">GitHub</a>
               </li>
               <li>
-                <Link className='links' to='/'>LinkedIn</Link>
+                <a className='links' href="https://www.linkedin.com/in/keithfrancisb">LinkedIn</a>
               </li>
               <li className='links-divider'></li>
               <li>

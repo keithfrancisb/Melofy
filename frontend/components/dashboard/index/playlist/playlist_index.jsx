@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PlaylistItem from './playlist_item';
 
+import { fetchPlaylists } from '../../../../actions/playlist_actions';
 
 class PlaylistIndex extends React.Component {
 
   componentDidMount(){
-    const { searchTerm, playlist_ids } = this.props;
-    this.props.fetchPlaylists(searchTerm, playlist_ids);
+    const { searchTerm, playlistIds } = this.props;
+
+    this.props.fetchPlaylists(searchTerm, playlistIds);
   }
 
   componentDidUpdate(prevProps) {
@@ -41,6 +43,7 @@ const msp = ({entities}) => {
 
 const mdp = dispatch => {
   return {
+    clearEntitiesState: () => dispatch(clearEntitiesState()),
     fetchPlaylists: (searchTerm, playlist_ids) => dispatch(fetchPlaylists(searchTerm, playlist_ids))
   };
 };

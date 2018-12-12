@@ -319,7 +319,7 @@ class Dashboard extends React.Component {
 // <progress id='progress-bar' value={this.state.progress} max='100'></progress>
 const msp = (state, ownProps) => {
   return {
-    currentUser: state.entities.users[state.session.id],
+    currentUser: state.session,
     albums: state.entities.albums,
     artists: state.entities.artists,
     nowPlaying: state.nowPlaying

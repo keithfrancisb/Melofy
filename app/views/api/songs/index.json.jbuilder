@@ -1,6 +1,5 @@
 # albums = []
 # artists = []
-
 json.songs do
   @songs.each do |song|
     # albums << song.album unless albums.include?(song.album)

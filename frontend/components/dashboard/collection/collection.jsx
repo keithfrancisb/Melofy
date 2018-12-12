@@ -77,7 +77,6 @@ class Collection extends React.Component {
 
   render (){
 
-
     return (
       <div>
         {this.createPlaylist()}
@@ -98,11 +97,11 @@ class Collection extends React.Component {
                 </div>
               </div>
               <Route exact path='/dashboard/collection' render={ () => <Redirect to='/dashboard/collection/playlists'/> } />
-              <ProtectedRoute exact path='/dashboard/collection/playlists' component={PlaylistIndex} />
-              <ProtectedRoute exact path='/dashboard/collection/albums' component={AlbumIndex} />
-              <ProtectedRoute exact path='/dashboard/collection/songs' component={SongIndex} />
-              <ProtectedRoute exact path='/dashboard/collection/artists' component={ArtistIndex} />
-              
+              <Route exact path='/dashboard/collection/playlists' render={ () => <PlaylistIndex playlistIds={this.props.savedPlaylistIds}/> } />
+              <Route exact path='/dashboard/collection/albums' render={ () => <AlbumIndex albumIds={this.props.savedAlbumIds}/> } />
+              <Route exact path='/dashboard/collection/songs' render={ () => <SongIndex songIds={this.props.savedSongIds}/> } />
+              <Route exact path='/dashboard/collection/artists' render={ () => <ArtistIndex artistIds={this.props.savedArtistIds}/> } />
+
             </section>
           </div>
         </div>
@@ -112,6 +111,20 @@ class Collection extends React.Component {
   }
 }
 
+// <ProtectedRoute exact path='/dashboard/collection/playlists' component={PlaylistIndex} />
+// <ProtectedRoute exact path='/dashboard/collection/albums' component={AlbumIndex} />
+// <ProtectedRoute exact path='/dashboard/collection/songs' component={SongIndex} />
+// <ProtectedRoute exact path='/dashboard/collection/artists' component={ArtistIndex} />
+const msp = state => {
+  const { saved_song_ids, saved_album_ids, saved_artist_ids, saved_playlist_ids } = state.session;
+  return {
+    savedAlbumIds: saved_album_ids,
+    savedArtistIds: saved_artist_ids,
+    savedSongIds: saved_song_ids,
+    savedPlaylistIds: saved_playlist_ids
+  };
+};
+
 const mdp = dispatch => {
   return {
     submitForm: (playlistName) => dispatch(createPlaylist(playlistName))
@@ -119,4 +132,4 @@ const mdp = dispatch => {
 };
 
 
-export default withRouter(connect(null,mdp)(Collection));
+export default withRouter(connect(msp,mdp)(Collection));

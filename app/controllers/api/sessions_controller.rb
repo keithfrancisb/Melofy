@@ -6,7 +6,7 @@ class Api::SessionsController < ApplicationController
 
     if @user
       login(@user)
-      render 'api/users/show'
+      render :show
     else
       render json: ['Invalid Username and/or Password'], status: 422
     end

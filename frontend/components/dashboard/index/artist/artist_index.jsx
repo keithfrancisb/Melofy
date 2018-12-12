@@ -8,8 +8,8 @@ import { fetchArtists } from '../../../../actions/artist_actions';
 class ArtistIndex extends React.Component {
 
   componentDidMount(){
-    const { searchTerm, artist_ids } = this.props;
-    this.props.fetchArtists(searchTerm, artist_ids);
+    const { searchTerm, artistIds } = this.props;
+    this.props.fetchArtists(searchTerm, artistIds);
   }
 
   componentDidUpdate(prevProps) {
