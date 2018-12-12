@@ -6,7 +6,7 @@ json.songs do
     # artists << song.artist unless artists.include?(song.artist)
 
     json.set! song.id do
-      json.extract! song, :id, :name, :artist_id, :album_id, :song_url
+      json.extract! song, :id, :name, :artist_id, :album_id, :song_url, :duration
       json.artist song.artist, :id, :name
       json.album song.album, :id, :name
     end

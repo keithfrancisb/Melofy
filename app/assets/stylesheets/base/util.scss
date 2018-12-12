@@ -17,8 +17,12 @@
 }
 
 .dot-div {
+  align-items: center;
   position: relative;
-  display: block;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 100px;
 }
 
 .popupBox-song {

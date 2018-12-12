@@ -129,9 +129,11 @@ class SongIndex extends React.Component {
 
 const msp = ({entities, session}) => {
   const { songs, playlists } = entities;
+  const { saved_song_ids } = session;
   return {
     songs: Object.values(songs),
-    playlists: currentUserPlaylists(playlists, session.id)
+    playlists: currentUserPlaylists(playlists, session.id),
+    savedSongIds: saved_song_ids
   };
 };
 

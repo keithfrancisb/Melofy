@@ -57,49 +57,49 @@ alb4.save!
 
 # Songs
 # Pray for the Wicked
-song1 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Say+Amen+(Saturday+Night).mp3', name:'Say Amen (Saturday Night)', artist_id: art2.id, album_id: alb3.id)
-song2 = Song.create!(song_url:"https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+Dancing's+Not+A+Crime+(Audio).mp3", name:'Dancing is Not a Crime', artist_id: art2.id, album_id: alb3.id)
-song3 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+Hey+Look+Ma%2C+I+Made+It+%5BOFFICIAL+VIDEO%5D.mp3', name:'Hey Look Ma, I Made It', artist_id: art2.id, album_id: alb3.id)
-song4 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+King+Of+The+Clouds+(Audio).mp3', name:'King of the Clouds', artist_id: art2.id, album_id: alb3.id)
-song5 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+Old+Fashioned+(Audio).mp3', name:'Old Fashioned', artist_id: art2.id, album_id: alb3.id)
-song6 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+One+Of+The+Drunks+(Audio).mp3', name:'One of the Drunks', artist_id: art2.id, album_id: alb3.id)
-song7 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+Roaring+20s+(Audio).mp3', name:'Roaring 20s', artist_id: art2.id, album_id: alb3.id)
-song8 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+The+Overpass+(Audio).mp3', name:'The Overpass', artist_id: art2.id, album_id: alb3.id)
-song9 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+Dying+In+LA+(Audio).mp3', name:'Dying in LA', artist_id: art2.id, album_id: alb3.id)
+song1 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Say+Amen+(Saturday+Night).mp3', duration: '3:09', name:'Say Amen (Saturday Night)', artist_id: art2.id, album_id: alb3.id)
+song2 = Song.create!(song_url:"https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+Dancing's+Not+A+Crime+(Audio).mp3", duration: '3:40', name:'Dancing is Not a Crime', artist_id: art2.id, album_id: alb3.id)
+song3 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+Hey+Look+Ma%2C+I+Made+It+%5BOFFICIAL+VIDEO%5D.mp3', duration: '3:06', name:'Hey Look Ma, I Made It', artist_id: art2.id, album_id: alb3.id)
+song4 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+King+Of+The+Clouds+(Audio).mp3', name:'King of the Clouds', duration: '2:41', artist_id: art2.id, album_id: alb3.id)
+song5 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+Old+Fashioned+(Audio).mp3', name:'Old Fashioned', duration: '2:47', artist_id: art2.id, album_id: alb3.id)
+song6 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+One+Of+The+Drunks+(Audio).mp3', name:'One of the Drunks', duration: '3:19', artist_id: art2.id, album_id: alb3.id)
+song7 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+Roaring+20s+(Audio).mp3', name:'Roaring 20s', duration: '3:07', artist_id: art2.id, album_id: alb3.id)
+song8 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+The+Overpass+(Audio).mp3', name:'The Overpass', duration: '2:58', artist_id: art2.id, album_id: alb3.id)
+song9 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Pray+for+the+Wicked/Panic!+At+The+Disco+Dying+In+LA+(Audio).mp3', name:'Dying in LA', duration: '3:49', artist_id: art2.id, album_id: alb3.id)
 
 
 # <|°_°|>
-song10 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Caravan+Palace+-+Lone+Digger+(album+version).mp3', name:'Lone Digger', artist_id: art1.id, album_id: alb2.id)
-song11 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Aftermath.mp3', name:'Aftermath', artist_id: art1.id, album_id: alb2.id)
-song12 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Caravan+Palace+-+Comics.mp3', name:'Comics', artist_id: art1.id, album_id: alb2.id)
-song13 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Caravan+Palace+-+Human+Leather+Shoes+for+Crocodile+Dandies.mp3', name:'Human Leather Shoes for Crocodile Dandies', artist_id: art1.id, album_id: alb2.id)
-song14 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Caravan+Palace+-+Mighty+(feat.+JFTH).mp3', name:'Mighty', artist_id: art1.id, album_id: alb2.id)
-song15 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Caravan+Palace+-+Russian.mp3', name:'Russian', artist_id: art1.id, album_id: alb2.id)
-song16 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Caravan+Palace+-+Wonda.mp3', name:'Wonda', artist_id: art1.id, album_id: alb2.id)
-song17 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Lay+Down.mp3', name:'Lay Down', artist_id: art1.id, album_id: alb2.id)
-song18 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Midnight.mp3', name:'Midnight', artist_id: art1.id, album_id: alb2.id)
-song19 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Tattoos.mp3', name:'Tattoos', artist_id: art1.id, album_id: alb2.id)
+song10 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Caravan+Palace+-+Lone+Digger+(album+version).mp3', duration: '3:51', name:'Lone Digger', artist_id: art1.id, album_id: alb2.id)
+song11 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Aftermath.mp3', duration: '3:06', name:'Aftermath', artist_id: art1.id, album_id: alb2.id)
+song12 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Caravan+Palace+-+Comics.mp3', duration: '2:49', name:'Comics', artist_id: art1.id, album_id: alb2.id)
+song13 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Caravan+Palace+-+Human+Leather+Shoes+for+Crocodile+Dandies.mp3', duration: '4:35', name:'Human Leather Shoes for Crocodile Dandies', artist_id: art1.id, album_id: alb2.id)
+song14 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Caravan+Palace+-+Mighty+(feat.+JFTH).mp3', duration: '3:31', name:'Mighty', artist_id: art1.id, album_id: alb2.id)
+song15 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Caravan+Palace+-+Russian.mp3', duration: '4:02', name:'Russian', artist_id: art1.id, album_id: alb2.id)
+song16 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Caravan+Palace+-+Wonda.mp3', duration: '3:45', name:'Wonda', artist_id: art1.id, album_id: alb2.id)
+song17 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Lay+Down.mp3', name:'Lay Down', duration: '3:09', artist_id: art1.id, album_id: alb2.id)
+song18 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Midnight.mp3', name:'Midnight', duration: '3:26', artist_id: art1.id, album_id: alb2.id)
+song19 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Caravan+Palace/Tattoos.mp3', name:'Tattoos', duration: '3:28', artist_id: art1.id, album_id: alb2.id)
 
 
 # Coco
-song20 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+The+Mojo+Radio+Gang+(Official+Audio).mp3', name:'The Mojo Radio Gang', artist_id: art3.id, album_id: alb1.id)
-song21 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Catgroove+(Official+Audio).mp3', name:'Catgroove', artist_id: art3.id, album_id: alb1.id)
-song22 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Fleur+De+Lille+(Official+Audio).mp3', name:'Fleur De Lille', artist_id: art3.id, album_id: alb1.id)
-song23 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Hotel+Axos+(Official+Audio).mp3', name:'Hotel Axos', artist_id: art3.id, album_id: alb1.id)
-song24 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Libella+Swing+(Official+Audio).mp3', name:'Libella Swing', artist_id: art3.id, album_id: alb1.id)
-song25 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Matilda+(Official+Audio).mp3', name:'Matilda', artist_id: art3.id, album_id: alb1.id)
-song26 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Monster+(Official+Audio).mp3', name:'Monster', artist_id: art3.id, album_id: alb1.id)
-song27 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Nosferatu+(Official+Audio).mp3', name:'Nosferatu', artist_id: art3.id, album_id: alb1.id)
-song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Ragtime+Cat+feat.+Lilja+Bloom+(Official+Audio).mp3', name:'Ragtime Cat', artist_id: art3.id, album_id: alb1.id)
+song20 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+The+Mojo+Radio+Gang+(Official+Audio).mp3', duration: '2:39', name:'The Mojo Radio Gang', artist_id: art3.id, album_id: alb1.id)
+song21 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Catgroove+(Official+Audio).mp3', duration: '3:56', name:'Catgroove', artist_id: art3.id, album_id: alb1.id)
+song22 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Fleur+De+Lille+(Official+Audio).mp3', duration: '5:17', name:'Fleur De Lille', artist_id: art3.id, album_id: alb1.id)
+song23 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Hotel+Axos+(Official+Audio).mp3', duration: '5:36', name:'Hotel Axos', artist_id: art3.id, album_id: alb1.id)
+song24 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Libella+Swing+(Official+Audio).mp3', duration: '4:05', name:'Libella Swing', artist_id: art3.id, album_id: alb1.id)
+song25 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Matilda+(Official+Audio).mp3', duration: '3:21', name:'Matilda', artist_id: art3.id, album_id: alb1.id)
+song26 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Monster+(Official+Audio).mp3', duration: '5:12', name:'Monster', artist_id: art3.id, album_id: alb1.id)
+song27 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Nosferatu+(Official+Audio).mp3', duration: '5:56', name:'Nosferatu', artist_id: art3.id, album_id: alb1.id)
+song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Parov+Stelar/Parov+Stelar+-+Ragtime+Cat+feat.+Lilja+Bloom+(Official+Audio).mp3', duration: '3:01', name:'Ragtime Cat', artist_id: art3.id, album_id: alb1.id)
 
 # mono.
-song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/01.+tokyo.mp3', name:'tokyo', artist_id: art4.id, album_id: alb4.id)
-song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/02.+seoul+(prod.+HONNE).mp3', name:'seoul (prod. HONNE)', artist_id: art4.id, album_id: alb4.id)
-song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/03.+moonchild.mp3', name:'moonchild', artist_id: art4.id, album_id: alb4.id)
-song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/04.+badbye+(with+eAeon).mp3', name:'badbye', artist_id: art4.id, album_id: alb4.id)
-song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/05.+uhgood.mp3', name:'uhgood', artist_id: art4.id, album_id: alb4.id)
-song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/06.+everythingoes+(with+NELL).mp3', name:'everythingoes', artist_id: art4.id, album_id: alb4.id)
-song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/07.+forever+rain.mp3', name:'forever rain', artist_id: art4.id, album_id: alb4.id)
+song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/01.+tokyo.mp3', duration: '3:29', name:'tokyo', artist_id: art4.id, album_id: alb4.id)
+song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/02.+seoul+(prod.+HONNE).mp3', duration: '4:36', name:'seoul (prod. HONNE)', artist_id: art4.id, album_id: alb4.id)
+song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/03.+moonchild.mp3', duration: '3:26', name:'moonchild', artist_id: art4.id, album_id: alb4.id)
+song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/04.+badbye+(with+eAeon).mp3', duration: '1:53', name:'badbye', artist_id: art4.id, album_id: alb4.id)
+song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/05.+uhgood.mp3', name:'uhgood', duration: '3:14', artist_id: art4.id, album_id: alb4.id)
+song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/06.+everythingoes+(with+NELL).mp3', duration: '3:42', name:'everythingoes', artist_id: art4.id, album_id: alb4.id)
+song28 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/RM/07.+forever+rain.mp3', duration: '3:42', name:'forever rain', artist_id: art4.id, album_id: alb4.id)
 
 
 
@@ -114,14 +114,14 @@ agustDAlbum = Album.create!(name:'Agust D', artist_id: agustD.id, description:'A
 agustDAlbum.image_url = 'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/Agust+D+COVER.JPG'
 agustDAlbum.save!
 
-a_song1 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/03.+give+it+to+me.mp3', name:'Give It to Me', artist_id:agustD.id, album_id: agustDAlbum.id)
-a_song2 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/04.+skit.mp3', name:'Skit', artist_id:agustD.id, album_id: agustDAlbum.id)
-a_song3 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/05.+%C6%92%C2%B0%E2%88%8F%C3%86%C2%AAA%CC%81%C2%BF%C5%93%C2%AAA%CC%81%E2%88%86%C2%BB+(724148).mp3', name:'724148', artist_id:agustD.id, album_id: agustDAlbum.id)
-a_song4 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/06.+140503+%C2%AA%C4%B1%E2%88%AB%C3%86%C3%B8%C2%B0+(140503+at+dawn).mp3', name:'140503 at Dawn', artist_id:agustD.id, album_id: agustDAlbum.id)
-a_song5 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/07.+%E2%88%8F%E2%88%82%C2%A1%CB%86%E2%88%8F%E2%88%91+(The+Last).mp3', name:'The Last', artist_id:agustD.id, album_id: agustDAlbum.id)
-a_song6 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/08.+Tony+Montana+(Feat.+Yankie).mp3', name:'Tony Montana', artist_id:agustD.id, album_id: agustDAlbum.id)
-a_song7 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/09.+Interlude+%3B+Dream%2C+Reality.mp3', name:'Interlude_dream, Reality', artist_id:agustD.id, album_id: agustDAlbum.id)
-a_song8 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/10.+so+far+away+(Feat.+%C2%BA%CB%86%E2%88%82%C4%B1+(SURAN)).mp3', name:'So Far Away', artist_id:agustD.id, album_id: agustDAlbum.id)
+a_song1 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/03.+give+it+to+me.mp3', duration: '2:29', name:'Give It to Me', artist_id:agustD.id, album_id: agustDAlbum.id)
+a_song2 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/04.+skit.mp3', duration: '1:14', name:'Skit', artist_id:agustD.id, album_id: agustDAlbum.id)
+a_song3 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/05.+%C6%92%C2%B0%E2%88%8F%C3%86%C2%AAA%CC%81%C2%BF%C5%93%C2%AAA%CC%81%E2%88%86%C2%BB+(724148).mp3', duration: '3:06', name:'724148', artist_id:agustD.id, album_id: agustDAlbum.id)
+a_song4 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/06.+140503+%C2%AA%C4%B1%E2%88%AB%C3%86%C3%B8%C2%B0+(140503+at+dawn).mp3', duration: '1:25', name:'140503 at Dawn', artist_id:agustD.id, album_id: agustDAlbum.id)
+a_song5 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/07.+%E2%88%8F%E2%88%82%C2%A1%CB%86%E2%88%8F%E2%88%91+(The+Last).mp3', duration: '4:06', name:'The Last', artist_id:agustD.id, album_id: agustDAlbum.id)
+a_song6 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/08.+Tony+Montana+(Feat.+Yankie).mp3', duration: '3:28', name:'Tony Montana', artist_id:agustD.id, album_id: agustDAlbum.id)
+a_song7 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/09.+Interlude+%3B+Dream%2C+Reality.mp3', duration: '1:33', name:'Interlude_dream, Reality', artist_id:agustD.id, album_id: agustDAlbum.id)
+a_song8 = Song.create!(song_url:'https://s3.amazonaws.com/playlist-dev/albums/Agust+D+by+Agust+D/10.+so+far+away+(Feat.+%C2%BA%CB%86%E2%88%82%C4%B1+(SURAN)).mp3', duration: '5:58', name:'So Far Away', artist_id:agustD.id, album_id: agustDAlbum.id)
 
 # Playlists
 pl1 = Playlist.create!(name:'\o/ |o| /o\ |o| \o/', user_id:user1.id)

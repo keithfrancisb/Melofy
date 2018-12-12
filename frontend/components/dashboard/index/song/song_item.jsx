@@ -1,39 +1,7 @@
 import React from 'react';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
-// const calculateTotalTime = (duration) => {
-//
-//     const minutes = Math.floor(duration / 60);
-//     const seconds_int = duration - minutes * 60;
-//     const seconds_str = seconds_int.toString();
-//     const seconds = seconds_str.substr(0, 2);
-//     const totalTime = `${minutes}:${seconds}`;
 
-//     return totalTime;
-// };
-
-const toggleDropdown = (id) => {
-  return () => {
-    document.getElementById(`dropDown${id}`).classList.toggle('show');
-    window.songId = id;
-  };
-};
-
-const renderTotalTime = () => {
-  const player = document.getElementById('music-player');
-
-  if(player && player.duration) {
-    const duration = player.duration;
-    const total_minute = parseInt(duration / 60) % 60;
-    const total_seconds_long = duration % 60;
-    const total_seconds = total_seconds_long.toFixed();
-    const totalTime = (total_minute < 10 ? "0" + total_minute :
-      total_minute) + ":" + (total_seconds < 10 ? "0" + total_seconds : total_seconds);
-
-    return totalTime;
-  } else {
-    return '     ';
-  }
-}
+import { save, unsave } from '../../../../actions/save_actions';
 
 class SongItem extends React.Component {
 
@@ -50,12 +18,25 @@ class SongItem extends React.Component {
       this.contextTrigger.handleContextClick(e);
   }
 
+  handleSave() {
+    const { savedSongIds, song } = this.props;
+    if(savedSongIds.includes(song.id)){
+      const saveId = this.props.saves.filter( (save) => {
+        return save.saveable_id === this.props.song.id && save.saveable_type === 'Song';
+      })[0].id;
+      this.props.unsave(saveId);
+    } else {
+      this.props.save(song.id, 'Song');
+    }
+  }
+
   render() {
 
     const { song, artist, album, setupAddToPlaylist, playSong } = this.props;
 
     const liClass = this.props.parentId ? 'songs-list' : 'song-browse-list';
     const divClass = this.props.parentId ? 'div-song-list-item' : 'div-browse-song-list-item';
+    const saveLabel = this.props.savedSongIds.includes(song.id) ? 'Remove from your Library' : 'Save to your Library';
 
     return (
       <div key={song.id} className={divClass} onDoubleClick={playSong(song)}>
@@ -76,12 +57,19 @@ class SongItem extends React.Component {
                 <img className='song-misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
               </button>
             </ContextMenuTrigger>
+            <div className='sub-song-info'>
+              <span>{song.duration}</span>
+            </div>
           </div>
+
         </li>
         <>
         <ContextMenu id={`${song.id}`}>
           <MenuItem>
             <span onClick={setupAddToPlaylist(song.id)}>Add to Playlist</span>
+          </MenuItem>
+          <MenuItem>
+            <span onClick={this.handleSave}>{saveLabel}</span>
           </MenuItem>
         </ContextMenu>
         </>
@@ -90,4 +78,18 @@ class SongItem extends React.Component {
   }
 }
 
-export default SongItem;
+const msp = state => {
+
+  return {
+    savedSongIds
+  };
+};
+
+const mdp = dispatch => {
+  return {
+    save: (saveId, saveType) => dispatch(save(saveId, saveType)),
+    unsave: (saveId) => dispatch(unsave(saveId))
+  };
+};
+
+export default connect(msp, mdp)(SongItem);
