@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+import { connect } from 'react-redux';
 
 import { save, unsave } from '../../../../actions/save_actions';
 
@@ -11,6 +12,7 @@ class SongItem extends React.Component {
     this.contextTrigger = null;
 
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   toggleMenu(e) {
@@ -19,6 +21,7 @@ class SongItem extends React.Component {
   }
 
   handleSave() {
+    debugger
     const { savedSongIds, song } = this.props;
     if(savedSongIds.includes(song.id)){
       const saveId = this.props.saves.filter( (save) => {
@@ -33,7 +36,6 @@ class SongItem extends React.Component {
   render() {
 
     const { song, artist, album, setupAddToPlaylist, playSong } = this.props;
-
     const liClass = this.props.parentId ? 'songs-list' : 'song-browse-list';
     const divClass = this.props.parentId ? 'div-song-list-item' : 'div-browse-song-list-item';
     const saveLabel = this.props.savedSongIds.includes(song.id) ? 'Remove from your Library' : 'Save to your Library';
@@ -81,7 +83,8 @@ class SongItem extends React.Component {
 const msp = state => {
 
   return {
-    savedSongIds
+    savedSongIds: state.session.saved_song_ids,
+    saves: Object.values(state.session.saves)
   };
 };
 
