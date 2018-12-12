@@ -8,9 +8,11 @@ import { fetchPlaylists } from '../../../../actions/playlist_actions';
 class PlaylistIndex extends React.Component {
 
   componentDidMount(){
-    const { searchTerm, playlistIds } = this.props;
-
-    this.props.fetchPlaylists(searchTerm, playlistIds);
+    const { searchTerm, playlistIds, createdPlaylistIds } = this.props;
+    let allPlaylistIds;
+    if((playlistIds && createdPlaylistIds) && !searchTerm)
+      allPlaylistIds = playlistIds.concat(createdPlaylistIds);
+    this.props.fetchPlaylists(searchTerm, allPlaylistIds);
   }
 
   componentDidUpdate(prevProps) {
@@ -34,10 +36,12 @@ class PlaylistIndex extends React.Component {
   }
 }
 
-const msp = ({entities}) => {
+const msp = ({entities, session}) => {
   const { playlists } = entities;
+  const { playlist_ids } = session;
   return {
-    playlists: Object.values(playlists)
+    playlists: Object.values(playlists),
+    createdPlaylistIds: playlist_ids
   };
 };
 

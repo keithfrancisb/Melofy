@@ -42,11 +42,10 @@ class AlbumItemShow extends React.Component{
   }
 
   render() {
-    const { album } = this.props;
-    const displayPhoto = album.image_url;
-
     if (!this.props.album.artist) return null;
 
+    const { album } = this.props;
+    const displayPhoto = album.image_url;
     const saveLabel = this.props.savedAlbumIds.includes(album.id) ? 'Remove from your Library' : 'Save to your Library';
 
     return (

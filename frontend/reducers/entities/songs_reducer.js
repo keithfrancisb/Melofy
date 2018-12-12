@@ -13,7 +13,11 @@ export const SongsReducer = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_SONGS:
-      return action.payload.songs;
+      if(action.payload.songs){
+        return action.payload.songs;
+      } else {
+        return {};
+      }
     case RECEIVE_SONG:
       newState[action.song.id] = action.song;
       return newState;

@@ -1,4 +1,4 @@
-json.extract! @user, :id, :first_name, :last_name
+json.extract! @user, :id, :first_name, :last_name, :playlist_ids
 json.extract! @user, :saved_song_ids, :saved_artist_ids, :saved_album_ids, :saved_playlist_ids
 json.saves do
   @user.saves.each do |save|

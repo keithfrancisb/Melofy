@@ -10,7 +10,11 @@ export const PlaylistsReducer = (state = {}, action) => {
   const newState = Object.assign({}, state);
   switch (action.type) {
     case RECEIVE_PLAYLISTS:
-      return action.playlists;
+      if(action.playlists){
+        return action.playlists;
+      } else {
+        return {};
+      }
     case RECEIVE_PLAYLIST:
       newState[action.payload.playlist.id] = action.payload.playlist;
       return newState;

@@ -54,7 +54,7 @@ class SongItem extends React.Component {
           </div>
           <div className='dot-div'>
             <ContextMenuTrigger id={`${song.id}`} ref={c => this.contextTrigger = c}>
-              <button id='popup' onClick={this.toggleMenu} className={`button${song.id}`}>
+              <button id='popup' onClick={this.toggleMenu}>
                 <img className='song-misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
               </button>
             </ContextMenuTrigger>

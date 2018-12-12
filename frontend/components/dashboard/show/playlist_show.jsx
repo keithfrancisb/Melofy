@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Navlink, Redirect } from 'react-router-dom';
+import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import { deletePlaylist } from '../../../actions/playlist_actions';
 import { fetchCurrentSong } from '../../../actions/now_playing_actions';
+import { save, unsave } from '../../../actions/save_actions';
 import SongIndex from '../index/song/song_index';
 
 class PlaylistItemShow extends React.Component{
@@ -11,9 +13,15 @@ class PlaylistItemShow extends React.Component{
     super(props);
 
     this.state = { changeBooleanState: false , songId: -1 };
+
+    this.contextTrigger = null;
+
     this.changeBooleanState = this.changeBooleanState.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.playSong = this.playSong.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
+    this.renderOptions = this.renderOptions.bind(this);
+
   }
 
   componentDidMount() {
@@ -24,16 +32,26 @@ class PlaylistItemShow extends React.Component{
     this.setState({ changeBooleanState: !this.state.changeBooleanState });
   }
 
+  toggleMenu(e) {
+    if(this.contextTrigger)
+      this.contextTrigger.handleContextClick(e);
+  }
+
+  handleSave() {
+    const { savedPlaylistIds, playlist } = this.props;
+    if(savedPlaylistIds.includes(playlist.id)){
+      const saveId = this.props.saves.filter( (save) => {
+        return save.saveable_id === this.props.playlist.id && save.saveable_type === 'Playlist';
+      })[0].id;
+      this.props.unsave(saveId);
+    } else {
+      this.props.save(playlist.id, 'Playlist');
+    }
+  }
+
   handleAddToPlaylist(playlistId, songId) {
     this.changeBooleanState();
     return () => this.props.addSongToPlaylist(playlistId, songId);
-  }
-
-  toggleDropdown(id) {
-    return () => {
-      document.getElementById(`dropDown${id}`).classList.toggle('show');
-      window.songId = id;
-    };
   }
 
   renderConfirmDelete() {
@@ -64,19 +82,55 @@ class PlaylistItemShow extends React.Component{
     this.props.history.push('/dashboard/collection/playlists');
   }
 
-  playSong(song) {
-    const { fetchCurrentSong } = this.props;
-    return () => {
-      return fetchCurrentSong(song.id);
-    };
+  renderOptions(){
+    const saveLabel = this.props.savedPlaylistIds.includes(this.props.playlist.id) ? 'Remove from your Library' : 'Save to your Library';
+    debugger
+    let result;
+    if(this.props.createdPlaylistIds.includes(this.props.playlist.id)){
+      result = (
+        <div>
+          <div className='show-dot-div'>
+            <ContextMenuTrigger id={`${this.props.playlist.id}`} ref={c => this.contextTrigger = c}>
+              <button onClick={this.toggleMenu}>
+                <img className='misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
+              </button>
+            </ContextMenuTrigger>
+          </div>
+
+          <>
+          <ContextMenu id={`${this.props.playlist.id}`}>
+            <MenuItem>
+              <span onClick={this.changeBooleanState}>Delete Playlist</span>
+            </MenuItem>
+          </ContextMenu>
+          </>
+      </div>
+      );
+    } else {
+      result = (
+        <div className='show-dot-div'>
+          <button onClick={this.handleSave}>
+            <span className='btn'>{saveLabel}</span>
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <>
+      {result}
+      </>
+    );
   }
 
   render() {
+
+    if (!this.props.playlist.user) return null;
+
     const { playlist } = this.props;
     const defaultImage = 'https://s3.amazonaws.com/playlist-dev/icons/noun_music+playlist_1058814.png';
     const displayPhoto = playlist.image_url === defaultImage ? 'playlist-default-image' : 'playlist-show-image';
 
-    if (!this.props.playlist.user) return null;
 
     return (
       <div>
@@ -99,18 +153,7 @@ class PlaylistItemShow extends React.Component{
                       <span>{`${playlist.user.first_name} ${playlist.user.last_name}`}</span>
                     </div>
                   </div>
-                  <div className='dot-div'>
-                    <button id='popup' onClick={this.toggleDropdown(playlist.id)} className={`button${playlist.id}`}>
-                      <img className='misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
-                    </button>
-                    <div id={`dropDown${playlist.id}`} className='popupBox'>
-                      <ul>
-                        <li>
-                          <span onClick={this.changeBooleanState}>Delete</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                  {this.renderOptions()}
                 </div>
                 <div className='playlist-songs'>
                   <SongIndex songIds={playlist.song_ids} parentId={playlist.id} />
@@ -124,26 +167,15 @@ class PlaylistItemShow extends React.Component{
   }
 }
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = (event) => {
-  if (!event.target.matches(`button${window.songId}`)) {
-
-    const dropdowns = document.getElementsByClassName("popupBox-song");
-    for (let i = 0; i < dropdowns.length; i++) {
-      const openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show') && openDropdown.id !== `dropDown${window.songId}`) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-};
-
-const msp = ({entities},ownProps) => {
+const msp = ({entities, session},ownProps) => {
   const { playlists } = entities;
-  // const playlistSongs = Object.values(songs);
+
   const playlist = playlists[ownProps.match.params.playlistId] || {};
   return {
     playlist,
+    savedPlaylistIds: session.saved_playlist_ids,
+    saves: Object.values(session.saves),
+    createdPlaylistIds: session.playlist_ids
   };
 };
 
@@ -151,6 +183,8 @@ const mdp = dispatch => {
   return {
     fetchPlaylist: id => dispatch(fetchPlaylist(id)),
     deletePlaylist: id => dispatch(deletePlaylist(id)),
+    save: (saveId, saveType) => dispatch(save(saveId, saveType)),
+    unsave: (saveId) => dispatch(unsave(saveId))
   };
 };
 

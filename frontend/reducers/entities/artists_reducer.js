@@ -10,15 +10,13 @@ export const ArtistsReducer = (state = {}, action) => {
   Object.freeze(state);
   const newState = Object.assign({}, state);
   switch (action.type) {
-    // case RECEIVE_SONGS:
-    // case RECEIVE_PLAYLIST:
-      // return Object.assign({}, action.payload.artists);
-    // case RECEIVE_ALBUM:
-      // newState[action.payload.artist.id] = action.payload.artist;
-      // return newState;
-    // case RECEIVE_ALBUMS:
+
     case RECEIVE_ARTISTS:
-      return action.payload.artists;
+      if(action.payload.artists){
+        return action.payload.artists;
+      } else {
+        return {};
+      }
     case RECEIVE_ARTIST:
       newState[action.payload.artist.id] = action.payload.artist;
       return newState;
