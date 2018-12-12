@@ -47,7 +47,6 @@ const msp = ({entities, session}) => {
 
 const mdp = dispatch => {
   return {
-    clearEntitiesState: () => dispatch(clearEntitiesState()),
     fetchPlaylists: (searchTerm, playlist_ids) => dispatch(fetchPlaylists(searchTerm, playlist_ids))
   };
 };

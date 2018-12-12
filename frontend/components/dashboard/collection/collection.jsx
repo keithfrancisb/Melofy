@@ -3,6 +3,7 @@ import { withRouter, NavLink, Redirect, Route } from 'react-router-dom';
 import { ProtectedRoute } from '../../../util/route_util';
 import { connect } from 'react-redux';
 import { createPlaylist } from '../../../actions/playlist_actions';
+import { fetchCurrentUser } from '../../../actions/session_actions';
 
 import PlaylistIndex from '../index/playlist/playlist_index.jsx';
 import SongIndex from '../index/song/song_index.jsx';
@@ -41,7 +42,7 @@ class Collection extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.playlist.name !== '') {
-      this.props.submitForm(this.state.playlist);
+      this.props.submitForm(this.state.playlist, this.props.currentUserId);
       this.setState({playlist: {name: ''}});
       this.changeBooleanState();
     }
@@ -111,23 +112,21 @@ class Collection extends React.Component {
   }
 }
 
-// <ProtectedRoute exact path='/dashboard/collection/playlists' component={PlaylistIndex} />
-// <ProtectedRoute exact path='/dashboard/collection/albums' component={AlbumIndex} />
-// <ProtectedRoute exact path='/dashboard/collection/songs' component={SongIndex} />
-// <ProtectedRoute exact path='/dashboard/collection/artists' component={ArtistIndex} />
 const msp = state => {
   const { saved_song_ids, saved_album_ids, saved_artist_ids, saved_playlist_ids } = state.session;
   return {
     savedAlbumIds: saved_album_ids,
     savedArtistIds: saved_artist_ids,
     savedSongIds: saved_song_ids,
-    savedPlaylistIds: saved_playlist_ids
+    savedPlaylistIds: saved_playlist_ids,
+    currentUserId: state.session.id
   };
 };
 
 const mdp = dispatch => {
   return {
-    submitForm: (playlistName) => dispatch(createPlaylist(playlistName))
+    submitForm: (playlistName, userId) => dispatch(createPlaylist(playlistName))
+      .then( () => dispatch(fetchCurrentUser(userId)))
   };
 };
 

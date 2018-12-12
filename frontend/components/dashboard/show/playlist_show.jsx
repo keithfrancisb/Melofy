@@ -5,6 +5,7 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import { deletePlaylist } from '../../../actions/playlist_actions';
 import { fetchCurrentSong } from '../../../actions/now_playing_actions';
 import { save, unsave } from '../../../actions/save_actions';
+import { fetchCurrentUser } from '../../../actions/session_actions';
 import SongIndex from '../index/song/song_index';
 
 class PlaylistItemShow extends React.Component{
@@ -77,14 +78,14 @@ class PlaylistItemShow extends React.Component{
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.deletePlaylist(this.props.match.params.playlistId);
+    debugger
+    this.props.deletePlaylist(this.props.match.params.playlistId, this.props.currentUserId);
     this.changeBooleanState();
-    this.props.history.push('/dashboard/collection/playlists');
+    this.props.history.push('/dashboard/browse/playlists');
   }
 
   renderOptions(){
     const saveLabel = this.props.savedPlaylistIds.includes(this.props.playlist.id) ? 'Remove from your Library' : 'Save to your Library';
-    debugger
     let result;
     if(this.props.createdPlaylistIds.includes(this.props.playlist.id)){
       result = (
@@ -171,21 +172,23 @@ const msp = ({entities, session},ownProps) => {
   const { playlists } = entities;
 
   const playlist = playlists[ownProps.match.params.playlistId] || {};
-  
+
   return {
     playlist,
     savedPlaylistIds: session.saved_playlist_ids,
     saves: Object.values(session.saves),
-    createdPlaylistIds: session.playlist_ids
+    createdPlaylistIds: session.playlist_ids,
+    currentUserId: session.id
   };
 };
 
 const mdp = dispatch => {
   return {
     fetchPlaylist: id => dispatch(fetchPlaylist(id)),
-    deletePlaylist: id => dispatch(deletePlaylist(id)),
+    deletePlaylist: (playlistId, userId) => dispatch(deletePlaylist(playlistId))
+      .then( () => dispatch(fetchCurrentUser(userId))),
     save: (saveId, saveType) => dispatch(save(saveId, saveType)),
-    unsave: (saveId) => dispatch(unsave(saveId))
+    unsave: (saveId) => dispatch(unsave(saveId)),
   };
 };
 

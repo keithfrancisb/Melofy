@@ -3,6 +3,7 @@ import { receiveSongs } from './song_actions';
 import { receiveArtists } from './artist_actions';
 import { receiveAlbums } from './album_actions';
 
+
 export const RECEIVE_PLAYLISTS = 'RECEIVE_PLAYLISTS';
 export const RECEIVE_PLAYLIST = 'RECEIVE_PLAYLIST';
 export const REMOVE_PLAYLIST = 'REMOVE_PLAYLIST';
@@ -67,7 +68,8 @@ export const updatePlaylist = playlist => dispatch => {
       .fail( err => dispatch(receivePlaylistErrors(err.responseJSON)));
 };
 
-export const deletePlaylist = playlistId => dispatch => {
+export const deletePlaylist = (playlistId, userId) => dispatch => {
+
   return PSApiUtil.deletePlaylist(playlistId)
     .then( playlist => dispatch(removePlaylist(playlist.id)))
       .fail( err => dispatch(receivePlaylistErrors(err.responseJSON)));

@@ -72,6 +72,12 @@ export const signup = (user) => {
 
 // USER
 
+export const fetchCurrentUser = id => dispatch => {
+  return SessionAPIUtil.fetchUser(id)
+    .then( user => dispatch(receiveCurrentUser(user)))
+      .fail( err => dispatch(receiveUserErrors(err)));
+};
+
 export const fetchUser = id => dispatch => {
   return SessionAPIUtil.fetchUser(id)
     .then( user => dispatch(receiveUser(user)))
