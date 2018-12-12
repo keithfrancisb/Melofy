@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { fetchAlbum } from '../../../actions/album_actions';
 import { fetchCurrentSong } from '../../../actions/now_playing_actions';
+import { save, unsave } from '../../../actions/save_actions';
 import SongIndex from '../index/song/song_index';
 
 
@@ -11,18 +12,26 @@ class AlbumItemShow extends React.Component{
   constructor(props) {
     super(props);
 
+    this.contextTrigger = null;
+
     this.playSong = this.playSong.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+  }
+
+  handleSave() {
+    const { savedAlbumIds, album } = this.props;
+    if(savedAlbumIds.includes(album.id)){
+      const saveId = this.props.saves.filter( (save) => {
+        return save.saveable_id === this.props.album.id && save.saveable_type === 'Album';
+      })[0].id;
+      this.props.unsave(saveId);
+    } else {
+      this.props.save(album.id, 'Album');
+    }
   }
 
   componentDidMount() {
     this.props.fetchAlbum(this.props.match.params.albumId);
-  }
-
-  toggleDropdown(id) {
-    return () => {
-      document.getElementById(`dropDown${id}`).classList.toggle('show');
-      window.songId = id;
-    };
   }
 
   playSong(song) {
@@ -37,6 +46,8 @@ class AlbumItemShow extends React.Component{
     const displayPhoto = album.image_url;
 
     if (!this.props.album.artist) return null;
+
+    const saveLabel = this.props.savedAlbumIds.includes(album.id) ? 'Remove from your Library' : 'Save to your Library';
 
     return (
       <div>
@@ -58,17 +69,10 @@ class AlbumItemShow extends React.Component{
                       <span>{album.artist.name}</span>
                     </div>
                   </div>
-                  <div className='dot-div'>
-                    <button id='popup' onClick={this.toggleDropdown(album.id)} className={`button${album.id}`}>
-                      <img className='misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
+                  <div className='show-dot-div'>
+                    <button onClick={this.handleSave}>
+                      <span className='btn'>{saveLabel}</span>
                     </button>
-                    <div id={`dropDown${album.id}`} className='popupBox'>
-                      <ul>
-                        <li>
-                          <span>Save</span>
-                        </li>
-                      </ul>
-                    </div>
                   </div>
                 </div>
                 <div className='playlist-songs'>
@@ -84,27 +88,15 @@ class AlbumItemShow extends React.Component{
 
 }
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = (event) => {
-  if (!event.target.matches(`button${window.songId}`)) {
-
-    const dropdowns = document.getElementsByClassName("popupBox-song");
-    for (let i = 0; i < dropdowns.length; i++) {
-      const openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show') && openDropdown.id !== `dropDown${window.songId}`) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-};
-
-
 const msp = (state, ownProps) => {
   const { albums } = state.entities;
+  const { saved_album_ids, saves } = state.session;
 
   const album = albums[ownProps.match.params.albumId] || {};
   return {
     album,
+    savedAlbumIds: saved_album_ids,
+    saves: Object.values(saves)
   };
 };
 
@@ -112,7 +104,9 @@ const mdp = dispatch => {
 
   return {
     fetchAlbum: id => dispatch(fetchAlbum(id)),
-    fetchCurrentSong: songId => dispatch(fetchCurrentSong(songId))
+    fetchCurrentSong: songId => dispatch(fetchCurrentSong(songId)),
+    save: (saveId, saveType) => dispatch(save(saveId, saveType)),
+    unsave: (saveId) => dispatch(unsave(saveId))
   };
 };
 

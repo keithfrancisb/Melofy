@@ -18,3 +18,12 @@
   height: 100vh;
   background-color: #181818;
 }
+
+.show-dot-div {
+  align-items: center;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  // width: 100px;
+}

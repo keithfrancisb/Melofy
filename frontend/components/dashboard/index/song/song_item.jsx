@@ -21,7 +21,6 @@ class SongItem extends React.Component {
   }
 
   handleSave() {
-    debugger
     const { savedSongIds, song } = this.props;
     if(savedSongIds.includes(song.id)){
       const saveId = this.props.saves.filter( (save) => {
