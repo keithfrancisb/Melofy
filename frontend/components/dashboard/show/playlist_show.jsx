@@ -171,6 +171,7 @@ const msp = ({entities, session},ownProps) => {
   const { playlists } = entities;
 
   const playlist = playlists[ownProps.match.params.playlistId] || {};
+  
   return {
     playlist,
     savedPlaylistIds: session.saved_playlist_ids,

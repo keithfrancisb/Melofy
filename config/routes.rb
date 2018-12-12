@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
     resources :saves, only: [:create, :destroy]
 
-    resources :users, only: [:create]
+    resources :users, only: [:create, :show]
     resource :session, only: [:create, :destroy]
   end
 
