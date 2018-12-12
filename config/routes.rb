@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :artists, only: [:index,:show]
     resources :albums, only: [:index,:show]
 
+    resources :saves, only: [:create, :destroy]
+
     resources :users, only: [:create]
     resource :session, only: [:create, :destroy]
   end

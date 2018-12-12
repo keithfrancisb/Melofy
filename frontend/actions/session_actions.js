@@ -7,7 +7,7 @@ export const RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
 export const RECEIVE_USER_ERRORS = 'RECEIVE_USER_ERRORS';
 export const CLEAR_ALL_ERRORS = 'CLEAR_ALL_ERRORS';
 
-const receiveCurrentUser = user => {
+export const receiveCurrentUser = user => {
   return {
     type: RECEIVE_CURRENT_USER,
     user
