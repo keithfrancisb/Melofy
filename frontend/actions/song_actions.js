@@ -44,7 +44,6 @@ export const fetchSong = id => dispatch => {
       .fail( err => dispatch(receiveSongErrors(err.responseJSON)));
 };
 
-
 export const addSongToPlaylist = (playlistId, songId) => dispatch => {
   return PSApiUtil.addSongToPlaylist(playlistId, songId)
     .then( updatedPlaylist => dispatch(receivePlaylist(updatedPlaylist)));

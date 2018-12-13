@@ -43,8 +43,9 @@ class SongIndex extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(prevProps.searchTerm !== this.props.searchTerm)
-      this.props.fetchSongs(this.props.searchTerm);
+    if(prevProps.songIds && (prevProps.searchTerm !== this.props.searchTerm ||
+      prevProps.songIds.length !== this.props.songIds.length))
+      this.props.fetchSongs(this.props.searchTerm, this.props.songIds);
   }
 
   changeBooleanState() {
@@ -103,7 +104,6 @@ class SongIndex extends React.Component {
     }
   }
 
-
   playSong(song) {
     const { fetchCurrentSong } = this.props;
     return () => {
@@ -124,6 +124,7 @@ class SongIndex extends React.Component {
           artist={song.artist}
           album={song.album}
           parentId={this.props.parentId}
+          parentType={this.props.parentType}
           allowRemoveSong={this.props.allowRemoveSong}/>
       );
     });
@@ -154,8 +155,8 @@ const mdp = dispatch => {
   return {
     fetchSongs: (searchTerm, song_ids) => dispatch(fetchSongs(searchTerm, song_ids)),
     fetchPlaylists: () => dispatch(fetchPlaylists()),
-    addSongToPlaylist: (playlistId, songId) => addSongToPlaylist(playlistId, songId),
-    removeSongFromPlaylist: (playlistId, songId) => removeSongFromPlaylist(playlistId, songId),
+    addSongToPlaylist: (playlistId, songId) => dispatch(addSongToPlaylist(playlistId, songId)),
+    removeSongFromPlaylist: (playlistId, songId) => dispatch(removeSongFromPlaylist(playlistId, songId)),
     fetchCurrentSong: (songId) => dispatch(fetchCurrentSong(songId))
   };
 };

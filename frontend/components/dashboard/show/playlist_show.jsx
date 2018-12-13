@@ -29,6 +29,12 @@ class PlaylistItemShow extends React.Component{
     this.props.fetchPlaylist(this.props.match.params.playlistId);
   }
 
+  // componentDidUpdate(prevProps) {
+  //   if(Object.values(prevProps.playlist).length !== 0 &&
+  //     (this.props.playlist.song_ids.length !== prevProps.playlist.song_ids.length))
+  //     this.props.fetchPlaylist(this.props.match.params.playlistId);
+  // }
+
   changeBooleanState() {
     this.setState({ changeBooleanState: !this.state.changeBooleanState });
   }
@@ -78,7 +84,6 @@ class PlaylistItemShow extends React.Component{
 
   handleSubmit(e) {
     e.preventDefault();
-    debugger
     this.props.deletePlaylist(this.props.match.params.playlistId, this.props.currentUserId);
     this.changeBooleanState();
     this.props.history.push('/dashboard/browse/playlists');
@@ -132,7 +137,6 @@ class PlaylistItemShow extends React.Component{
     const defaultImage = 'https://s3.amazonaws.com/playlist-dev/icons/noun_music+playlist_1058814.png';
     const displayPhoto = playlist.image_url === defaultImage ? 'playlist-default-image' : 'playlist-show-image';
     const allowRemoveSong = playlist.user_id === this.props.currentUserId;
-
     return (
       <div>
         <div className='playlist-show-view'>
@@ -157,7 +161,7 @@ class PlaylistItemShow extends React.Component{
                   {this.renderOptions()}
                 </div>
                 <div className='playlist-songs'>
-                  <SongIndex songIds={playlist.song_ids} parentId={playlist.id} allowRemoveSong={allowRemoveSong}/>
+                  <SongIndex songIds={playlist.song_ids} parentId={playlist.id} parentType={'Playlist'} allowRemoveSong={allowRemoveSong}/>
                 </div>
               </section>
             </div>
@@ -172,7 +176,6 @@ const msp = ({entities, session},ownProps) => {
   const { playlists } = entities;
 
   const playlist = playlists[ownProps.match.params.playlistId] || {};
-
   return {
     playlist,
     savedPlaylistIds: session.saved_playlist_ids,

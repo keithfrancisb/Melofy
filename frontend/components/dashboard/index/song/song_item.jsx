@@ -38,7 +38,7 @@ class SongItem extends React.Component {
     const liClass = this.props.parentId ? 'songs-list' : 'song-browse-list';
     const divClass = this.props.parentId ? 'div-song-list-item' : 'div-browse-song-list-item';
     const saveLabel = this.props.savedSongIds.includes(song.id) ? 'Remove from your Library' : 'Save to your Library';
-
+    
     let removeFromPlaylist;
     if(this.props.parentType === 'Playlist' && this.props.allowRemoveSong){
       removeFromPlaylist = (
