@@ -1,6 +1,7 @@
 import React from 'react';
 import { fetchCurrentSong } from '../../../actions/now_playing_actions';
 import { connect } from 'react-redux';
+import { save, unsave } from '../../../actions/save_actions';
 
 class MusicPlayer extends React.Component{
 
@@ -24,6 +25,7 @@ class MusicPlayer extends React.Component{
     this.nextSong = this.nextSong.bind(this);
     this.prevSong = this.prevSong.bind(this);
     this.seek = this.seek.bind(this);
+    this.toggleSave = this.toggleSave.bind(this);
   }
 
   componentDidMount() {
@@ -194,7 +196,31 @@ class MusicPlayer extends React.Component{
     }
   }
 
+  toggleSave() {
+    const saveButton = document.getElementById('save');
+    if(this.props.savedSongIds.includes(this.props.nowPlaying.id)){
+      const saveId = this.props.saves.filter( (save) => {
+        return save.saveable_id === this.props.nowPlaying.id && save.saveable_type === 'Song';
+      })[0].id;
+      this.props.unsave(saveId);
+      saveButton.classList.remove('saved');
+    } else {
+      this.props.save(this.props.nowPlaying.id, 'Song');
+      saveButton.classList.add('saved');
+    }
+
+  }
+
+
   renderNowPlayingInfo() {
+    let saveIcon;
+    if(this.props.savedSongIds.includes(this.props.nowPlaying.id)) {
+      saveIcon = 'save-button saved';
+    } else {
+      saveIcon = 'save-button';
+    }
+
+
     if(this.props.nowPlaying.name) {
       const { name, artistName, albumName, albumImage } = this.props.nowPlaying;
       return (
@@ -206,6 +232,7 @@ class MusicPlayer extends React.Component{
             <div className='song-name-player'><span>{name}</span></div>
             <div className='artist-name-player'><span>{artistName}</span></div>
           </div>
+          <button id='save' className={saveIcon} onClick={this.toggleSave}></button>
         </>
       );
     }
@@ -262,13 +289,17 @@ class MusicPlayer extends React.Component{
 
 const msp = state => {
   return {
-    nowPlaying: state.nowPlaying
+    nowPlaying: state.nowPlaying,
+    savedSongIds: state.session.saved_song_ids,
+    saves: Object.values(state.session.saves)
   };
 };
 
 const mdp = dispatch => {
   return {
-    fetchCurrentSong: (songId) => dispatch(fetchCurrentSong(songId))
+    fetchCurrentSong: (songId) => dispatch(fetchCurrentSong(songId)),
+    save: (saveId, saveType) => dispatch(save(saveId, saveType)),
+    unsave: saveId => dispatch(unsave(saveId))
   };
 };
 
