@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Navlink, Redirect } from 'react-router-dom';
+import { withRouter, Navlink, Redirect, Link } from 'react-router-dom';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import { deletePlaylist } from '../../../actions/playlist_actions';
 import { fetchCurrentSong } from '../../../actions/now_playing_actions';
@@ -28,12 +28,6 @@ class PlaylistItemShow extends React.Component{
   componentDidMount() {
     this.props.fetchPlaylist(this.props.match.params.playlistId);
   }
-
-  // componentDidUpdate(prevProps) {
-  //   if(Object.values(prevProps.playlist).length !== 0 &&
-  //     (this.props.playlist.song_ids.length !== prevProps.playlist.song_ids.length))
-  //     this.props.fetchPlaylist(this.props.match.params.playlistId);
-  // }
 
   changeBooleanState() {
     this.setState({ changeBooleanState: !this.state.changeBooleanState });
@@ -137,6 +131,32 @@ class PlaylistItemShow extends React.Component{
     const defaultImage = 'https://s3.amazonaws.com/playlist-dev/icons/noun_music+playlist_1058814.png';
     const displayPhoto = playlist.image_url === defaultImage ? 'playlist-default-image' : 'playlist-show-image';
     const allowRemoveSong = playlist.user_id === this.props.currentUserId;
+
+    let renderIndex;
+    if(playlist.song_ids.length !== 0){
+      renderIndex = (
+        <div className='playlist-songs'>
+          <SongIndex songIds={playlist.song_ids} parentId={playlist.id} parentType={'Playlist'} allowRemoveSong={allowRemoveSong}/>
+        </div>
+      );
+    } else {
+      renderIndex = (
+        <div className="empty-playlist-container">
+          <div className="empty-playlist-icon">
+            <svg width="80" height="79" viewBox="0 0 80 79" xmlns="http://www.w3.org/2000/svg"><title>Album</title><path d="M76.8 3.138v72.126H3.2V3.138h73.6zM80 0H0v78.398h80V0zM40 20.8c-9.72 0-17.6 7.88-17.6 17.6C22.4 48.12 30.28 56 40 56c9.72 0 17.6-7.88 17.6-17.6 0-9.72-7.88-17.6-17.6-17.6zm0 3.2c7.94 0 14.4 6.46 14.4 14.4S47.94 52.8 40 52.8s-14.4-6.46-14.4-14.4S32.06 24 40 24z" fill="currentColor" fillRule="evenodd"></path></svg>
+          </div>
+          <div>
+            <h1 className="empty-playlist-header">It's a bit empty here...</h1>
+          </div>
+          <div>
+            <h4 className="empty-playlist-subheader">Find more of the music you love down below</h4>
+          </div>
+          <div>
+            <Link to='/dashboard/browse' className="btn browse-btn">Browse</Link>
+          </div>
+        </div>
+      );
+    }
     return (
       <div>
         <div className='playlist-show-view'>
@@ -160,9 +180,7 @@ class PlaylistItemShow extends React.Component{
                   </div>
                   {this.renderOptions()}
                 </div>
-                <div className='playlist-songs'>
-                  <SongIndex songIds={playlist.song_ids} parentId={playlist.id} parentType={'Playlist'} allowRemoveSong={allowRemoveSong}/>
-                </div>
+                {renderIndex}
               </section>
             </div>
           </div>
