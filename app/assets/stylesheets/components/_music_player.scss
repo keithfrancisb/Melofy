@@ -120,6 +120,14 @@
   transform: scale(1);
 }
 
+.progress-bar-container:hover > div > div {
+  background-color: #1db954 !important;
+}
+
+.volume-bar-container:hover > div > div {
+  background-color: #1db954 !important;
+}
+
 .outer-bar {
   width: 100%;
   background-color: #404040;
@@ -234,6 +242,7 @@
 .now-playing-bar-right {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   width: 30%;
   min-width: 180px;
 }
@@ -243,6 +252,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  height: 15px;
 }
 
 .volume-slider {
