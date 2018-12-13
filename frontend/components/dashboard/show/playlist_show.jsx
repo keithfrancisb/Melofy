@@ -131,11 +131,11 @@ class PlaylistItemShow extends React.Component{
     const { playlist } = this.props;
     const defaultImage = 'https://s3.amazonaws.com/playlist-dev/icons/noun_music+playlist_1058814.png';
     const displayPhoto = playlist.image_url === defaultImage ? 'playlist-default-image' : 'playlist-show-image';
-
+    const allowRemoveSong = playlist.user_id === this.props.currentUserId;
 
     return (
       <div>
-        <div className='show-main-view'>
+        <div className='playlist-show-view'>
           <div className='content-scrolling'>
             {this.renderConfirmDelete()}
             <div className='content-spacing-playlist'>
@@ -157,7 +157,7 @@ class PlaylistItemShow extends React.Component{
                   {this.renderOptions()}
                 </div>
                 <div className='playlist-songs'>
-                  <SongIndex songIds={playlist.song_ids} parentId={playlist.id} />
+                  <SongIndex songIds={playlist.song_ids} parentId={playlist.id} allowRemoveSong={allowRemoveSong}/>
                 </div>
               </section>
             </div>

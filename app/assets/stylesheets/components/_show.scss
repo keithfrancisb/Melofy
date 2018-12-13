@@ -11,6 +11,14 @@
   display: none;
 }
 
+.playlist-show-view {
+  padding-left: 230px;
+  display: block;
+  background: linear-gradient(#162f19, rgb(6, 8, 9) 85%);
+  height: 100vh;
+  padding-top: 45px;
+}
+
 .artist-show-view {
   padding-left: 230px;
   display: block;
@@ -25,5 +33,4 @@
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  // width: 100px;
 }

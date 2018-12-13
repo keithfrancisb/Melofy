@@ -10,13 +10,11 @@ class Api::SongsController < ApplicationController
 
   def index
     if(params[:search_term])
-      @songs = Song.where('name ILIKE ?', "%#{params[:search_term].downcase}%").includes(:artist,:album)
+      @songs = Song.where('name ILIKE ?', "%#{params[:search_term].downcase}%").includes(:artist,:album,:playlists)
     elsif (params[:song_ids])
-      @songs = Song.where(id: params[:song_ids]).includes(:artist,:album)
+      @songs = Song.where(id: params[:song_ids]).includes(:artist,:album,:playlists)
     else
-      @songs = Song.all.includes(:artist,:album)
-      # @artists = Artist.all
-      # @albums = Album.all
+      @songs = Song.all.includes(:artist,:album,:playlists)
     end
   end
 
@@ -35,16 +33,14 @@ class Api::SongsController < ApplicationController
 
   def destroy
     @playlist = current_user.playlists.find(params[:playlist_id])
-    @song = @playlist.songs.find(params[:id])
-    # @song.destroy
-    # .destroy removes song from the database. NO NO NO
-    if @song
-      @playlist.songs -= [@song]
+    # @song = @playlist.songs.find(params[:id])
+    @ps_tag = PsTag.where('playlist_id = ? AND song_id = ?', params[:playlist_id], params[:id]).first
+    @ps_tag.destroy
 
-      render 'api/playlists/show'
-    else
-      render json: ["Song is already not included in the playlist."], status: 422
-    end
+    render 'api/playlists/show'
+    # else
+    #   render json: ["Song is already not included in the playlist."], status: 422
+    # end
 
   end
 

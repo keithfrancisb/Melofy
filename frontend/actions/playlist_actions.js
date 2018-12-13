@@ -19,7 +19,7 @@ const receivePlaylists = playlists => {
   };
 };
 
-const receivePlaylist = (payload) => {
+export const receivePlaylist = (payload) => {
   return {
     type: RECEIVE_PLAYLIST,
     payload

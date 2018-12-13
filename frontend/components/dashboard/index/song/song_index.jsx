@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addSongToPlaylist } from '../../../../util/ps_api_util';
+import { addSongToPlaylist, removeSongFromPlaylist } from '../../../../actions/song_actions';
 import { fetchSongs } from '../../../../actions/song_actions';
 import { fetchPlaylists } from '../../../../actions/playlist_actions';
 import { currentUserPlaylists } from '../../../../reducers/selectors/playlist_selectors.js';
@@ -19,6 +19,7 @@ class SongIndex extends React.Component {
     this.changeBooleanState = this.changeBooleanState.bind(this);
     this.setupAddToPlaylist = this.setupAddToPlaylist.bind(this);
     this.handleAddToPlaylist = this.handleAddToPlaylist.bind(this);
+    this.handleRemoveFromPlaylist = this.handleRemoveFromPlaylist.bind(this);
     this.playSong = this.playSong.bind(this);
   }
 
@@ -57,8 +58,16 @@ class SongIndex extends React.Component {
   }
 
   handleAddToPlaylist(playlistId, songId) {
-    this.changeBooleanState();
-    return () => this.props.addSongToPlaylist(playlistId, songId);
+    return () => {
+      this.changeBooleanState();
+      this.props.addSongToPlaylist(playlistId, songId);
+    };
+  }
+
+  handleRemoveFromPlaylist(playlistId, songId) {
+    return () => {
+      this.props.removeSongFromPlaylist(playlistId, songId)
+    };
   }
 
   renderAddToPlaylist() {
@@ -74,7 +83,7 @@ class SongIndex extends React.Component {
             </div>
             <div><h1 className='h1-add-to-playlist'>Add to playlist</h1></div>
 
-          <ul>
+          <ul className='add-playlist-ul'>
             {this.props.playlists.map( playlist => {
               return (
                 <li key={playlist.id}>
@@ -109,10 +118,13 @@ class SongIndex extends React.Component {
           playSong={this.playSong}
           key={song.id}
           setupAddToPlaylist={this.setupAddToPlaylist}
+
+          handleRemoveFromPlaylist={this.handleRemoveFromPlaylist}
           song={song}
           artist={song.artist}
           album={song.album}
-          parentId={this.props.parentId}/>
+          parentId={this.props.parentId}
+          allowRemoveSong={this.props.allowRemoveSong}/>
       );
     });
     return (
@@ -143,6 +155,7 @@ const mdp = dispatch => {
     fetchSongs: (searchTerm, song_ids) => dispatch(fetchSongs(searchTerm, song_ids)),
     fetchPlaylists: () => dispatch(fetchPlaylists()),
     addSongToPlaylist: (playlistId, songId) => addSongToPlaylist(playlistId, songId),
+    removeSongFromPlaylist: (playlistId, songId) => removeSongFromPlaylist(playlistId, songId),
     fetchCurrentSong: (songId) => dispatch(fetchCurrentSong(songId))
   };
 };

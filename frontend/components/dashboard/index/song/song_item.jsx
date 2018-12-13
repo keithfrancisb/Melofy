@@ -39,6 +39,17 @@ class SongItem extends React.Component {
     const divClass = this.props.parentId ? 'div-song-list-item' : 'div-browse-song-list-item';
     const saveLabel = this.props.savedSongIds.includes(song.id) ? 'Remove from your Library' : 'Save to your Library';
 
+    let removeFromPlaylist;
+    if(this.props.parentType === 'Playlist' && this.props.allowRemoveSong){
+      removeFromPlaylist = (
+        <MenuItem>
+          <span onClick={this.props.handleRemoveFromPlaylist(this.props.parentId, song.id)}>Remove from this Playlist</span>
+        </MenuItem>
+      );
+    } else {
+      removeFromPlaylist = null;
+    }
+
     return (
       <div key={song.id} className={divClass} onDoubleClick={playSong(song)}>
         <li className={liClass}>
@@ -69,6 +80,7 @@ class SongItem extends React.Component {
           <MenuItem>
             <span onClick={setupAddToPlaylist(song.id)}>Add to Playlist</span>
           </MenuItem>
+          {removeFromPlaylist}
           <MenuItem>
             <span onClick={this.handleSave}>{saveLabel}</span>
           </MenuItem>

@@ -66,3 +66,13 @@
   text-transform: none;
   text-align: center;
 }
+
+.add-playlist-ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.add-playlist-ul > li {
+  margin: 20px;
+}
