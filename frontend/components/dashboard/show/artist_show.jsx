@@ -37,6 +37,12 @@ class ArtistShow extends React.Component {
     if(artist && artist.song_ids)
       songs = artist.song_ids.slice(0,6);
 
+
+    const player = document.getElementById('music-player');
+    let playPause = 'PLAY';
+
+    if(player && !player.paused) playPause = 'PAUSE';
+
     const saveLabel = savedArtistIds.includes(artist.id) ? 'Remove from your Library' : 'Save to your Library';
     return (
       <div>
@@ -47,7 +53,7 @@ class ArtistShow extends React.Component {
                   <header className='artist-header' style={{backgroundImage: 'url(' + artist.cover_url + ')'}}>
                     <h1 className='artist-header-title'>{artist.name}</h1>
                     <div className='header-buttons'>
-                      <button className='btn btn-green'>PLAY</button>
+                      <button className='btn btn-green'>{playPause}</button>
                       <button className='btn btn-black btn-wide' onClick={this.handleSave}>{saveLabel}</button>
                     </div>
                   </header>

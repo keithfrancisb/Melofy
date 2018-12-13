@@ -38,7 +38,9 @@ class SongItem extends React.Component {
     const liClass = this.props.parentId ? 'songs-list' : 'song-browse-list';
     const divClass = this.props.parentId ? 'div-song-list-item' : 'div-browse-song-list-item';
     const saveLabel = this.props.savedSongIds.includes(song.id) ? 'Remove from your Library' : 'Save to your Library';
-    
+    const playedColor = song.id === this.props.nowPlayingId ? 'green' : 'not-green';
+
+
     let removeFromPlaylist;
     if(this.props.parentType === 'Playlist' && this.props.allowRemoveSong){
       removeFromPlaylist = (
@@ -55,7 +57,7 @@ class SongItem extends React.Component {
         <li className={liClass}>
           <div>
             <div>
-              <span>{song.name}</span>
+              <span className={playedColor}>{song.name}</span>
             </div>
             <div className='sub-song-info'>
               <span>{artist.name}</span>
@@ -70,7 +72,7 @@ class SongItem extends React.Component {
               </button>
             </ContextMenuTrigger>
             <div className='sub-song-info'>
-              <span>{song.duration}</span>
+              <span className={playedColor}>{song.duration}</span>
             </div>
           </div>
 
@@ -95,7 +97,8 @@ const msp = state => {
 
   return {
     savedSongIds: state.session.saved_song_ids,
-    saves: Object.values(state.session.saves)
+    saves: Object.values(state.session.saves),
+    nowPlayingId: state.nowPlaying.id
   };
 };
 
