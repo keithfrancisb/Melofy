@@ -55,14 +55,19 @@ class SongItem extends React.Component {
     return (
       <div key={song.id} className={divClass} onDoubleClick={playSong(song)}>
         <li className={liClass}>
-          <div>
-            <div>
-              <span className={playedColor}>{song.name}</span>
+          <div className='left-side-song-item'>
+            <div className={playedColor}>
+              <span className='mini-play'></span>
             </div>
-            <div className='sub-song-info'>
-              <span>{artist.name}</span>
-              <span className="second-line-separator">•</span>
-              <span>{album.name}</span>
+            <div>
+              <div>
+                <span className={playedColor}>{song.name}</span>
+              </div>
+              <div className='sub-song-info'>
+                <span>{artist.name}</span>
+                <span className="second-line-separator">•</span>
+                <span>{album.name}</span>
+              </div>
             </div>
           </div>
           <div className='dot-div'>

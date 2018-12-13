@@ -40,8 +40,32 @@
 }
 
 .song-misc-logo {
-  width: 2em;
-  height: 2em;
+  width: 30px;
+}
+
+.left-side-song-item {
+  display: flex;
+  justify-content: flex-start;
+  width: 60%;
+}
+
+.left-side-song-item > div {
+  margin: 0 8px;
+}
+
+.mini-play:before {
+  content: "\F156";
+  font-size: 16px;
+
+  font-family: glue1-spoticon;
+  font-style: normal;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: inherit;
+  vertical-align: bottom;
+  display: inline-block;
+  text-decoration: inherit;
 }
 
 // ADD To Playlist

@@ -32,13 +32,13 @@
 }
 
 .current-user-info {
-  position: relative;
+  // position: relative;
   display: flex;
-  bottom: 1.5em;
+  // bottom: 1.5em;
   flex-direction: column;
-  right: -7%;
+  // right: -7%;
   text-align: center;
-  width: 10vw;
+  width: 100%;
 }
 
 .current-user-info > li {
@@ -49,6 +49,8 @@
   letter-spacing: .015em;
   color: #b3b3b3;
   transition: color 0.5s;
+  // margin-inline-start: 10px;
+  text-align: center;
 }
 
 .current-user-info > li > button {
@@ -58,7 +60,7 @@
 
 .super-mini-divider {
   border: 0.5px solid #d9dadc;
-  width: 9em;
+  width: 100%;
   display: block;
   line-height: 1px;
   margin: 5px 0;
