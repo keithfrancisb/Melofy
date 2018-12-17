@@ -7,7 +7,7 @@ import { currentUserPlaylists } from '../../../../reducers/selectors/playlist_se
 import SongItem from './song_item';
 import PlaylistItem from '../playlist/playlist_item';
 
-import { fetchCurrentSong } from '../../../../actions/now_playing_actions';
+import { fetchCurrentSong } from '../../../../actions/queue_actions';
 
 class SongIndex extends React.Component {
 

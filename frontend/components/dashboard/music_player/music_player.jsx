@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { fetchCurrentSong } from '../../../actions/now_playing_actions';
+import { fetchCurrentSong } from '../../../actions/queue_actions';
 import { connect } from 'react-redux';
 import { save, unsave } from '../../../actions/save_actions';
 
@@ -295,7 +295,7 @@ class MusicPlayer extends React.Component{
 
 const msp = state => {
   return {
-    nowPlaying: state.nowPlaying,
+    nowPlaying: state.ui.nowPlaying,
     savedSongIds: state.session.saved_song_ids,
     saves: Object.values(state.session.saves)
   };

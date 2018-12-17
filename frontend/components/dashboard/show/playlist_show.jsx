@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Navlink, Redirect, Link } from 'react-router-dom';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import { deletePlaylist } from '../../../actions/playlist_actions';
-import { fetchCurrentSong } from '../../../actions/now_playing_actions';
+import { fetchCurrentSong } from '../../../actions/queue_actions';
 import { save, unsave } from '../../../actions/save_actions';
 import { fetchCurrentUser } from '../../../actions/session_actions';
 import SongIndex from '../index/song/song_index';

@@ -103,7 +103,7 @@ const msp = state => {
   return {
     savedSongIds: state.session.saved_song_ids,
     saves: Object.values(state.session.saves),
-    nowPlayingId: state.nowPlaying.id
+    nowPlayingId: state.ui.nowPlaying.id
   };
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { fetchAlbum } from '../../../actions/album_actions';
-import { fetchCurrentSong } from '../../../actions/now_playing_actions';
+import { fetchCurrentSong } from '../../../actions/queue_actions';
 import { save, unsave } from '../../../actions/save_actions';
 import SongIndex from '../index/song/song_index';
 
