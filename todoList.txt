@@ -1,2 +1,6 @@
 fix createPlaylist in browse
 fix album index
+
+
+* make song queue
+* make site repsonsive to browser dimensions (media query)
