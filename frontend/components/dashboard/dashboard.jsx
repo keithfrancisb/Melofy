@@ -1,14 +1,16 @@
 import React from 'react';
 import { NavLink, Route, Redirect } from 'react-router-dom';
-import Browse from './browse/browse';
-import Search from './search/search';
-import Collection from './collection/collection';
 import { ProtectedRoute } from '../../util/route_util';
 
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
 
+import Browse from './browse/browse';
+import Search from './search/search';
+import Collection from './collection/collection';
+import QueueIndex from './index/song/queue_index';
 import MusicPlayer from './music_player/music_player';
+
 import ArtistShow from './show/artist_show';
 import AlbumShow from './show/album_show';
 import PlaylistShow from './show/playlist_show';
@@ -61,6 +63,8 @@ class Dashboard extends React.Component {
         <ProtectedRoute path='/dashboard/search' component={Search}/>
         <ProtectedRoute path='/dashboard/browse' component={Browse}/>
         <ProtectedRoute path='/dashboard/collection' component={Collection}/>
+        <ProtectedRoute path='/dashboard/queue' component={QueueIndex}/>
+
         <ProtectedRoute path='/dashboard/albums/:albumId' component={AlbumShow} />
         <ProtectedRoute path='/dashboard/playlists/:playlistId' component={PlaylistShow} />
         <ProtectedRoute path='/dashboard/artists/:artistId' component={ArtistShow} />
@@ -70,7 +74,6 @@ class Dashboard extends React.Component {
   }
 }
 
-// <progress id='progress-bar' value={this.state.progress} max='100'></progress>
 const msp = (state, ownProps) => {
   return {
     currentUser: state.session,

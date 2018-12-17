@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { fetchCurrentSong } from '../../../actions/now_playing_actions';
 import { connect } from 'react-redux';
 import { save, unsave } from '../../../actions/save_actions';
@@ -26,6 +27,7 @@ class MusicPlayer extends React.Component{
     this.prevSong = this.prevSong.bind(this);
     this.seek = this.seek.bind(this);
     this.toggleSave = this.toggleSave.bind(this);
+    this.redirectQueue = this.redirectQueue.bind(this);
   }
 
   componentDidMount() {
@@ -211,7 +213,6 @@ class MusicPlayer extends React.Component{
 
   }
 
-
   renderNowPlayingInfo() {
     let saveIcon;
     if(this.props.savedSongIds.includes(this.props.nowPlaying.id)) {
@@ -219,7 +220,6 @@ class MusicPlayer extends React.Component{
     } else {
       saveIcon = 'save-button';
     }
-
 
     if(this.props.nowPlaying.name) {
       const { name, artistName, albumName, albumImage } = this.props.nowPlaying;
@@ -238,7 +238,12 @@ class MusicPlayer extends React.Component{
     }
   }
 
+  redirectQueue() {
+    this.props.history.push('/dashboard/queue');
+  }
+
   render() {
+
     return (
       <div className='now-playing-bar'>
         <footer className='footer-player-bar'>
@@ -270,6 +275,7 @@ class MusicPlayer extends React.Component{
           </div>
           <div className='now-playing-bar-right'>
             <div className='right-button-icons'>
+              <button id='queue' className='control-button queue-button' onClick={this.redirectQueue}></button>
               <button id='mute' className='control-button mute-button' onClick={this.muteVolume}></button>
             </div>
             <div className='volume-bar-container'>
@@ -304,4 +310,4 @@ const mdp = dispatch => {
 };
 
 
-export default connect(msp,mdp)(MusicPlayer);
+export default withRouter(connect(msp,mdp)(MusicPlayer));

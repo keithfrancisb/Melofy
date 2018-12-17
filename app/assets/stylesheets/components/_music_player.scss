@@ -318,3 +318,23 @@
   content: "\F10A" !important;
   color: #1db954 !important;
 }
+
+.queue-button::before {
+  content: "\f13a";
+  font-size: 16px;
+
+  font-family: glue1-spoticon;
+  font-style: normal;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: inherit;
+  vertical-align: bottom;
+  display: inline-block;
+  text-decoration: inherit;
+}
+
+.queue-selected::before{
+  content: "\f13a" !important;
+  color: #1db954 !important;
+}
