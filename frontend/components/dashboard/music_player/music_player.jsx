@@ -21,10 +21,8 @@ class MusicPlayer extends React.Component{
 
     this.updateProgressBar = this.updateProgressBar.bind(this);
     this.togglePlayPause = this.togglePlayPause.bind(this);
-    // this.toggleShuffle = this.toggleShuffle.bind(this);
     this.updateVolume = this.updateVolume.bind(this);
     this.muteVolume = this.muteVolume.bind(this);
-    // this.nextSong = this.nextSong.bind(this);
     this.prevSong = this.prevSong.bind(this);
     this.seek = this.seek.bind(this);
     this.toggleSave = this.toggleSave.bind(this);
@@ -70,6 +68,7 @@ class MusicPlayer extends React.Component{
       player.play();
     }
   }
+
   seek(e) {
     const player = document.getElementById('music-player');
 
@@ -81,7 +80,8 @@ class MusicPlayer extends React.Component{
 
   updateProgressBar() {
     const player = document.getElementById('music-player');
-    if (player && player.paused) this.setState( { playbackButton: 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png'});
+    if(player && player.paused) this.setState( { playbackButton: 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png'});
+    if(player.ended && (this.props.songList.length !== 0 || this.props.queue.length !== 0)) this.props.nextSong();
     this.setState({
       duration: player.duration || 0,
       currentTime: player.currentTime || 0,
@@ -98,7 +98,6 @@ class MusicPlayer extends React.Component{
     } else {
       volumeBar.value = e.target.value;
       player.volume = e.target.value;
-
     }
   }
 
@@ -227,7 +226,7 @@ class MusicPlayer extends React.Component{
               </button>
               <button className='control-button nextSong' onClick={this.props.nextSong}></button>
               <button className={repeatClass} onClick={this.props.toggleRepeat}></button>
-              <audio id='music-player' onTimeUpdate={this.updateProgressBar} volume={this.state.muted ? 0 : this.state.volume} src={this.props.nowPlaying.song_url}>
+              <audio id='music-player' onTimeUpdate={this.updateProgressBar} loop={this.props.repeatSongStatus} volume={this.state.muted ? 0 : this.state.volume} src={this.props.nowPlaying.song_url}>
               </audio>
             </div>
             <div className='playback-bar'>
@@ -262,7 +261,7 @@ class MusicPlayer extends React.Component{
 }
 
 const msp = state => {
-  const { shuffleStatus, repeatAllStatus, repeatSongStatus, changedSongStatus } = state.ui.queue;
+  const { shuffleStatus, repeatAllStatus, repeatSongStatus, changedSongStatus, songList, queue } = state.ui.queue;
   return {
     nowPlaying: state.ui.queue.nowPlaying,
     savedSongIds: state.session.saved_song_ids,
@@ -270,7 +269,9 @@ const msp = state => {
     shuffleStatus,
     repeatAllStatus,
     repeatSongStatus,
-    changedSongStatus
+    changedSongStatus,
+    songList,
+    queue
   };
 };
 
