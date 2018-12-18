@@ -16,6 +16,7 @@ let defaultState = {
   queue: [],
   songList: [], // list to be displayed
   originalList: [], // ordered list of original songlist
+  prevSongs: [],
   shuffleStatus: false,
   repeatSongStatus: false,
   repeatAllStatus: false,
@@ -41,7 +42,7 @@ const findSongIndex = (songList, songId) => {
 
 const loopList = (songList, songId) => {
   const currentIndex = findSongIndex(songList, songId);
-  return songList.slice(currentIndex+1).concat(songList.slice(0,currentIndex));
+  return songList.slice(currentIndex).concat(songList.slice(0,currentIndex));
 };
 
 const sliceList = (songList, songId) => {
@@ -50,14 +51,16 @@ const sliceList = (songList, songId) => {
 };
 
 const formatSongList = (newState) => {
-
+  let newSongList;
   let { repeatAllStatus, shuffleStatus, originalList, nowPlaying } = newState;
   if(repeatAllStatus && shuffleStatus){ // repeat ON && shuffle ON
-    newState.songList = loopList(shuffle(originalList), nowPlaying.id).concat([nowPlaying.id]);
+    newSongList = loopList(shuffle(originalList), nowPlaying.id);
+    newState.songList = newSongList.concat(shuffle(newSongList));
   } else if (!repeatAllStatus && shuffleStatus){ // repeat OFF && shuffle ON
     newState.songList = loopList(shuffle(originalList), nowPlaying.id);
   } else if (repeatAllStatus && !shuffleStatus){ // repeat ON && shuffle OFF
-    newState.songList = loopList(originalList, nowPlaying.id).concat([nowPlaying.id]);
+    newSongList = loopList(originalList, nowPlaying.id);
+    newState.songList = newSongList.slice(1).concat(newSongList);
   } else if (!repeatAllStatus && !shuffleStatus){ // repeat OFF && shuffle OFF
     newState.songList = sliceList(originalList, nowPlaying.id);
   }
@@ -106,6 +109,10 @@ export const QueueReducer = (state = defaultState, action) => {
       if(newState.queue.length !== 0) {
         nextSongId = newState.queue.shift();
         newState.nowPlaying = newState.songs[nextSongId];
+      } else if(newState.repeatAllStatus && newState.songList.length <= newState.originalList.length) {
+        nextSongId = newState.songList[0];
+        newState.nowPlaying = newState.songs[nextSongId];
+        newState = formatSongList(newState);
       } else {
         nextSongId = newState.songList.shift();
         newState.nowPlaying = newState.songs[nextSongId];
@@ -114,11 +121,16 @@ export const QueueReducer = (state = defaultState, action) => {
       newState.changedSongStatus = true;
       return newState;
     case PREV_SONG:
-      debugger
+
       newState.songList.unshift(`${newState.nowPlaying.id}`);
       songIndex = findSongIndex(newState.originalList, newState.nowPlaying.id);
+      if(songIndex === 0) songIndex = newState.originalList.length;
       nextSongId = newState.originalList[songIndex-1];
       newState.nowPlaying = newState.songs[nextSongId];
+
+      if(newState.repeatAllStatus && newState.songList.length > newState.originalList.length * 2){
+        formatSongList(newState);
+      }
 
       newState.changedSongStatus = true;
       return newState;
