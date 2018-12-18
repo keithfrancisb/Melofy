@@ -18,7 +18,6 @@ export const receiveCurrentSong = (song) => {
 };
 
 export const receiveCurrentSongList = (songs) => {
-  debugger
   return {
     type: RECEIVE_CURRENT_SONG_LIST,
     songs

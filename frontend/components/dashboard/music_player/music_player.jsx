@@ -25,7 +25,7 @@ class MusicPlayer extends React.Component{
     this.updateVolume = this.updateVolume.bind(this);
     this.muteVolume = this.muteVolume.bind(this);
     // this.nextSong = this.nextSong.bind(this);
-    // this.prevSong = this.prevSong.bind(this);
+    this.prevSong = this.prevSong.bind(this);
     this.seek = this.seek.bind(this);
     this.toggleSave = this.toggleSave.bind(this);
     this.redirectQueue = this.redirectQueue.bind(this);
@@ -61,6 +61,15 @@ class MusicPlayer extends React.Component{
     player.paused ? player.play() : player.pause();
   }
 
+  prevSong(){
+    const player = document.getElementById('music-player');
+    if(player.currentTime < 2){
+      this.props.prevSong();
+    } else {
+      player.load();
+      player.play();
+    }
+  }
   seek(e) {
     const player = document.getElementById('music-player');
 
@@ -212,7 +221,7 @@ class MusicPlayer extends React.Component{
           <div className='now-playing-bar-center'>
             <div className='player-controls'>
               <button className={shuffleClass} onClick={this.props.toggleShuffle}></button>
-              <button className='control-button previousSong' onClick={this.props.prevSong}></button>
+              <button className='control-button previousSong' onClick={this.prevSong}></button>
               <button onClick={this.togglePlayPause}>
                 <img src={this.state.playbackButton}></img>
               </button>

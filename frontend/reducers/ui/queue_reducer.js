@@ -32,7 +32,6 @@ const shuffle = (songArray) => {
 }
 
 const findSongIndex = (songList, songId) => {
-  debugger
   for(let i=0; i<songList.length; i++){
     if(songList[i] === `${songId}`)
       return i;
@@ -42,25 +41,24 @@ const findSongIndex = (songList, songId) => {
 
 const loopList = (songList, songId) => {
   const currentIndex = findSongIndex(songList, songId);
-  return songList.slice(currentIndex).concat(songList.slice(0,currentIndex));
+  return songList.slice(currentIndex+1).concat(songList.slice(0,currentIndex));
 };
 
 const sliceList = (songList, songId) => {
   const currentIndex = findSongIndex(songList, songId);
-  return songList.slice(currentIndex);
+  return songList.slice(currentIndex+1);
 };
 
 const formatSongList = (newState) => {
 
   let { repeatAllStatus, shuffleStatus, originalList, nowPlaying } = newState;
   if(repeatAllStatus && shuffleStatus){ // repeat ON && shuffle ON
-    newState.songList = loopList(shuffle(originalList), nowPlaying.id);
+    newState.songList = loopList(shuffle(originalList), nowPlaying.id).concat([nowPlaying.id]);
   } else if (!repeatAllStatus && shuffleStatus){ // repeat OFF && shuffle ON
     newState.songList = loopList(shuffle(originalList), nowPlaying.id);
   } else if (repeatAllStatus && !shuffleStatus){ // repeat ON && shuffle OFF
-    newState.songList = loopList(originalList, nowPlaying.id);
+    newState.songList = loopList(originalList, nowPlaying.id).concat([nowPlaying.id]);
   } else if (!repeatAllStatus && !shuffleStatus){ // repeat OFF && shuffle OFF
-    debugger
     newState.songList = sliceList(originalList, nowPlaying.id);
   }
 
@@ -70,10 +68,10 @@ const formatSongList = (newState) => {
 
 export const QueueReducer = (state = defaultState, action) => {
   Object.freeze(state);
-  let newState = merge({}, state);
+  let newState = Object.assign({}, state);
 
-  debugger
-  let nextSongId;
+  let nextSongId, songIndex;
+
   switch (action.type) {
     case RECEIVE_CURRENT_SONG:
       newState.nowPlaying = action.song;
@@ -116,8 +114,10 @@ export const QueueReducer = (state = defaultState, action) => {
       newState.changedSongStatus = true;
       return newState;
     case PREV_SONG:
-      newState.songList.unshift(newState.nowPlaying.id);
-      nextSongId = findSongIndex(newState.originalList, newState.nowPlaying.id);
+      debugger
+      newState.songList.unshift(`${newState.nowPlaying.id}`);
+      songIndex = findSongIndex(newState.originalList, newState.nowPlaying.id);
+      nextSongId = newState.originalList[songIndex-1];
       newState.nowPlaying = newState.songs[nextSongId];
 
       newState.changedSongStatus = true;
