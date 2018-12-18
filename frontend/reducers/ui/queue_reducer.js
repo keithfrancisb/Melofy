@@ -1,7 +1,16 @@
-import { RECEIVE_CURRENT_SONG } from '../../actions/queue_actions';
+import {  RECEIVE_CURRENT_SONG,
+          RECEIVE_CURRENT_SONG_LIST,
+          ADD_TO_QUEUE,
+          TOGGLE_REPEAT,
+          TOGGLE_SHUFFLE,
+          NEXT_SONG,
+          PREV_SONG,
+          FINALIZE_SONG_CHANGE
+ } from '../../actions/queue_actions';
+import { merge } from 'lodash';
 
 
-const defaultState = {
+let defaultState = {
   nowPlaying: {},
   songs: {}, // object of song objects
   queue: [],
@@ -41,7 +50,7 @@ const sliceList = (songList, songId) => {
 };
 
 const formatSongList = (newState) => {
-  const { repeatAllStatus, shuffleStatus, songList, originalList, nowPlaying } = newState;
+  let { repeatAllStatus, shuffleStatus, songList, originalList, nowPlaying } = newState;
 
   if(repeatAllStatus && shuffleStatus){ // repeat ON && shuffle ON
     songList = loopList(shuffle(originalList), nowPlaying.id);
@@ -58,16 +67,18 @@ const formatSongList = (newState) => {
 
 export const QueueReducer = (state = defaultState, action) => {
   Object.freeze(state);
-  const newState = Object.assign({}, state);
+  const newState = merge({}, state);
+  debugger
 
   let nextSongId;
   switch (action.type) {
     case RECEIVE_CURRENT_SONG:
-      return newState.nowPlaying = action.song;
+      newState.nowPlaying = action.song;
+      newState.changedSongStatus = true;
       return newState;
     case RECEIVE_CURRENT_SONG_LIST:
-      newState.songs = action.payload.songs;
-      newState.originalList = action.payload.songList;
+      newState.songs = action.songs;
+      newState.originalList = Object.keys(action.songs);
 
       return formatSongList(newState);
     case ADD_TO_QUEUE:
@@ -80,7 +91,14 @@ export const QueueReducer = (state = defaultState, action) => {
 
       return formatSongList(newState);
     case TOGGLE_REPEAT:
-      newState.repeatAllStatus = !newState.repeatAllStatus;
+      if(!newState.repeatAllStatus && !newState.repeatSongStatus){
+        newState.repeatAllStatus = true;
+      } else if(newState.repeatAllStatus && !newState.repeatSongStatus){
+        newState.repeatAllStatus = false;
+        newState.repeatSongStatus = true;
+      } else if(!newState.repeatAllStatus && newState.repeatSongStatus){
+        newState.repeatSongStatus = false;
+      }
 
       return formatSongList(newState);
     case NEXT_SONG:

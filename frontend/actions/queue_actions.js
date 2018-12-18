@@ -11,19 +11,18 @@ export const FINALIZE_SONG_CHANGE = 'FINALIZE_SONG_CHANGE';
 export const RECEIVE_CURRENT_SONG = 'RECEIVE_CURRENT_SONG';
 
 export const receiveCurrentSong = (song) => {
+  debugger
   return {
     type: RECEIVE_CURRENT_SONG,
     song
   };
 };
 
-export const receiveCurrentSongList = (songs, songIds) => {
+export const receiveCurrentSongList = (songs) => {
+  debugger
   return {
     type: RECEIVE_CURRENT_SONG_LIST,
-    payload: {
-      songs,
-      songIds
-    }
+    songs
   };
 };
 

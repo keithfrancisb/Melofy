@@ -7,7 +7,7 @@ import { currentUserPlaylists } from '../../../../reducers/selectors/playlist_se
 import SongItem from './song_item';
 import PlaylistItem from '../playlist/playlist_item';
 
-import { fetchCurrentSong } from '../../../../actions/queue_actions';
+import { receiveCurrentSong, receiveCurrentSongList } from '../../../../actions/queue_actions';
 
 class SongIndex extends React.Component {
 
@@ -25,20 +25,7 @@ class SongIndex extends React.Component {
 
   componentDidMount(){
     const { searchTerm, songIds } = this.props;
-    this.props.fetchSongs(searchTerm, songIds)
-      .then( () => {
-        window.songIdList = {};
-        window.songIdList.queue = this.props.songs.map( song => song.id);
-        return window.songIdList.queue;
-      })
-        .then( (songList) => {
-          let arr = window.songIdList.queue.slice(0);
-          for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-          }
-          window.songIdList.shuffleQueue = arr;
-        });
+    this.props.fetchSongs(searchTerm, songIds);
     this.props.fetchPlaylists();
   }
 
@@ -105,9 +92,10 @@ class SongIndex extends React.Component {
   }
 
   playSong(song) {
-    const { fetchCurrentSong } = this.props;
+    const { receiveCurrentSong, receiveCurrentSongList } = this.props;
     return () => {
-      return fetchCurrentSong(song.id);
+      receiveCurrentSong(song);
+      return receiveCurrentSongList(window.sessionStorage.songs);
     };
   }
 
@@ -118,7 +106,6 @@ class SongIndex extends React.Component {
           playSong={this.playSong}
           key={song.id}
           setupAddToPlaylist={this.setupAddToPlaylist}
-
           handleRemoveFromPlaylist={this.handleRemoveFromPlaylist}
           song={song}
           artist={song.artist}
@@ -144,6 +131,8 @@ class SongIndex extends React.Component {
 const msp = ({entities, session}) => {
   const { songs, playlists } = entities;
   const { saved_song_ids } = session;
+  window.sessionStorage.songs = songs;
+  debugger
   return {
     songs: Object.values(songs),
     playlists: currentUserPlaylists(playlists, session.id),
@@ -157,7 +146,8 @@ const mdp = dispatch => {
     fetchPlaylists: () => dispatch(fetchPlaylists()),
     addSongToPlaylist: (playlistId, songId) => dispatch(addSongToPlaylist(playlistId, songId)),
     removeSongFromPlaylist: (playlistId, songId) => dispatch(removeSongFromPlaylist(playlistId, songId)),
-    fetchCurrentSong: (songId) => dispatch(fetchCurrentSong(songId))
+    receiveCurrentSong: song => dispatch(receiveCurrentSong(song)),
+    receiveCurrentSongList: songs => dispatch(receiveCurrentSongList(songs))
   };
 };
 

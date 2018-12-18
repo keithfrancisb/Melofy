@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { fetchCurrentSong } from '../../../actions/queue_actions';
 import { connect } from 'react-redux';
 import { save, unsave } from '../../../actions/save_actions';
+import { toggleShuffle, toggleRepeat, nextSong, prevSong, finalizeSongChange } from '../../../actions/queue_actions';
 
 class MusicPlayer extends React.Component{
 
@@ -15,16 +16,16 @@ class MusicPlayer extends React.Component{
       duration: 0,
       currentTime: 0,
       muted: false,
-      shuffle: false
+      // shuffle: false
      };
 
     this.updateProgressBar = this.updateProgressBar.bind(this);
     this.togglePlayPause = this.togglePlayPause.bind(this);
-    this.toggleShuffle = this.toggleShuffle.bind(this);
+    // this.toggleShuffle = this.toggleShuffle.bind(this);
     this.updateVolume = this.updateVolume.bind(this);
     this.muteVolume = this.muteVolume.bind(this);
-    this.nextSong = this.nextSong.bind(this);
-    this.prevSong = this.prevSong.bind(this);
+    // this.nextSong = this.nextSong.bind(this);
+    // this.prevSong = this.prevSong.bind(this);
     this.seek = this.seek.bind(this);
     this.toggleSave = this.toggleSave.bind(this);
     this.redirectQueue = this.redirectQueue.bind(this);
@@ -35,45 +36,19 @@ class MusicPlayer extends React.Component{
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.nowPlaying.id !== this.props.nowPlaying.id){
+    if (this.props.changedSongStatus){
       const player = document.getElementById('music-player');
       player.load();
       this.togglePlayPause();
       this.setState({
         duration: player.duration || 0,
       });
+      this.props.finalizeSongChange();
     }
   }
 
   componentWillUnmount() {
     clearInterval(this.updateInterval);
-  }
-
-  nextSong() {
-    const { songIdList } = window;
-    const { nowPlaying } = this.props;
-    let newIndex = !this.state.shuffle ? songIdList.queue.indexOf(nowPlaying.id) + 1 : songIdList.shuffleQueue.indexOf(nowPlaying.id) + 1;
-    let newSongId = !this.state.shuffle ? songIdList.queue[newIndex] : songIdList.shuffleQueue[newIndex];
-    if (newIndex === songIdList.length) newSongId = songIdList[0];
-
-    this.props.fetchCurrentSong(newSongId);
-  }
-
-  prevSong() {
-    const { songIdList } = window;
-    const { nowPlaying } = this.props;
-    const player = document.getElementById('music-player');
-
-    if(player.currentTime < 2){
-      let newIndex = !this.state.shuffle ? songIdList.queue.indexOf(nowPlaying.id) - 1 : songIdList.shuffleQueue.indexOf(nowPlaying.id) - 1;
-      let newSongId = !this.state.shuffle ? songIdList.queue[newIndex] : songIdList.shuffleQueue[newIndex];
-      if (newIndex === -1) newSongId = songIdList[songIdList.length-1];
-      this.props.fetchCurrentSong(newSongId);
-    } else {
-      player.load();
-      player.play();
-    }
-
   }
 
   togglePlayPause() {
@@ -84,33 +59,6 @@ class MusicPlayer extends React.Component{
 
     this.setState({ playbackButton: newIcon });
     player.paused ? player.play() : player.pause();
-  }
-
-  toggleRepeat() {
-    const player = document.getElementById('music-player');
-    const repeatButton = document.getElementsByClassName('repeat')[0];
-
-    player.loop = !player.loop;
-    if(player.loop) {
-      repeatButton.style.color = '#1db954';
-    } else {
-      repeatButton.style.color = '';
-    }
-  }
-
-  toggleShuffle() {
-    const shuffleButton = document.getElementsByClassName('shuffle')[0];
-    let { shuffleQueue } = window.songIdList;
-
-    if(!this.state.shuffle){
-      const currentIndex = shuffleQueue.indexOf(this.props.nowPlaying.id);
-      shuffleQueue = shuffleQueue.slice(currentIndex).concat(shuffleQueue.slice(0,currentIndex));
-      shuffleButton.style.color = '#1db954';
-      this.setState({ shuffle: !this.state.shuffle});
-    } else {
-      shuffleButton.style.color = '';
-      this.setState({ shuffle: !this.state.shuffle});
-    }
   }
 
   seek(e) {
@@ -243,6 +191,17 @@ class MusicPlayer extends React.Component{
   }
 
   render() {
+    const { shuffleStatus, repeatAllStatus, repeatSongStatus } = this.props;
+
+    const shuffleClass = shuffleStatus ? 'control-button shuffle green' : 'control-button shuffle';
+    let repeatClass;
+    if(!repeatAllStatus && !repeatSongStatus) {
+      repeatClass = 'control-button repeat';
+    } else if(repeatAllStatus && !repeatSongStatus) {
+      repeatClass = 'control-button repeat green';
+    } else if(!repeatAllStatus && repeatSongStatus) {
+      repeatClass = 'control-button repeat green repeat-single';
+    }
 
     return (
       <div className='now-playing-bar'>
@@ -252,13 +211,13 @@ class MusicPlayer extends React.Component{
           </div>
           <div className='now-playing-bar-center'>
             <div className='player-controls'>
-              <button className='control-button shuffle' onClick={this.toggleShuffle}></button>
-              <button className='control-button previousSong' onClick={this.prevSong}></button>
+              <button className={shuffleClass} onClick={this.props.toggleShuffle}></button>
+              <button className='control-button previousSong' onClick={this.props.prevSong}></button>
               <button onClick={this.togglePlayPause}>
                 <img src={this.state.playbackButton}></img>
               </button>
-              <button className='control-button nextSong' onClick={this.nextSong}></button>
-              <button className='control-button repeat' onClick={this.toggleRepeat}></button>
+              <button className='control-button nextSong' onClick={this.props.nextSong}></button>
+              <button className={repeatClass} onClick={this.props.toggleRepeat}></button>
               <audio id='music-player' onTimeUpdate={this.updateProgressBar} volume={this.state.muted ? 0 : this.state.volume} src={this.props.nowPlaying.song_url}>
               </audio>
             </div>
@@ -294,10 +253,15 @@ class MusicPlayer extends React.Component{
 }
 
 const msp = state => {
+  const { shuffleStatus, repeatAllStatus, repeatSongStatus, changedSongStatus } = state.ui.queue;
   return {
-    nowPlaying: state.ui.nowPlaying,
+    nowPlaying: state.ui.queue.nowPlaying,
     savedSongIds: state.session.saved_song_ids,
-    saves: Object.values(state.session.saves)
+    saves: Object.values(state.session.saves),
+    shuffleStatus,
+    repeatAllStatus,
+    repeatSongStatus,
+    changedSongStatus
   };
 };
 
@@ -305,7 +269,12 @@ const mdp = dispatch => {
   return {
     fetchCurrentSong: (songId) => dispatch(fetchCurrentSong(songId)),
     save: (saveId, saveType) => dispatch(save(saveId, saveType)),
-    unsave: saveId => dispatch(unsave(saveId))
+    unsave: saveId => dispatch(unsave(saveId)),
+    toggleShuffle: () => dispatch(toggleShuffle()),
+    toggleRepeat: () => dispatch(toggleRepeat()),
+    nextSong: () => dispatch(nextSong()),
+    prevSong: () => dispatch(prevSong()),
+    finalizeSongChange: () => dispatch(finalizeSongChange())
   };
 };
 

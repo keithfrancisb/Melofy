@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchArtist } from '../../../actions/artist_actions';
-import { fetchCurrentSong } from '../../../actions/queue_actions';
 import { save, unsave } from '../../../actions/save_actions';
 
 import SongIndex from '../index/song/song_index';
@@ -97,7 +96,6 @@ const msp = (state, ownProps) => {
 const mdp = dispatch => {
   return {
     fetchArtist: id => dispatch(fetchArtist(id)),
-    fetchCurrentSong: songId => dispatch(fetchCurrentSong(songId)),
     save: (saveId, saveType) => dispatch(save(saveId, saveType)),
     unsave: saveId => dispatch(unsave(saveId))
   };

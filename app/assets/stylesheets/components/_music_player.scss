@@ -237,6 +237,9 @@
   text-decoration: inherit;
 }
 
+.repeat-single::before {
+  content: "\F13E" !important;
+}
 // ------------------------------------------------------ //
 
 .now-playing-bar-right {

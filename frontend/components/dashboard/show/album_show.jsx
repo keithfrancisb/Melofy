@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { fetchAlbum } from '../../../actions/album_actions';
-import { fetchCurrentSong } from '../../../actions/queue_actions';
 import { save, unsave } from '../../../actions/save_actions';
 import SongIndex from '../index/song/song_index';
 
@@ -14,7 +13,6 @@ class AlbumItemShow extends React.Component{
 
     this.contextTrigger = null;
 
-    this.playSong = this.playSong.bind(this);
     this.handleSave = this.handleSave.bind(this);
   }
 
@@ -32,13 +30,6 @@ class AlbumItemShow extends React.Component{
 
   componentDidMount() {
     this.props.fetchAlbum(this.props.match.params.albumId);
-  }
-
-  playSong(song) {
-    const { fetchCurrentSong } = this.props;
-    return () => {
-      return fetchCurrentSong(song.id);
-    };
   }
 
   render() {
@@ -103,7 +94,6 @@ const mdp = dispatch => {
 
   return {
     fetchAlbum: id => dispatch(fetchAlbum(id)),
-    fetchCurrentSong: songId => dispatch(fetchCurrentSong(songId)),
     save: (saveId, saveType) => dispatch(save(saveId, saveType)),
     unsave: (saveId) => dispatch(unsave(saveId))
   };
