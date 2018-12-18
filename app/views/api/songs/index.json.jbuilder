@@ -8,7 +8,7 @@ json.songs do
     json.set! song.id do
       json.extract! song, :id, :name, :artist_id, :album_id, :song_url, :duration, :playlist_ids
       json.artist song.artist, :id, :name
-      json.album song.album, :id, :name
+      json.album song.album, :id, :name, :image_url
     end
   end
 end

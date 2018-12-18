@@ -179,15 +179,15 @@ class MusicPlayer extends React.Component{
     }
 
     if(this.props.nowPlaying.name) {
-      const { name, artistName, albumName, albumImage } = this.props.nowPlaying;
+      const { name, artist, album } = this.props.nowPlaying;
       return (
         <>
           <div className='album-image-player'>
-            <img src={albumImage}></img>
+            <img src={album.image_url}></img>
           </div>
           <div className='song-artist-info-bar'>
             <div className='song-name-player'><span>{name}</span></div>
-            <div className='artist-name-player'><span>{artistName}</span></div>
+            <div className='artist-name-player'><span>{artist.name}</span></div>
           </div>
           <button id='save' className={saveIcon} onClick={this.toggleSave}></button>
         </>
