@@ -92,15 +92,15 @@ class SongIndex extends React.Component {
   }
 
   playSong(song) {
-    const { receiveCurrentSong, receiveCurrentSongList } = this.props;
+    const { receiveCurrentSong, receiveCurrentSongList, songs } = this.props;
     return () => {
       receiveCurrentSong(song);
-      return receiveCurrentSongList(window.sessionStorage.songs);
+      return receiveCurrentSongList(songs);
     };
   }
 
   render() {
-    const songs = this.props.songs.map((song) => {
+    const songs = Object.values(this.props.songs).map((song) => {
       return (
         <SongItem
           playSong={this.playSong}
@@ -131,10 +131,9 @@ class SongIndex extends React.Component {
 const msp = ({entities, session}) => {
   const { songs, playlists } = entities;
   const { saved_song_ids } = session;
-  window.sessionStorage.songs = songs;
-  debugger
+  // window.sessionStorage.songs = songs;
   return {
-    songs: Object.values(songs),
+    songs,
     playlists: currentUserPlaylists(playlists, session.id),
     savedSongIds: saved_song_ids
   };

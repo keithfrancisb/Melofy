@@ -11,7 +11,6 @@ export const FINALIZE_SONG_CHANGE = 'FINALIZE_SONG_CHANGE';
 export const RECEIVE_CURRENT_SONG = 'RECEIVE_CURRENT_SONG';
 
 export const receiveCurrentSong = (song) => {
-  debugger
   return {
     type: RECEIVE_CURRENT_SONG,
     song
