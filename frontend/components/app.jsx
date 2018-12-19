@@ -15,7 +15,7 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <header className='main-header'>
+          <header>
             <GreetingContainer />
           </header>
         </div>
