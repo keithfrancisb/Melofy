@@ -1,6 +1,6 @@
 import React from 'react';
-import SongItem from 'song_item';
-import SongIndex from 'song_index';
+import SongItem from './song_item';
+import SongIndex from './song_index';
 
 
 class QueueIndex extends React.Component {
