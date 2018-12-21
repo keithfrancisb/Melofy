@@ -7,11 +7,7 @@
 
 .playlist-content {
   display: flex;
-  justify-content: space-between;
-  padding-top: 2em;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0px 80px;
+  justify-content: space-around;
 }
 
 .playlist-content > ul {
@@ -22,7 +18,7 @@
   color: #fff;
   text-align: center;
   width: 320px;
-  padding: 0 90px;
+  padding: 0 40px;
 }
 
 .hoverable-info {
@@ -76,8 +72,7 @@
 }
 
 .playlist-songs {
-  width: 45vw;
-  margin: 0 4em;
+  width: 65%;
 }
 
 
