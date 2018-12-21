@@ -9,7 +9,7 @@ class QueueIndex extends React.Component {
     super(props);
 
     this.renderQueue = this.renderQueue.bind(this);
-    this.renderSongList = this.renderSongList.bind(this);
+    // this.renderSongList = this.renderSongList.bind(this);
   }
 
   renderQueue(){
@@ -24,6 +24,7 @@ class QueueIndex extends React.Component {
     }
   }
 
+  // {this.renderSongList}
   render(){
     return (
       <div className='collection-main-view'>
@@ -31,8 +32,7 @@ class QueueIndex extends React.Component {
           <div className='content-scrolling'>
             <h1 className='artist-subheaders main-header'>Play Queue</h1>
             <h2 className='artist-subheaders sub-header'>Now Playing</h2>
-            {this.renderQueue}
-            {this.renderSongList}
+            {this.renderQueue()}
           </div>
         </div>
       </div>
