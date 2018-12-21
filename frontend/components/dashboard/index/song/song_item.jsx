@@ -13,6 +13,7 @@ class SongItem extends React.Component {
 
     this.toggleMenu = this.toggleMenu.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.handlePlaySong = this.handlePlaySong.bind(this);
   }
 
   toggleMenu(e) {
@@ -29,6 +30,12 @@ class SongItem extends React.Component {
       this.props.unsave(saveId);
     } else {
       this.props.save(song.id, 'Song');
+    }
+  }
+
+  handlePlaySong(song) {
+    if(this.props.parentType !== 'Queue'){
+      return () => { return this.props.playSong(song)(); };
     }
   }
 
@@ -53,7 +60,7 @@ class SongItem extends React.Component {
     }
 
     return (
-      <div key={song.id} className={divClass} onDoubleClick={playSong(song)}>
+      <div key={song.id} className={divClass} onDoubleClick={this.handlePlaySong(song)}>
         <li className={liClass}>
           <div className='left-side-song-item'>
             <div className={playedColor}>
