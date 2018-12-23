@@ -59,13 +59,22 @@ class SongItem extends React.Component {
       removeFromPlaylist = null;
     }
 
+    const player = document.getElementById('music-player');
+    let playIcon;
+    if(player){
+      playIcon = <svg onClick={this.handlePlaySong(song)} class="icon-play" viewBox="0 0 85 100"><path fill="currentColor" d="M81 44.6c5 3 5 7.8 0 10.8L9 98.7c-5 3-9 .7-9-5V6.3c0-5.7 4-8 9-5l72 43.3z"><title>PLAY</title></path></svg>
+      if(!player.paused && this.props.nowPlayingId === song.id){
+      playIcon = <svg class="icon-pause" viewBox="0 0 60 100"><path fill="currentColor" d="M0 8c0-5 3-8 8-8s9 3 9 8v84c0 5-4 8-9 8s-8-3-8-8V8zm43 0c0-5 3-8 8-8s8 3 8 8v84c0 5-3 8-8 8s-8-3-8-8V8z"><title>PAUSE</title></path></svg>      }
+    }
+
+
       return (
         <div key={song.id} className={divClass} onDoubleClick={this.handlePlaySong(song)}>
           <li className={liClass}>
             <div className='left-side-song-item'>
               <div className={playedColor}>
                 <span className='mini-play'></span>
-                <svg onClick={this.handlePlaySong(song)} class="icon-play" viewBox="0 0 85 100"><path fill="currentColor" d="M81 44.6c5 3 5 7.8 0 10.8L9 98.7c-5 3-9 .7-9-5V6.3c0-5.7 4-8 9-5l72 43.3z"><title>PLAY</title></path></svg>
+                {playIcon}
               </div>
               <div>
                 <div>
