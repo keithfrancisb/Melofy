@@ -53,6 +53,14 @@
   margin: 0 8px;
 }
 
+.left-side-song-item:hover > div > svg {
+  display: block !important;
+}
+
+.left-side-song-item:hover > div> span {
+  display: none !important;
+}
+
 .mini-play:before {
   content: "\F156";
   font-size: 16px;
@@ -66,6 +74,12 @@
   vertical-align: bottom;
   display: inline-block;
   text-decoration: inherit;
+}
+
+.icon-play {
+  display: none;
+  width: 1em;
+  height: 1em;
 }
 
 // ADD To Playlist
