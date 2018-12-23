@@ -59,49 +59,49 @@ class SongItem extends React.Component {
       removeFromPlaylist = null;
     }
 
-    return (
-      <div key={song.id} className={divClass} onDoubleClick={this.handlePlaySong(song)}>
-        <li className={liClass}>
-          <div className='left-side-song-item'>
-            <div className={playedColor}>
-              <span className='mini-play'></span>
-            </div>
-            <div>
+      return (
+        <div key={song.id} className={divClass} onDoubleClick={this.handlePlaySong(song)}>
+          <li className={liClass}>
+            <div className='left-side-song-item'>
+              <div className={playedColor}>
+                <span className='mini-play'></span>
+              </div>
               <div>
-                <span className={playedColor}>{song.name}</span>
+                <div>
+                  <span className={playedColor}>{song.name}</span>
+                </div>
+                <div className='sub-song-info'>
+                  <span>{artist ? artist.name : ""}</span>
+                  <span className="second-line-separator">•</span>
+                  <span>{album ? album.name : ""}</span>
+                </div>
               </div>
+            </div>
+            <div className='dot-div'>
+              <ContextMenuTrigger id={`${song.id}`} ref={c => this.contextTrigger = c}>
+                <button id='popup' onClick={this.toggleMenu}>
+                  <img className='song-misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
+                </button>
+              </ContextMenuTrigger>
               <div className='sub-song-info'>
-                <span>{artist.name}</span>
-                <span className="second-line-separator">•</span>
-                <span>{album.name}</span>
+                <span className={playedColor}>{song.duration}</span>
               </div>
             </div>
-          </div>
-          <div className='dot-div'>
-            <ContextMenuTrigger id={`${song.id}`} ref={c => this.contextTrigger = c}>
-              <button id='popup' onClick={this.toggleMenu}>
-                <img className='song-misc-logo' src='https://s3.amazonaws.com/playlist-dev/icons/noun_dot_dot_dot_white.png'></img>
-              </button>
-            </ContextMenuTrigger>
-            <div className='sub-song-info'>
-              <span className={playedColor}>{song.duration}</span>
-            </div>
-          </div>
 
-        </li>
-        <>
-        <ContextMenu id={`${song.id}`}>
-          <MenuItem>
-            <span onClick={setupAddToPlaylist(song.id)}>Add to Playlist</span>
-          </MenuItem>
-          {removeFromPlaylist}
-          <MenuItem>
-            <span onClick={this.handleSave}>{saveLabel}</span>
-          </MenuItem>
-        </ContextMenu>
-        </>
-      </div>
-    );
+          </li>
+          <>
+          <ContextMenu id={`${song.id}`}>
+            <MenuItem>
+              <span onClick={setupAddToPlaylist ? setupAddToPlaylist(song.id) : null}>Add to Playlist</span>
+            </MenuItem>
+            {removeFromPlaylist}
+            <MenuItem>
+              <span onClick={this.handleSave}>{saveLabel}</span>
+            </MenuItem>
+          </ContextMenu>
+          </>
+        </div>
+      );
   }
 }
 

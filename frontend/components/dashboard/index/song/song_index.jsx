@@ -24,9 +24,11 @@ class SongIndex extends React.Component {
   }
 
   componentDidMount(){
-    const { searchTerm, songIds } = this.props;
-    this.props.fetchSongs(searchTerm, songIds);
-    this.props.fetchPlaylists();
+    if(this.props.parentType !== 'Queue'){
+      const { searchTerm, songIds } = this.props;
+      this.props.fetchSongs(searchTerm, songIds);
+      this.props.fetchPlaylists();
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -100,7 +102,13 @@ class SongIndex extends React.Component {
   }
 
   render() {
-    const songs = Object.values(this.props.songs).map((song) => {
+    let songs;
+    if(this.props.songIds){
+      songs = Object.values(this.props.songs).filter( song => this.props.songIds.includes(song.id));
+    } else {
+      songs = Object.values(this.props.songs);
+    }
+    songs = songs.map((song) => {
       return (
         <SongItem
           playSong={this.playSong}

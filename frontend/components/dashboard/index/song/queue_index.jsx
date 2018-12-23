@@ -1,31 +1,50 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import SongItem from './song_item';
 import SongIndex from './song_index';
-
+import { fetchSongs } from '../../../../actions/song_actions';
 
 class QueueIndex extends React.Component {
 
   constructor(props){
     super(props);
 
+    // this.state = {
+    //   nowPlaying: Object.values(this.props.songs).filter( song => this.props.nowPlaying.id === song.id),
+    //   queue: Object.value(this.props.songs).filter( song => this.props.queue.includes(`${song.id}`)),
+    //   songList:Object.values(this.props.songs).filter( song => this.props.songList.includes(`${song.id}`))
+    // };
+
     this.renderNowPlaying = this.renderNowPlaying.bind(this);
     this.renderQueue = this.renderQueue.bind(this);
     this.renderSongList = this.renderSongList.bind(this);
   }
 
+  componentDidMount(){
+    const { nowPlaying, queue, songList } = this.props;
+    let list = Object.keys(nowPlaying).length !== 0 ? songList.concat(queue).concat(`${nowPlaying.id}`) : songList.concat(queue);
+    list = [...new Set(list)];
+    this.props.fetchSongs(null, list);
+  }
+
+  componentDidUpdate(prevProps){
+    if(prevProps.nowPlaying.id !== this.props.nowPlaying.id){
+      // debugger
+      const { nowPlaying, queue, songList } = this.props;
+      let list = Object.keys(nowPlaying).length !== 0 ? songList.concat(queue).concat(`${nowPlaying.id}`) : songList.concat(queue);
+      list = [...new Set(list)];
+      this.props.fetchSongs(null, list);
+    }
+  }
+
   renderNowPlaying(){
     const { nowPlaying } = this.props;
+    debugger
     if(nowPlaying)
       return (
         <div>
           <h2 className='artist-subheaders sub-header'>Now Playing</h2>
-          <SongItem
-            key={nowPlaying.id}
-            song={nowPlaying}
-            artist={nowPlaying.artist}
-            album={nowPlaying.album}
-            parentType='Queue'
-            />
+          <SongIndex songIds={[nowPlaying.id]} parentType='Queue'/>
         </div>
       );
   }
@@ -47,7 +66,7 @@ class QueueIndex extends React.Component {
     if(songList && songList.length !== 0){
       return (
         <div>
-          <h2 className='artist-subheaders sub-header'>Next in Queue</h2>
+          <h2 className='artist-subheaders sub-header'>Next Up</h2>
           <SongIndex songIds={songList.map( id => parseInt(id))} parentType='Queue'/>
         </div>
       );
@@ -57,10 +76,9 @@ class QueueIndex extends React.Component {
   render(){
     return (
       <div className='collection-main-view'>
-        <div className='content-spacing'>
-          <div className='content-scrolling'>
+        <div className='content-scrolling'>
+          <div className='content-spacing'>
             <h1 className='artist-subheaders main-header'>Play Queue</h1>
-            <h2 className='artist-subheaders sub-header'>Now Playing</h2>
             {this.renderNowPlaying()}
             {this.renderQueue()}
             {this.renderSongList()}
@@ -74,13 +92,18 @@ class QueueIndex extends React.Component {
 const msp = state => {
   const { songList, queue, nowPlaying } = state.ui.queue;
   return {
+    songs: state.entities.songs,
     songList,
     queue,
     nowPlaying
   };
 };
 
+const mdp = dispatch => {
+  return {
+    fetchSongs: (searchTerm, songIds) => dispatch(fetchSongs(searchTerm,songIds))
+  };
+};
 
 
-
-export default QueueIndex;
+export default connect(msp, mdp)(QueueIndex);
