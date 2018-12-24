@@ -219,15 +219,15 @@ class MusicPlayer extends React.Component{
           </div>
           <div className='now-playing-bar-center'>
             <div className='player-controls'>
+              <audio id='music-player' onTimeUpdate={this.updateProgressBar} loop={this.props.repeatSongStatus} volume={this.state.muted ? 0 : this.state.volume} src={this.props.nowPlaying.song_url}>
+              </audio>
               <button className={shuffleClass} onClick={this.props.toggleShuffle}></button>
               <button className='control-button previousSong' onClick={this.prevSong} disabled={this.props.songList.length === this.props.originalList.length - 1}></button>
-              <button onClick={this.togglePlayPause}>
+              <button onClick={this.togglePlayPause} disabled={Object.keys(this.props.nowPlaying).length === 0}>
                 <img src={this.state.playbackButton}></img>
               </button>
               <button className='control-button nextSong' onClick={this.props.nextSong} disabled={this.props.songList.length === 0 && this.props.queue.length === 0}></button>
               <button className={repeatClass} onClick={this.props.toggleRepeat}></button>
-              <audio id='music-player' onTimeUpdate={this.updateProgressBar} loop={this.props.repeatSongStatus} volume={this.state.muted ? 0 : this.state.volume} src={this.props.nowPlaying.song_url}>
-              </audio>
             </div>
             <div className='playback-bar'>
               <div className='current-time'>{this.updateCurrentTime()}</div>
