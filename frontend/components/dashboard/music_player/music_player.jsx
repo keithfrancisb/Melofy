@@ -220,11 +220,11 @@ class MusicPlayer extends React.Component{
           <div className='now-playing-bar-center'>
             <div className='player-controls'>
               <button className={shuffleClass} onClick={this.props.toggleShuffle}></button>
-              <button className='control-button previousSong' onClick={this.prevSong}></button>
+              <button className='control-button previousSong' onClick={this.prevSong} disabled={this.props.songList.length === this.props.originalList.length - 1}></button>
               <button onClick={this.togglePlayPause}>
                 <img src={this.state.playbackButton}></img>
               </button>
-              <button className='control-button nextSong' onClick={this.props.nextSong}></button>
+              <button className='control-button nextSong' onClick={this.props.nextSong} disabled={this.props.songList.length === 0 && this.props.queue.length === 0}></button>
               <button className={repeatClass} onClick={this.props.toggleRepeat}></button>
               <audio id='music-player' onTimeUpdate={this.updateProgressBar} loop={this.props.repeatSongStatus} volume={this.state.muted ? 0 : this.state.volume} src={this.props.nowPlaying.song_url}>
               </audio>
@@ -261,7 +261,7 @@ class MusicPlayer extends React.Component{
 }
 
 const msp = state => {
-  const { shuffleStatus, repeatAllStatus, repeatSongStatus, changedSongStatus, songList, queue } = state.ui.queue;
+  const { shuffleStatus, repeatAllStatus, repeatSongStatus, changedSongStatus, originalList, songList, queue } = state.ui.queue;
   return {
     nowPlaying: state.ui.queue.nowPlaying,
     savedSongIds: state.session.saved_song_ids,
@@ -270,6 +270,7 @@ const msp = state => {
     repeatAllStatus,
     repeatSongStatus,
     changedSongStatus,
+    originalList,
     songList,
     queue
   };
