@@ -42,8 +42,6 @@ class SongItem extends React.Component {
   render() {
 
     const { song, artist, album, setupAddToPlaylist, playSong } = this.props;
-    const liClass = this.props.parentId ? 'songs-list' : 'song-browse-list';
-    const divClass = this.props.parentId ? 'div-song-list-item' : 'div-browse-song-list-item';
     const saveLabel = this.props.savedSongIds.includes(song.id) ? 'Remove from your Library' : 'Save to your Library';
     const playedColor = song.id === this.props.nowPlayingId ? 'green' : 'not-green';
 
@@ -62,21 +60,21 @@ class SongItem extends React.Component {
     const player = document.getElementById('music-player');
     let playIcon;
     if(player){
-      playIcon = <svg onClick={this.handlePlaySong(song)} class="icon-play" viewBox="0 0 85 100"><path fill="currentColor" d="M81 44.6c5 3 5 7.8 0 10.8L9 98.7c-5 3-9 .7-9-5V6.3c0-5.7 4-8 9-5l72 43.3z"><title>PLAY</title></path></svg>
+      playIcon = <svg onClick={this.handlePlaySong(song)} className="icon-play" viewBox="0 0 85 100"><path fill="currentColor" d="M81 44.6c5 3 5 7.8 0 10.8L9 98.7c-5 3-9 .7-9-5V6.3c0-5.7 4-8 9-5l72 43.3z"><title>PLAY</title></path></svg>
       if(!player.paused && this.props.nowPlayingId === song.id){
-      playIcon = <svg class="icon-pause" viewBox="0 0 60 100"><path fill="currentColor" d="M0 8c0-5 3-8 8-8s9 3 9 8v84c0 5-4 8-9 8s-8-3-8-8V8zm43 0c0-5 3-8 8-8s8 3 8 8v84c0 5-3 8-8 8s-8-3-8-8V8z"><title>PAUSE</title></path></svg>      }
+      playIcon = <svg className="icon-pause" viewBox="0 0 60 100"><path fill="currentColor" d="M0 8c0-5 3-8 8-8s9 3 9 8v84c0 5-4 8-9 8s-8-3-8-8V8zm43 0c0-5 3-8 8-8s8 3 8 8v84c0 5-3 8-8 8s-8-3-8-8V8z"><title>PAUSE</title></path></svg>      }
     }
 
 
       return (
-        <div key={song.id} className={divClass} onDoubleClick={this.handlePlaySong(song)}>
-          <li className={liClass}>
+        <div key={song.id} className='div-browse-song-list-item' onDoubleClick={this.handlePlaySong(song)}>
+          <li className='songs-list'>
             <div className='left-side-song-item'>
               <div className={playedColor}>
                 <span className='mini-play'></span>
                 {playIcon}
               </div>
-              <div>
+              <div className='song-info'>
                 <div>
                   <span className={playedColor}>{song.name}</span>
                 </div>
