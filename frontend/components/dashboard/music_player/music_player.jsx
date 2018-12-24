@@ -211,6 +211,9 @@ class MusicPlayer extends React.Component{
       repeatClass = 'control-button repeat green repeat-single';
     }
 
+    const nextClass = this.props.songList.length === 0 && this.props.queue.length === 0 ? 'control-button nextSong disabled' : 'control-button nextSong';
+    const prevClass = this.props.songList.length === this.props.originalList.length - 1 || Object.keys(this.props.nowPlaying).length === 0 ? 'control-button previousSong disabled' : 'control-button previousSong';
+    const playPauseClass = Object.keys(this.props.nowPlaying).length === 0 ? 'disabled' : '';
     return (
       <div className='now-playing-bar'>
         <footer className='footer-player-bar'>
@@ -222,11 +225,11 @@ class MusicPlayer extends React.Component{
               <audio id='music-player' onTimeUpdate={this.updateProgressBar} loop={this.props.repeatSongStatus} volume={this.state.muted ? 0 : this.state.volume} src={this.props.nowPlaying.song_url}>
               </audio>
               <button className={shuffleClass} onClick={this.props.toggleShuffle}></button>
-              <button className='control-button previousSong' onClick={this.prevSong} disabled={this.props.songList.length === this.props.originalList.length - 1}></button>
-              <button onClick={this.togglePlayPause} disabled={Object.keys(this.props.nowPlaying).length === 0}>
+              <button className={prevClass} onClick={this.prevSong} disabled={this.props.songList.length === this.props.originalList.length - 1}></button>
+              <button className={playPauseClass} onClick={this.togglePlayPause} disabled={Object.keys(this.props.nowPlaying).length === 0}>
                 <img src={this.state.playbackButton}></img>
               </button>
-              <button className='control-button nextSong' onClick={this.props.nextSong} disabled={this.props.songList.length === 0 && this.props.queue.length === 0}></button>
+              <button className={nextClass} onClick={this.props.nextSong} disabled={this.props.songList.length === 0 && this.props.queue.length === 0}></button>
               <button className={repeatClass} onClick={this.props.toggleRepeat}></button>
             </div>
             <div className='playback-bar'>
