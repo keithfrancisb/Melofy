@@ -225,7 +225,7 @@ class MusicPlayer extends React.Component{
               <audio id='music-player' onTimeUpdate={this.updateProgressBar} loop={this.props.repeatSongStatus} volume={this.state.muted ? 0 : this.state.volume} src={this.props.nowPlaying.song_url}>
               </audio>
               <button className={shuffleClass} onClick={this.props.toggleShuffle}></button>
-              <button className={prevClass} onClick={this.prevSong} disabled={this.props.songList.length === this.props.originalList.length - 1}></button>
+              <button className={prevClass} onClick={this.prevSong} disabled={this.props.songList.length === this.props.originalList.length - 1 || Object.keys(this.props.nowPlaying).length === 0}></button>
               <button className={playPauseClass} onClick={this.togglePlayPause} disabled={Object.keys(this.props.nowPlaying).length === 0}>
                 <img src={this.state.playbackButton}></img>
               </button>
