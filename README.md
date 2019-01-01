@@ -24,7 +24,7 @@ Users able to search for their favorite artists, albums, and songs within the mu
 
 ![](search-melofy.gif)
 
-This is achieved by customizing my `AJAX` get requests to optionally accept a search term parameter and then handled accordingly in the appropriate controllers in Rails if `searchTerm` exists in `params`.
+This is achieved by customizing my `AJAX` get requests to optionally accept a search term parameter and then handled accordingly in the appropriate controller in Rails if `searchTerm` exists in `params`.
 
 ```ruby
 def index
