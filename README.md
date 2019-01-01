@@ -20,7 +20,7 @@ Melofy is inspired by Spotify, a web app that not only allows users to search an
 ## Key Features
 
 ### Search
-Users able to search for their favorite artists, albums, and songs within the music app. Users are also able to search for playlists created by other users. Search results are updated after each keystroke.
+Users are able to search for their favorite artists, albums, and songs within the music app. Users are also able to search for playlists created by other users. Search results are updated after each keystroke.
 
 ![](search-melofy.gif)
 
