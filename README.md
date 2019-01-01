@@ -69,6 +69,7 @@ From here I created a `div` with a `div` nested inside which will act as the `pr
 Just like Spotify, users are able to create their own playlists and add songs to them. Conversely, users also are able to remove songs from their created playlists and are also able to delete playlists that they have created.
 
 ## Future Plans
+* Make app responsive to different browser dimensions.
 * Allow users to build out their song queue that's separate from the song list the currently played song belongs to.
 * Allow users to upload image for their playlist thumbnails.
 * Allow users to look up other users and browse their activity.
