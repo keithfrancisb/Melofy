@@ -57,9 +57,9 @@ From here I created a `div` with a `div` nested inside which will act as the `pr
 ```HTML
 // In JSX
 <div className='progress-bar-container'>
-  <input className='seeker-bar' type='range' min='0' max={this.state.duration} step='0.25' onChange={this.seek} value={this.state.currentTime}/>
+  <input className='seeker-bar' type='range' min='0' max={duration} step='0.25' onChange={this.seek} value={currentTime}/>
   <div className='outer-bar'>
-    <div className='inner-bar' style={{width: `${(this.state.currentTime*100)/this.state.duration || 1}%`}}></div>
+    <div className='inner-bar' style={{width: `${(currentTime*100)/duration || 1}%`}}></div>
   </div>
 </div>
 ```
