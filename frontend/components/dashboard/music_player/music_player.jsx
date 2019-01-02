@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { fetchCurrentSong } from '../../../actions/queue_actions';
 import { connect } from 'react-redux';
 import { save, unsave } from '../../../actions/save_actions';
-import { toggleShuffle, toggleRepeat, nextSong, prevSong, finalizeSongChange } from '../../../actions/queue_actions';
+import { toggleShuffle, toggleRepeat, nextSong, prevSong, finalizeSongChange, changePlayStatus } from '../../../actions/queue_actions';
 
 class MusicPlayer extends React.Component{
 
@@ -16,7 +16,6 @@ class MusicPlayer extends React.Component{
       duration: 0,
       currentTime: 0,
       muted: false,
-      // shuffle: false
      };
 
     this.updateProgressBar = this.updateProgressBar.bind(this);
@@ -51,12 +50,13 @@ class MusicPlayer extends React.Component{
 
   togglePlayPause() {
     const player = document.getElementById('music-player');
-
-    const newIcon = player.paused ? 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_pause+button_895204.png' :
-      'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png';
-
-    this.setState({ playbackButton: newIcon });
-    player.paused ? player.play() : player.pause();
+    if(!player.paused){
+      player.pause();
+      this.props.changePlayStatus(false);
+    } else {
+      player.play();
+      this.props.changePlayStatus(true);
+    }
   }
 
   prevSong(){
@@ -80,7 +80,7 @@ class MusicPlayer extends React.Component{
 
   updateProgressBar() {
     const player = document.getElementById('music-player');
-    if(player && player.paused) this.setState( { playbackButton: 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png'});
+    // if(player && player.paused) this.setState( { playbackButton: 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png'});
     if(player.ended && (this.props.songList.length !== 0 || this.props.queue.length !== 0)) this.props.nextSong();
     this.setState({
       duration: player.duration || 0,
@@ -199,7 +199,12 @@ class MusicPlayer extends React.Component{
   }
 
   render() {
-    const { shuffleStatus, repeatAllStatus, repeatSongStatus } = this.props;
+    const { shuffleStatus, repeatAllStatus, repeatSongStatus, playStatus } = this.props;
+
+    const playIcon = 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png';
+    const pauseIcon = 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_pause+button_895204.png';
+
+    const currentIcon = playStatus ? pauseIcon : playIcon;
 
     const shuffleClass = shuffleStatus ? 'control-button shuffle green' : 'control-button shuffle';
     let repeatClass;
@@ -227,7 +232,7 @@ class MusicPlayer extends React.Component{
               <button className={shuffleClass} onClick={this.props.toggleShuffle}></button>
               <button className={prevClass} onClick={this.prevSong} disabled={this.props.songList.length === this.props.originalList.length - 1 || Object.keys(this.props.nowPlaying).length === 0}></button>
               <button className={playPauseClass} onClick={this.togglePlayPause} disabled={Object.keys(this.props.nowPlaying).length === 0}>
-                <img src={this.state.playbackButton}></img>
+                <img src={currentIcon}></img>
               </button>
               <button className={nextClass} onClick={this.props.nextSong} disabled={this.props.songList.length === 0 && this.props.queue.length === 0}></button>
               <button className={repeatClass} onClick={this.props.toggleRepeat}></button>
@@ -264,7 +269,7 @@ class MusicPlayer extends React.Component{
 }
 
 const msp = state => {
-  const { shuffleStatus, repeatAllStatus, repeatSongStatus, changedSongStatus, originalList, songList, queue } = state.ui.queue;
+  const { shuffleStatus, repeatAllStatus, repeatSongStatus, changedSongStatus, originalList, songList, queue, playing } = state.ui.queue;
   return {
     nowPlaying: state.ui.queue.nowPlaying,
     savedSongIds: state.session.saved_song_ids,
@@ -275,7 +280,8 @@ const msp = state => {
     changedSongStatus,
     originalList,
     songList,
-    queue
+    queue,
+    playStatus: playing
   };
 };
 
@@ -288,7 +294,8 @@ const mdp = dispatch => {
     toggleRepeat: () => dispatch(toggleRepeat()),
     nextSong: () => dispatch(nextSong()),
     prevSong: () => dispatch(prevSong()),
-    finalizeSongChange: () => dispatch(finalizeSongChange())
+    finalizeSongChange: () => dispatch(finalizeSongChange()),
+    changePlayStatus: (boolean) => dispatch(changePlayStatus(boolean))
   };
 };
 

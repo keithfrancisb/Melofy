@@ -7,6 +7,7 @@ export const TOGGLE_REPEAT = 'TOGGLE_REPEAT';
 export const NEXT_SONG = 'NEXT_SONG';
 export const PREV_SONG = 'PREV_SONG';
 export const FINALIZE_SONG_CHANGE = 'FINALIZE_SONG_CHANGE';
+export const CHANGE_PLAY_STATUS = 'CHANGE_PLAY_STATUS';
 
 export const RECEIVE_CURRENT_SONG = 'RECEIVE_CURRENT_SONG';
 
@@ -60,6 +61,14 @@ export const finalizeSongChange = () => {
     type: FINALIZE_SONG_CHANGE
   };
 };
+
+export const changePlayStatus = (boolean) => {
+  return {
+    type:CHANGE_PLAY_STATUS,
+    boolean
+  }
+}
+
 
 export const fetchCurrentSong = (songId) => dispatch => {
   return PSApiUtil.fetchSong(songId)

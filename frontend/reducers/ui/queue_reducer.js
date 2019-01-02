@@ -5,7 +5,8 @@ import {  RECEIVE_CURRENT_SONG,
           TOGGLE_SHUFFLE,
           NEXT_SONG,
           PREV_SONG,
-          FINALIZE_SONG_CHANGE
+          FINALIZE_SONG_CHANGE,
+          CHANGE_PLAY_STATUS
  } from '../../actions/queue_actions';
 import { merge } from 'lodash';
 
@@ -21,6 +22,7 @@ let defaultState = {
   repeatSongStatus: false,
   repeatAllStatus: false,
   changedSongStatus: false,
+  playing: false
 };
 
 const shuffle = (songArray) => {
@@ -133,6 +135,9 @@ export const QueueReducer = (state = defaultState, action) => {
       }
 
       newState.changedSongStatus = true;
+      return newState;
+    case CHANGE_PLAY_STATUS:
+      newState.playing = action.boolean;
       return newState;
     case FINALIZE_SONG_CHANGE:
       newState.changedSongStatus = false;
