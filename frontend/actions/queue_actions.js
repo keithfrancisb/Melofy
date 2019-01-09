@@ -8,6 +8,7 @@ export const NEXT_SONG = 'NEXT_SONG';
 export const PREV_SONG = 'PREV_SONG';
 export const FINALIZE_SONG_CHANGE = 'FINALIZE_SONG_CHANGE';
 export const CHANGE_PLAY_STATUS = 'CHANGE_PLAY_STATUS';
+export const CHANG_SHOW_QUEUE = 'CHANG_SHOW_QUEUE';
 
 export const RECEIVE_CURRENT_SONG = 'RECEIVE_CURRENT_SONG';
 
@@ -64,7 +65,14 @@ export const finalizeSongChange = () => {
 
 export const changePlayStatus = (boolean) => {
   return {
-    type:CHANGE_PLAY_STATUS,
+    type: CHANGE_PLAY_STATUS,
+    boolean
+  }
+}
+
+export const toggleQueue = (boolean) => {
+  return {
+    type: CHANG_SHOW_QUEUE,
     boolean
   }
 }

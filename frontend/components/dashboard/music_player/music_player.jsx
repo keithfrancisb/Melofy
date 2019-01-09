@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { fetchCurrentSong } from '../../../actions/queue_actions';
 import { connect } from 'react-redux';
 import { save, unsave } from '../../../actions/save_actions';
-import { toggleShuffle, toggleRepeat, nextSong, prevSong, finalizeSongChange, changePlayStatus } from '../../../actions/queue_actions';
+import { toggleShuffle, toggleRepeat, nextSong, prevSong, finalizeSongChange, changePlayStatus, toggleQueue } from '../../../actions/queue_actions';
 
 class MusicPlayer extends React.Component{
 
@@ -16,6 +16,7 @@ class MusicPlayer extends React.Component{
       duration: 0,
       currentTime: 0,
       muted: false,
+      showQueue: false
      };
 
     this.updateProgressBar = this.updateProgressBar.bind(this);
@@ -195,11 +196,18 @@ class MusicPlayer extends React.Component{
   }
 
   redirectQueue() {
-    this.props.history.push('/dashboard/queue');
+    // debugger
+    if(!this.props.showQueue){
+      this.props.toggleQueue(true);
+      this.props.history.push('/dashboard/queue');
+    } else {
+      this.props.history.goBack();
+      this.props.toggleQueue(false);
+    }
   }
 
   render() {
-    const { shuffleStatus, repeatAllStatus, repeatSongStatus, playStatus } = this.props;
+    const { shuffleStatus, repeatAllStatus, repeatSongStatus, playStatus, history } = this.props;
 
     const playIcon = 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_play+button_895200.png';
     const pauseIcon = 'https://s3.amazonaws.com/playlist-dev/icons/music+player/noun_pause+button_895204.png';
@@ -215,6 +223,8 @@ class MusicPlayer extends React.Component{
     } else if(!repeatAllStatus && repeatSongStatus) {
       repeatClass = 'control-button repeat green repeat-single';
     }
+
+    const queueClass = this.props.showQueue ? 'control-button queue-button green' : 'control-button queue-button';
 
     const nextClass = this.props.songList.length === 0 && this.props.queue.length === 0 ? 'control-button nextSong disabled' : 'control-button nextSong';
     const prevClass = this.props.songList.length === this.props.originalList.length - 1 || Object.keys(this.props.nowPlaying).length === 0 ? 'control-button previousSong disabled' : 'control-button previousSong';
@@ -250,7 +260,7 @@ class MusicPlayer extends React.Component{
           </div>
           <div className='now-playing-bar-right'>
             <div className='right-button-icons'>
-              <button id='queue' className='control-button queue-button' onClick={this.redirectQueue}></button>
+              <button id='queue' className={queueClass} onClick={this.redirectQueue}></button>
               <button id='mute' className='control-button mute-button' onClick={this.muteVolume}></button>
             </div>
             <div className='volume-bar-container'>
@@ -269,7 +279,7 @@ class MusicPlayer extends React.Component{
 }
 
 const msp = state => {
-  const { shuffleStatus, repeatAllStatus, repeatSongStatus, changedSongStatus, originalList, songList, queue, playing } = state.ui.queue;
+  const { shuffleStatus, repeatAllStatus, repeatSongStatus, changedSongStatus, originalList, songList, queue, playing, showQueue } = state.ui.queue;
   return {
     nowPlaying: state.ui.queue.nowPlaying,
     savedSongIds: state.session.saved_song_ids,
@@ -281,7 +291,8 @@ const msp = state => {
     originalList,
     songList,
     queue,
-    playStatus: playing
+    playStatus: playing,
+    showQueue
   };
 };
 
@@ -295,7 +306,8 @@ const mdp = dispatch => {
     nextSong: () => dispatch(nextSong()),
     prevSong: () => dispatch(prevSong()),
     finalizeSongChange: () => dispatch(finalizeSongChange()),
-    changePlayStatus: (boolean) => dispatch(changePlayStatus(boolean))
+    changePlayStatus: (boolean) => dispatch(changePlayStatus(boolean)),
+    toggleQueue: (boolean) => dispatch(toggleQueue(boolean))
   };
 };
 
