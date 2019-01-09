@@ -29,7 +29,6 @@ class QueueIndex extends React.Component {
 
   componentDidUpdate(prevProps){
     if(prevProps.nowPlaying.id !== this.props.nowPlaying.id){
-      // debugger
       const { nowPlaying, queue, songList } = this.props;
       let list = Object.keys(nowPlaying).length !== 0 ? songList.concat(queue).concat(`${nowPlaying.id}`) : songList.concat(queue);
       list = [...new Set(list)];
@@ -39,7 +38,7 @@ class QueueIndex extends React.Component {
 
   renderNowPlaying(){
     const { nowPlaying } = this.props;
-    debugger
+
     if(nowPlaying)
       return (
         <div>
