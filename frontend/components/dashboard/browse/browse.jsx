@@ -53,7 +53,7 @@ class Browse extends React.Component {
           <div className='content-scrolling'>
             <section className='content-spacing'>
               <div className='tabs-container'>
-                <nav className='nav-tabs'>
+                <nav className='nav-tabs-mine'>
                   <ul className='tabs'>
                     <li><NavLink activeClassName='selected-tab' to='/dashboard/browse/playlists'>Playlists</NavLink></li>
                     <li><NavLink activeClassName='selected-tab' to='/dashboard/browse/songs'>Songs</NavLink></li>
